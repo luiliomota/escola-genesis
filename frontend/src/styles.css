@@ -1,0 +1,7 @@
+
+.swiper-pagination-bullets{
+    bottom: revert !important;
+    top: -10px;
+    left: 0;
+    width: 100%
+}
