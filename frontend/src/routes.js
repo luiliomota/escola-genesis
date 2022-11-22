@@ -25,17 +25,14 @@ import Dashboard from "layouts/dashboard";
 import Tratamento from "layouts/tratamento";
 import TratamentoNovo from "layouts/tratamento/novo";
 import TratamentoAtualizar from "layouts/tratamento/atualizar";
-import TratamentoEliminar from "layouts/tratamento/eliminar(excluir componente)";
 import TratamentoComparador from "layouts/tratamento/comparador";
 import Paciente from "layouts/paciente";
 import PacienteNovo from "layouts/paciente/novo";
 import PacienteEditar from "layouts/paciente/editar";
-import PacienteEliminar from "layouts/paciente/eliminar(excluir componente)";
 
 import Usuario from "layouts/usuario";
 import UsuarioNovo from "layouts/usuario/novo";
 import UsuarioAtualizar from "layouts/usuario/atualizar";
-import UsuarioEliminar from "layouts/usuario/eliminar(excluir componente)";
 import SignIn from "layouts/authentication/sign-in";
 import Logout from "layouts/authentication/logout";
 
@@ -54,7 +51,7 @@ const routes = [
   },
   {
     type: "title",
-    title: "Tratamentos",
+    title: "Direção",
     key: "tratamentos",
   }, 
   {
@@ -65,7 +62,7 @@ const routes = [
     route: "/tratamento/todos",
     component: <Tratamento />,
     isPrivate: true,
-    perfis: ["ADMIN", "PACIENTE", "USER"],
+    perfis: ["DIRECAO"],
   },
   {
     type: "collapse",
@@ -75,34 +72,27 @@ const routes = [
     route: "/tratamento/novo",
     component: <TratamentoNovo/>,
     isPrivate: true,
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO"],
   },
   {
     key: "tratamento/atualizar",
     route: "/tratamento/atualizar/:id",
     component: <TratamentoAtualizar />,
     isPrivate: true,
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO"],
   },
-  // {
-  //   key: "tratamento/eliminar",
-  //   route: "/tratamento/eliminar/:id",
-  //   component: <TratamentoEliminar />,
-  //   isPrivate: true,
-  //   perfis: ["ADMIN"],
-  // },
   {
     key: "tratamento/comparador",
     route: "/tratamento/comparador/:id",
     component: <TratamentoComparador />,
     isPrivate: true,
-    perfis: ["ADMIN", "PACIENTE", "USER"],
+    perfis: ["DIRECAO"],
   },
   {
     type: "title",
-    title: "Pacientes",
+    title: "Secretaria",
     key: "pacientes",
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO", "SECRETARIA"],
   }, 
   {
     type: "collapse",
@@ -112,7 +102,7 @@ const routes = [
     route: "/paciente/todos",
     component: <Paciente />,
     isPrivate: true,
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO", "SECRETARIA"],
   },
   {
     type: "collapse",
@@ -122,27 +112,20 @@ const routes = [
     route: "/paciente/novo",
     component: <PacienteNovo />,
     isPrivate: true,
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO","SECRETARIA"],
   },
   {
     key: "paciente/editar",
     route: "/paciente/editar/:id",
     component: <PacienteEditar />,
     isPrivate: true,
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO","SECRETARIA"],
   },
-  // {
-  //   key: "paciente/eliminar",
-  //   route: "/paciente/eliminar/:id",
-  //   component: <PacienteEliminar />,
-  //   isPrivate: true,
-  //   perfis: ["ADMIN"],
-  // },
   {
     type: "title",
-    title: "Usuários",
+    title: "Coordenação",
     key: "usuarios",
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO","COORDENACAO"],
   },
   {
     type: "collapse",
@@ -152,7 +135,7 @@ const routes = [
     route: "/usuario/todos",
     component: <Usuario />,
     isPrivate: true,
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO","COORDENACAO"],
   },
   {
     type: "collapse",
@@ -162,7 +145,7 @@ const routes = [
     route: "/usuario/novo",
     component: <UsuarioNovo />,
     isPrivate: true,
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO","COORDENACAO"],
   },
   {
     name: "Atualizar",
@@ -170,20 +153,47 @@ const routes = [
     route: "/usuario/atualizar/:id",
     component: <UsuarioAtualizar />,
     isPrivate: true,
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO","COORDENACAO"],
   },
-  // {
-  //   key: "usuario/eliminar",
-  //   route: "/usuario/eliminar/:id",
-  //   component: <UsuarioEliminar />,
-  //   isPrivate: true,
-  //   perfis: ["ADMIN"],
-  // },
+  {
+    type: "title",
+    title: "Professor",
+    key: "usuarios",
+    perfis: ["DIRECAO","PROFESSOR"],
+  },
+  {
+    type: "collapse",
+    name: "Todos",
+    key: "usuario/todos",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/usuario/todos",
+    component: <Usuario />,
+    isPrivate: true,
+    perfis: ["DIRECAO","PROFESSOR"],
+  },
+  {
+    type: "collapse",
+    name: "Novo",
+    key: "usuario/novo",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/usuario/novo",
+    component: <UsuarioNovo />,
+    isPrivate: true,
+    perfis: ["DIRECAO","PROFESSOR"],
+  },
+  {
+    name: "Atualizar",
+    key: "usuario/atualizar",
+    route: "/usuario/atualizar/:id",
+    component: <UsuarioAtualizar />,
+    isPrivate: true,
+    perfis: ["DIRECAO","PROFESSOR"],
+  },
   {
     type: "title",
     title: "Autenticação",
     key: "autenticacao",
-    perfis: ["ADMIN"],
+    perfis: ["DIRECAO"],
   },
   // {
   //   type: "collapse",

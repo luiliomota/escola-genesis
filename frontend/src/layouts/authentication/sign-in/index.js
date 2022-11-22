@@ -28,8 +28,8 @@ import MDButton from "components/MDButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
-import bgImage from "assets/images/fundo.jpg";
-import bgImage2 from "assets/images/alf51.png";
+import bgImage from "assets/images/fundoceg.jpg";
+import bgImage2 from "assets/images/ceg1.png";
 
 import { Context } from '../../../context/auth';
 import {Image} from "@mui/icons-material";
@@ -50,7 +50,7 @@ function Basic() {
     <BasicLayout image={bgImage}>
       <Footer light />
       <Card style={{backgroundColor: 'transparent', boxShadow: 'none'}}>
-        <img style={{padding: '60px'}} src={bgImage2}/>
+        <img style={{padding: '30px'}} src={bgImage2}/>
       </Card>
       <Card>
         <MDBox

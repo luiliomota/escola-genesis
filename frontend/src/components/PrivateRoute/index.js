@@ -3,7 +3,7 @@ import { Navigate, Outlet, Route, useNavigate } from 'react-router-dom';
 import { Context } from 'context/auth';
 import { useContext } from 'react';
 
-// const perfis = { ADMIN: "ADMIN", PACIENTE: "PACIENTE"}
+// const perfis = { DIRECAO: "DIRECAO", SECRETARIA: "SECRETARIA"}
 
 export default function PrivateRoute({ perfis }) {
     const { loading, authenticated, roles } = useContext(Context);

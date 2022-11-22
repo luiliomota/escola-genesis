@@ -51,8 +51,8 @@ import PrivateRoute from "components/PrivateRoute";
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
 // Images
-import brandWhite from "assets/images/alf51.png";
-import brandDark from "assets/images/alf51.png";
+import brandWhite from "assets/images/ceg.png";
+import brandDark from "assets/images/ceg.png";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();

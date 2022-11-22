@@ -28,6 +28,9 @@ import MDTypography from "components/MDTypography";
 // Material Dashboard 2 React base styles
 import typography from "assets/theme/base/typography";
 
+// Imagens
+import imagem1 from "assets/images/alf53.png";
+
 function Footer({ light }) {
   const { size } = typography;
 
@@ -50,19 +53,19 @@ function Footer({ light }) {
             color={light ? "white" : "text"}
             fontSize={size.sm}
           >
+          <Link href="https://www.alf5.com.br/" target="_blank">
             &copy; {new Date().getFullYear()}, feito com
-            <MDBox fontSize={size.md} color={light ? "white" : "dark"} mb={-0.5} mx={0.25}>
+            {/*<MDBox fontSize={size.md} color={light ? "white" : "dark"} mb={-0.5} mx={0.25}>*/}
               <Icon color="inherit" fontSize="inherit">
                 favorite
               </Icon>
-            </MDBox>
+            {/*</MDBox>*/}
             por
-            <Link href="https://www.alf5.com.br/" target="_blank">
               <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
                 &nbsp;ALF5&nbsp;
               </MDTypography>
-            </Link>
             tecnologia.
+          </Link>
           </MDBox>
           <MDBox
             component="ul"

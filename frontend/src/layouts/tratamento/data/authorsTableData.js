@@ -91,7 +91,7 @@ export default function data() {
     );
   }
 
-    if(roles[0] === 'ADMIN'){
+    if(roles[0] === 'DIRECAO'){
       return {
         columns: [
           { Header: "Ação", accessor: "acao", align: "center" },

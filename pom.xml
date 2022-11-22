@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.alf5</groupId>
-	<artifactId>comparaimagens</artifactId>
+	<artifactId>escolagenesis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>comparaimagens</name>
-	<description>Web App Compara Imagens</description>
+	<name>escolagenesis</name>
+	<description>Web App Escola Genesis</description>
 	<properties>
 		<java.version>17</java.version>
 		<frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
