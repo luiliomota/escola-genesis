@@ -18,7 +18,7 @@
   9. The `href` key is used to store the external links location.
   10. The `title` key is only for the item with the type of `title` and its used for the title text on the Sidenav.
   10. The `component` key is used to store the component of its route.
-*/
+ */
 
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
@@ -44,6 +44,7 @@ import Logout from "layouts/authentication/logout";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 const routes = [
   {
@@ -56,13 +57,13 @@ const routes = [
     isPrivate: true,
   },
   {
-    type: "title",
+    type: "titleDirecao",
     title: "Direção",
     key: "direcao",
   }, 
   {
-    type: "collapse",
-    name: "Todos",
+    type: "collapseDirecao",
+    name: "Exemplo1",
     key: "direcao/todos",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/direcao/todos",
@@ -71,8 +72,8 @@ const routes = [
     perfis: ["DIRECAO"],
   },
   {
-    type: "collapse",
-    name: "Novo",
+    type: "collapseDirecao",
+    name: "Exemplo2",
     key: "direcao/novo",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/direcao/novo",
@@ -95,26 +96,25 @@ const routes = [
     perfis: ["DIRECAO"],
   },
   {
-    type: "title",
+    type: "titleSecretaria",
     title: "Secretaria",
     key: "secretaria",
-    perfis: ["DIRECAO", "SECRETARIA"],
-  }, 
+  },
   {
-    type: "collapse",
-    name: "Todos",
+    type: "collapseSecretaria",
+    name: "Relatórios",
     key: "secretaria/todos",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">summarize</Icon>,
     route: "/secretaria/todos",
     component: <Secretaria />,
     isPrivate: true,
     perfis: ["DIRECAO", "SECRETARIA"],
   },
   {
-    type: "collapse",
-    name: "Novo",
+    type: "collapseSecretaria",
+    name: "Matricula/Rematricula",
     key: "secretaria/novo",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/novo",
     component: <SecretariaNovo />,
     isPrivate: true,
@@ -128,26 +128,25 @@ const routes = [
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
-    type: "title",
+    type: "titleCoordenacao",
     title: "Coordenação",
     key: "coordenacao",
-    perfis: ["DIRECAO","COORDENACAO"],
   },
   {
-    type: "collapse",
-    name: "Todos",
+    type: "collapseCoordenacao",
+    name: "Exemplo1",
     key: "coordenacao/todos",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">table_view</Icon>,
     route: "/coordenacao/todos",
     component: <Coordenacao />,
     isPrivate: true,
     perfis: ["DIRECAO","COORDENACAO"],
   },
   {
-    type: "collapse",
-    name: "Novo",
+    type: "collapseCoordenacao",
+    name: "Exemplo2",
     key: "coordenacao/novo",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">table_view</Icon>,
     route: "/coordenacao/novo",
     component: <CoordenacaoNovo />,
     isPrivate: true,
@@ -162,26 +161,25 @@ const routes = [
     perfis: ["DIRECAO","COORDENACAO"],
   },
   {
-    type: "title",
+    type: "titleProfessor",
     title: "Professor",
     key: "professor",
-    perfis: ["DIRECAO","PROFESSOR"],
   },
   {
-    type: "collapse",
-    name: "Todos",
+    type: "collapseProfessor",
+    name: "Exemplo1",
     key: "professor/todos",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">table_view</Icon>,
     route: "/professor/todos",
     component: <Professor />,
     isPrivate: true,
     perfis: ["DIRECAO","PROFESSOR"],
   },
   {
-    type: "collapse",
-    name: "Novo",
+    type: "collapseProfessor",
+    name: "Exemplo2",
     key: "professor/novo",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">table_view</Icon>,
     route: "/professor/novo",
     component: <ProfessorNovo />,
     isPrivate: true,
@@ -196,7 +194,7 @@ const routes = [
     perfis: ["DIRECAO","PROFESSOR"],
   },
   {
-    type: "title",
+    type: "titleAutenticacao",
     title: "Autenticação",
     key: "autenticacao",
     perfis: ["DIRECAO"],
@@ -211,7 +209,7 @@ const routes = [
   //   isPrivate: true,
   // },
   {
-    type: "collapse",
+    type: "collapseAutenticacao",
     name: "Autenticar",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
@@ -219,7 +217,7 @@ const routes = [
     component: <SignIn />,
   },
   {
-    type: "collapse",
+    type: "collapseAutenticacao",
     name: "Sair",
     key: "sign-up",
     icon: <Icon fontSize="small">logout</Icon>,

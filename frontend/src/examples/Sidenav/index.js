@@ -13,13 +13,13 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect, useContext } from "react";
+import {useEffect, useContext, useState} from "react";
 
 // react-router-dom components
 import { useLocation, NavLink } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import PropTypes, {element} from "prop-types";
 
 // @mui material components
 import List from "@mui/material/List";
@@ -47,8 +47,18 @@ import {
   setTransparentSidenav,
   setWhiteSidenav,
 } from "context";
+import ListItemText from "@mui/material/ListItemText";
+import {Collapse, ListItemButton, ListSubheader} from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
+  const [openDirecao, setOpenDirecao] = useState(false);
+  const [openSecretaria, setOpenSecretaria] = useState(false);
+  const [openCoordenacao, setOpenCoordenacao] = useState(false);
+  const [openProfessor, setOpenProfessor] = useState(false);
+  const [openAutenticacao, setOpenAutenticacao] = useState(true);
+
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
   const location = useLocation();
@@ -85,62 +95,284 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     return () => window.removeEventListener("resize", handleMiniSidenav);
   }, [dispatch, location]);
 
-  // Render all the routes from the routes.js (All the visible items on the Sidenav)
+
+  const handleClickDirecao = () => {
+        setOpenDirecao(!openDirecao);
+  }
+    const handleClickSecretaria = () => {
+        setOpenSecretaria(!openSecretaria);
+    }
+    const handleClickCoordenacao = () => {
+        setOpenCoordenacao(!openCoordenacao);
+    }
+    const handleClickProfessor = () => {
+        setOpenProfessor(!openProfessor);
+    }
+    const handleClickAutenticacao = () => {
+        setOpenAutenticacao(!openAutenticacao);
+    }
+
+    // Render all the routes from the routes.js (All the visible items on the Sidenav)
   const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, href, route, perfis }) => {
     let returnValue;
 
     if (perfis && !perfis.some((item) => roles.includes(item))) {
       return;
     }
+    switch (type) {
+      case "collapseDirecao" :
+          returnValue = href ? (
+              <Collapse in={openDirecao}>
+                  <Link
+                    href={href}
+                    key={key}
+                    target="_blank"
+                    rel="noreferrer"
+                    sx={{ textDecoration: "none" }}
+                  >
+                    <SidenavCollapse
+                      name={name}
+                      icon={icon}
+                      active={key === collapseName}
+                      noCollapse={noCollapse}
+                    />
+                  </Link>
+              </Collapse>
+                ) : (
+              <Collapse in={openDirecao}>
+                  <NavLink key={key} to={route}>
+                    <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
+                  </NavLink>
+              </Collapse>
+          );
+      break;
+      case "collapseSecretaria" :
+        returnValue = href ? (
+            <Collapse in={openSecretaria}>
+              <Link
+                  href={href}
+                  key={key}
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{ textDecoration: "none" }}
+              >
+                <SidenavCollapse
+                    name={name}
+                    icon={icon}
+                    active={key === collapseName}
+                    noCollapse={noCollapse}
+                />
+              </Link>
+            </Collapse>
+        ) : (
+            <Collapse in={openSecretaria}>
+              <NavLink key={key} to={route}>
+                <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
+              </NavLink>
+            </Collapse>
+        );
+        break;
+      case "collapseCoordenacao" :
+        returnValue = href ? (
+            <Collapse in={openCoordenacao}>
+              <Link
+                  href={href}
+                  key={key}
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{ textDecoration: "none" }}
+              >
+                <SidenavCollapse
+                    name={name}
+                    icon={icon}
+                    active={key === collapseName}
+                    noCollapse={noCollapse}
+                />
+              </Link>
+            </Collapse>
+        ) : (
+            <Collapse in={openCoordenacao}>
+              <NavLink key={key} to={route}>
+                <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
+              </NavLink>
+            </Collapse>
+        );
+        break;
+      case "collapseProfessor" :
+        returnValue = href ? (
+            <Collapse in={openProfessor}>
+              <Link
+                  href={href}
+                  key={key}
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{ textDecoration: "none" }}
+              >
+                <SidenavCollapse
+                    name={name}
+                    icon={icon}
+                    active={key === collapseName}
+                    noCollapse={noCollapse}
+                />
+              </Link>
+            </Collapse>
+        ) : (
+            <Collapse in={openProfessor}>
+              <NavLink key={key} to={route}>
+                <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
+              </NavLink>
+            </Collapse>
+        );
+        break;
+        case "collapseAutenticacao" :
+            returnValue = href ? (
+                <Collapse in={openAutenticacao}>
+                    <Link
+                        href={href}
+                        key={key}
+                        target="_blank"
+                        rel="noreferrer"
+                        sx={{ textDecoration: "none" }}
+                    >
+                        <SidenavCollapse
+                            name={name}
+                            icon={icon}
+                            active={key === collapseName}
+                            noCollapse={noCollapse}
+                        />
+                    </Link>
+                </Collapse>
+            ) : (
+                <Collapse in={openAutenticacao}>
+                    <NavLink key={key} to={route}>
+                        <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
+                    </NavLink>
+                </Collapse>
+            );
+            break;
 
-    if (type === "collapse") {
-      returnValue = href ? (
-        <Link
-          href={href}
-          key={key}
-          target="_blank"
-          rel="noreferrer"
-          sx={{ textDecoration: "none" }}
-        >
-          <SidenavCollapse
-            name={name}
-            icon={icon}
-            active={key === collapseName}
-            noCollapse={noCollapse}
-          />
-        </Link>
-      ) : (
-        <NavLink key={key} to={route}>
-          <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
-        </NavLink>
-      );
-    } else if (type === "title") {
-      returnValue = (
-        <MDTypography
-          key={key}
-          color={textColor}
-          display="block"
-          variant="caption"
-          fontWeight="bold"
-          textTransform="uppercase"
-          pl={3}
-          mt={2}
-          mb={1}
-          ml={1}
-        >
-          {title}
-        </MDTypography>
-      );
-    } else if (type === "divider") {
-      returnValue = (
-        <Divider
-          key={key}
-          light={
-            (!darkMode && !whiteSidenav && !transparentSidenav) ||
-            (darkMode && !transparentSidenav && whiteSidenav)
-          }
-        />
-      );
+      case "titleDirecao" :
+          returnValue = (
+            <MDTypography
+                key={key}
+                color={textColor}
+                display="block"
+                variant="caption"
+                fontWeight="bold"
+                fontSize={15}
+                textTransform="uppercase"
+                pl={1}
+                // mt={2}
+                // mb={1}
+                // ml={1}
+            >
+              <ListItemButton onClick={handleClickDirecao}>
+                {title}&nbsp;&nbsp;
+                {openDirecao ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+            </MDTypography>
+          );
+      break;
+      case "titleSecretaria" :
+        returnValue = (
+            <MDTypography
+                key={key}
+                color={textColor}
+                display="block"
+                variant="caption"
+                fontWeight="bold"
+                fontSize={15}
+                textTransform="uppercase"
+                pl={1}
+                // mt={2}
+                // mb={1}
+                // ml={1}
+            >
+              <ListItemButton onClick={handleClickSecretaria}>
+                {title}&nbsp;&nbsp;
+                {openSecretaria ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+            </MDTypography>
+        );
+        break;
+      case "titleCoordenacao" :
+        returnValue = (
+            <MDTypography
+                key={key}
+                color={textColor}
+                display="block"
+                variant="caption"
+                fontWeight="bold"
+                fontSize={15}
+                textTransform="uppercase"
+                pl={1}
+                // mt={2}
+                // mb={1}
+                // ml={1}
+            >
+              <ListItemButton onClick={handleClickCoordenacao}>
+                {title}&nbsp;&nbsp;
+                {openCoordenacao ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+            </MDTypography>
+        );
+        break;
+      case "titleProfessor" :
+        returnValue = (
+            <MDTypography
+                key={key}
+                color={textColor}
+                display="block"
+                variant="caption"
+                fontWeight="bold"
+                fontSize={15}
+                textTransform="uppercase"
+                pl={1}
+                // mt={2}
+                // mb={1}
+                // ml={1}
+            >
+              <ListItemButton onClick={handleClickProfessor}>
+                {title}&nbsp;&nbsp;
+                {openProfessor ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+            </MDTypography>
+        );
+        break;
+        case "titleAutenticacao" :
+            returnValue = (
+                <MDTypography
+                    key={key}
+                    color={textColor}
+                    display="block"
+                    variant="caption"
+                    fontWeight="bold"
+                    fontSize={15}
+                    textTransform="uppercase"
+                    pl={1}
+                    // mt={2}
+                    // mb={1}
+                    // ml={1}
+                >
+                    <ListItemButton onClick={handleClickAutenticacao}>
+                        {title}&nbsp;&nbsp;
+                        {openAutenticacao ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemButton>
+                </MDTypography>
+            );
+            break;
+
+      case "divider" :
+          returnValue = (
+            <Divider
+              key={key}
+              light={
+                (!darkMode && !whiteSidenav && !transparentSidenav) ||
+                (darkMode && !transparentSidenav && whiteSidenav)
+              }
+            />
+          );
+      break;
     }
 
     return returnValue;
