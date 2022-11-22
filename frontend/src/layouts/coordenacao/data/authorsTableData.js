@@ -97,7 +97,6 @@ export default function data() {
           { Header: "Ação", accessor: "acao", align: "center" },
           { Header: "Título", accessor: "titulo", width: "45%", align: "left" },
           { Header: "Status", accessor: "status", align: "center" },
-          { Header: "Inicio do Tratamento", accessor: "dataCriacao", align: "center" },
           { Header: "Visualizar", accessor: "visualizar", align: "center" },
         ],
 
@@ -122,7 +121,6 @@ export default function data() {
             { Header: "Visualizar", accessor: "visualizar", align: "center" },
             { Header: "Título", accessor: "titulo", width: "45%", align: "left" },
             { Header: "Status", accessor: "status", align: "center" },
-            { Header: "Inicio do Tratamento", accessor: "dataCriacao", align: "center" },
             // { Header: "Ação", accessor: "acao", align: "center" },
         ],
 

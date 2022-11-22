@@ -118,7 +118,7 @@ function Tables() {
                                 coloredShadow="secondary"
                             >
                                 <MDTypography variant="h6" color="white">
-                                    Novo Tratamento
+                                    Novo
                                 </MDTypography>
                             </MDBox>
                             <MDBox p={3} pb={3}>
@@ -164,7 +164,7 @@ function Tables() {
                                                     renderInput={(params) =>
                                                         <TextField
                                                             {...params}
-                                                            label="Digite o nome do paciente"/>}
+                                                            label="Digite o nome"/>}
                                                 />
                                             </MDBox>
                                         </MDBox>

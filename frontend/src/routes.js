@@ -22,17 +22,23 @@
 
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-import Tratamento from "layouts/tratamento";
-import TratamentoNovo from "layouts/tratamento/novo";
-import TratamentoAtualizar from "layouts/tratamento/atualizar";
-import TratamentoComparador from "layouts/tratamento/comparador";
-import Paciente from "layouts/paciente";
-import PacienteNovo from "layouts/paciente/novo";
-import PacienteEditar from "layouts/paciente/editar";
+import Direcao from "layouts/direcao";
+import DirecaoNovo from "layouts/direcao/novo";
+import DirecaoAtualizar from "layouts/direcao/atualizar";
+import DirecaoComparador from "layouts/direcao/comparador";
 
-import Usuario from "layouts/usuario";
-import UsuarioNovo from "layouts/usuario/novo";
-import UsuarioAtualizar from "layouts/usuario/atualizar";
+import Secretaria from "layouts/secretaria";
+import SecretariaNovo from "layouts/secretaria/novo";
+import SecretariaAtualizar from "layouts/secretaria/atualizar";
+
+import Coordenacao from "layouts/coordenacao";
+import CoordenacaoNovo from "layouts/coordenacao/novo";
+import CoordenacaoAtualizar from "layouts/coordenacao/atualizar";
+
+import Professor from "layouts/professor";
+import ProfessorNovo from "layouts/professor/novo";
+import ProfessorAtualizar from "layouts/professor/atualizar";
+
 import SignIn from "layouts/authentication/sign-in";
 import Logout from "layouts/authentication/logout";
 
@@ -52,140 +58,140 @@ const routes = [
   {
     type: "title",
     title: "Direção",
-    key: "tratamentos",
+    key: "direcao",
   }, 
   {
     type: "collapse",
     name: "Todos",
-    key: "tratamento/todos",
+    key: "direcao/todos",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tratamento/todos",
-    component: <Tratamento />,
+    route: "/direcao/todos",
+    component: <Direcao />,
     isPrivate: true,
     perfis: ["DIRECAO"],
   },
   {
     type: "collapse",
     name: "Novo",
-    key: "tratamento/novo",
+    key: "direcao/novo",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tratamento/novo",
-    component: <TratamentoNovo/>,
+    route: "/direcao/novo",
+    component: <DirecaoNovo/>,
     isPrivate: true,
     perfis: ["DIRECAO"],
   },
   {
-    key: "tratamento/atualizar",
-    route: "/tratamento/atualizar/:id",
-    component: <TratamentoAtualizar />,
+    key: "direcao/atualizar",
+    route: "/direcao/atualizar/:id",
+    component: <DirecaoAtualizar />,
     isPrivate: true,
     perfis: ["DIRECAO"],
   },
   {
-    key: "tratamento/comparador",
-    route: "/tratamento/comparador/:id",
-    component: <TratamentoComparador />,
+    key: "direcao/comparador",
+    route: "/direcao/comparador/:id",
+    component: <DirecaoComparador />,
     isPrivate: true,
     perfis: ["DIRECAO"],
   },
   {
     type: "title",
     title: "Secretaria",
-    key: "pacientes",
+    key: "secretaria",
     perfis: ["DIRECAO", "SECRETARIA"],
   }, 
   {
     type: "collapse",
     name: "Todos",
-    key: "paciente/todos",
+    key: "secretaria/todos",
     icon: <Icon fontSize="small">person</Icon>,
-    route: "/paciente/todos",
-    component: <Paciente />,
+    route: "/secretaria/todos",
+    component: <Secretaria />,
     isPrivate: true,
     perfis: ["DIRECAO", "SECRETARIA"],
   },
   {
     type: "collapse",
     name: "Novo",
-    key: "paciente/novo",
+    key: "secretaria/novo",
     icon: <Icon fontSize="small">person</Icon>,
-    route: "/paciente/novo",
-    component: <PacienteNovo />,
+    route: "/secretaria/novo",
+    component: <SecretariaNovo />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
-    key: "paciente/editar",
-    route: "/paciente/editar/:id",
-    component: <PacienteEditar />,
+    key: "secretaria/atualizar",
+    route: "/secretaria/atualizar/:id",
+    component: <SecretariaAtualizar />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
     type: "title",
     title: "Coordenação",
-    key: "usuarios",
+    key: "coordenacao",
     perfis: ["DIRECAO","COORDENACAO"],
   },
   {
     type: "collapse",
     name: "Todos",
-    key: "usuario/todos",
+    key: "coordenacao/todos",
     icon: <Icon fontSize="small">person</Icon>,
-    route: "/usuario/todos",
-    component: <Usuario />,
+    route: "/coordenacao/todos",
+    component: <Coordenacao />,
     isPrivate: true,
     perfis: ["DIRECAO","COORDENACAO"],
   },
   {
     type: "collapse",
     name: "Novo",
-    key: "usuario/novo",
+    key: "coordenacao/novo",
     icon: <Icon fontSize="small">person</Icon>,
-    route: "/usuario/novo",
-    component: <UsuarioNovo />,
+    route: "/coordenacao/novo",
+    component: <CoordenacaoNovo />,
     isPrivate: true,
     perfis: ["DIRECAO","COORDENACAO"],
   },
   {
     name: "Atualizar",
-    key: "usuario/atualizar",
-    route: "/usuario/atualizar/:id",
-    component: <UsuarioAtualizar />,
+    key: "coordenacao/atualizar",
+    route: "/coordenacao/atualizar/:id",
+    component: <CoordenacaoAtualizar />,
     isPrivate: true,
     perfis: ["DIRECAO","COORDENACAO"],
   },
   {
     type: "title",
     title: "Professor",
-    key: "usuarios",
+    key: "professor",
     perfis: ["DIRECAO","PROFESSOR"],
   },
   {
     type: "collapse",
     name: "Todos",
-    key: "usuario/todos",
+    key: "professor/todos",
     icon: <Icon fontSize="small">person</Icon>,
-    route: "/usuario/todos",
-    component: <Usuario />,
+    route: "/professor/todos",
+    component: <Professor />,
     isPrivate: true,
     perfis: ["DIRECAO","PROFESSOR"],
   },
   {
     type: "collapse",
     name: "Novo",
-    key: "usuario/novo",
+    key: "professor/novo",
     icon: <Icon fontSize="small">person</Icon>,
-    route: "/usuario/novo",
-    component: <UsuarioNovo />,
+    route: "/professor/novo",
+    component: <ProfessorNovo />,
     isPrivate: true,
     perfis: ["DIRECAO","PROFESSOR"],
   },
   {
     name: "Atualizar",
-    key: "usuario/atualizar",
-    route: "/usuario/atualizar/:id",
-    component: <UsuarioAtualizar />,
+    key: "professor/atualizar",
+    route: "/professor/atualizar/:id",
+    component: <ProfessorAtualizar />,
     isPrivate: true,
     perfis: ["DIRECAO","PROFESSOR"],
   },

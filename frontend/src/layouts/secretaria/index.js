@@ -16,7 +16,7 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/tratamento/data/authorsTableData";
+import authorsTableData from "layouts/direcao/data/authorsTableData";
 import MDInput from "../../components/MDInput";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
@@ -133,7 +133,7 @@ function Tables() {
                 coloredShadow="secondary"
               >
                 <MDTypography variant="h6" color="white">
-                  Tratamento(s)
+                  Secretaria
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
@@ -141,7 +141,7 @@ function Tables() {
                   <MDInput
                     fullWidth
                     type="text"
-                    label="Pesquisar (título, descrição ou nome do paciente)"
+                    label="Pesquisar (nome, descrição)"
                     value={searchText}
                     onChange={e => {
                         setSearchText(e.target.value);

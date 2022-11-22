@@ -51,7 +51,7 @@ export default function useAuth() {
           setRoles(perfis);
           setMensagens("");
 
-          navigate('/tratamento/todos');
+          navigate('/direcao/todos');
         }
     } catch (error) {
       if (error.response) {
