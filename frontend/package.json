@@ -40,6 +40,8 @@
     "react-favicon": "^1.0.1",
     "react-github-btn": "1.2.1",
     "react-images-uploading": "^3.1.7",
+    "react-imask": "^6.4.3",
+    "react-input-mask": "^2.0.4",
     "react-loading": "^2.0.3",
     "react-router-dom": "6.2.1",
     "react-scripts": "^5.0.1",

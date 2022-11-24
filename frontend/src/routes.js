@@ -28,8 +28,10 @@ import DirecaoAtualizar from "layouts/direcao/atualizar";
 import DirecaoComparador from "layouts/direcao/comparador";
 
 import Secretaria from "layouts/secretaria";
-import SecretariaMatricula from "layouts/secretaria/matricula";
-import SecretariaDeclaracao from "layouts/secretaria/atualizar";
+import SecretariaCadastroResponsavel from "layouts/secretaria/cadastroResponsavel";
+import SecretariaCadastroAluno from "layouts/secretaria/cadastroAluno";
+import SecretariaRequerimentoMatricula from "layouts/secretaria/requerimentoMatricula";
+import SecretariaContrato from "layouts/secretaria/contrato";
 import SecretariaAtualizar from "layouts/secretaria/atualizar";
 
 import Coordenacao from "layouts/coordenacao";
@@ -103,31 +105,41 @@ const routes = [
   },
   {
     type: "collapseSecretaria",
-    name: "Relatórios",
-    key: "secretaria/todos",
-    icon: <Icon fontSize="small">summarize</Icon>,
-    route: "/secretaria/todos",
-    component: <Secretaria />,
-    isPrivate: true,
-    perfis: ["DIRECAO", "SECRETARIA"],
-  },
-  {
-    type: "collapseSecretaria",
-    name: "Matricula/Rematricula",
-    key: "secretaria/matricula",
+    name: "Cadastro responsável",
+    key: "secretaria/cadastroresponsavel",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/novo",
-    component: <SecretariaMatricula />,
+    route: "/secretaria/cadastroresponsavel",
+    component: <SecretariaCadastroResponsavel />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
     type: "collapseSecretaria",
-    name: "Declaração",
-    key: "secretaria/declaracao",
+    name: "Cadastro aluno",
+    key: "secretaria/cadastroaluno",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/novo",
-    component: <SecretariaDeclaracao />,
+    route: "/secretaria/cadastroaluno",
+    component: <SecretariaCadastroAluno />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    type: "collapseSecretaria",
+    name: "Requerimento matrícula",
+    key: "secretaria/requerimentomatricula",
+    icon: <Icon fontSize="small">summarize</Icon>,
+    route: "/secretaria/requerimentomatricula",
+    component: <SecretariaRequerimentoMatricula />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    type: "collapseSecretaria",
+    name: "Contrato",
+    key: "secretaria/contrato",
+    icon: <Icon fontSize="small">summarize</Icon>,
+    route: "/secretaria/contrato",
+    component: <SecretariaContrato />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
