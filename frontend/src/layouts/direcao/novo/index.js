@@ -41,7 +41,7 @@ function Tables() {
     const closeErrorSB = () => setErrorSB(false);
 
     useEffect(() => {
-        api.get("/api/paciente")
+        api.get("/api/aluno")
             .then((response) => {
                 setListaPacientes(response.data.content);
             })
@@ -91,10 +91,10 @@ function Tables() {
 
     function resetForm() {
         setTratamento({
-            titulo: "",
-            descricao: "",
-            nomePaciente: "",
-            idPaciente: 0,
+            nome: "",
+            dataNascimento: "",
+            sexo: "",
+            naturalidade: 0,
         });
     }
 
@@ -130,10 +130,10 @@ function Tables() {
                                                     fullWidth
                                                     type="text"
                                                     label="Titulo"
-                                                    value={tratamento.titulo}
+                                                    value={tratamento.nome}
                                                     onChange={(e) => setTratamento({
                                                         ...tratamento,
-                                                        titulo: e.target.value
+                                                        nome: e.target.value
                                                     })}/>
                                             </MDBox>
                                             <MDBox mb={2}>
@@ -145,7 +145,7 @@ function Tables() {
                                                     value={tratamento.descricao}
                                                     onChange={(e) => setTratamento({
                                                         ...tratamento,
-                                                        descricao: e.target.value
+                                                        dataNascimento: e.target.value
                                                     })}/>
                                             </MDBox>
                                             <MDBox mb={2}>
@@ -156,9 +156,9 @@ function Tables() {
                                                     isOptionEqualToValue={(option, value) => option ? value : ""}
                                                     onChange={(e, value) => {
                                                         if (value) {
-                                                            setTratamento({...tratamento, idPaciente: value.id})
+                                                            setTratamento({...tratamento, naturalidade: value.id})
                                                         } else {
-                                                            setTratamento({...tratamento, idPaciente: 0});
+                                                            setTratamento({...tratamento, naturalidade: 0});
                                                         }
                                                     }}
                                                     renderInput={(params) =>

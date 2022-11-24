@@ -48,7 +48,7 @@ function Tables() {
   const handleCloseDialog = () => setOpenDialog(false);
 
   useEffect(() => {
-    api.get(`/api/paciente/${id}`)
+    api.get(`/api/aluno/${id}`)
       .then((response) => {
         setPaciente(response.data);
       })
@@ -56,7 +56,7 @@ function Tables() {
   }, []);
 
   function handleSubmit() {
-    api.put(`/api/paciente/${id}`, {
+    api.put(`/api/aluno/${id}`, {
       ...paciente,
       nomeSexo: paciente.sexo
     })
@@ -71,7 +71,7 @@ function Tables() {
   }
 
   function excluir() {
-    api.delete(`/api/paciente/${id}`)
+    api.delete(`/api/aluno/${id}`)
       .then((response) => {
         openSuccessSB("Paciente excluído com sucesso.");
         setOpenDialog(false);

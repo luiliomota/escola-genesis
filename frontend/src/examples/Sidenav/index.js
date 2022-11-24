@@ -346,11 +346,11 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
                     color={textColor}
                     display="block"
                     variant="caption"
-                    fontWeight="bold"
+                    fontWeight="regular"
                     fontSize={15}
-                    textTransform="uppercase"
+                    // textTransform="uppercase"
                     pl={1}
-                    // mt={2}
+                    mt={4}
                     // mb={1}
                     // ml={1}
                 >

@@ -101,7 +101,7 @@ function Tables() {
   }
 
   function atualizarLista(){
-    api.get("/api/paciente?size=1000")
+    api.get("/api/aluno?size=1000")
         .then((response) => {
           setLista(response.data.content);
           setListaFiltro(response.data.content);

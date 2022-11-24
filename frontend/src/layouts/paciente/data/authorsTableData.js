@@ -23,7 +23,7 @@ export default function data() {
 
     useEffect(() => {
 
-    api.get("/api/paciente?size=1000&sort=id,desc")
+    api.get("/api/aluno?size=1000&sort=id,desc")
       .then((response) => {
         setLista(response.data.content);
         setListaFiltro(response.data.content);

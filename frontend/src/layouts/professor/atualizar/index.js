@@ -79,7 +79,7 @@ function Tables() {
       })
       .catch((error) => console.error(error));
 
-    api.get("/api/paciente")
+    api.get("/api/aluno")
       .then((response) => {
         setListaPacientes(response.data.content)
       })
@@ -188,9 +188,9 @@ function Tables() {
 
   function resetForm() {
     setTratamento({
-      titulo: "",
-      descricao: "",
-      nomePaciente: "",
+      nome: "",
+      dataNascimento: "",
+      sexo: "",
       status: "",
     });
   }
@@ -253,7 +253,7 @@ function Tables() {
                                 type="text"
                                 label="Titulo"
                                 value={tratamento.titulo}
-                                onChange={(e) => setTratamento({...tratamento, titulo: e.target.value})} />
+                                onChange={(e) => setTratamento({...tratamento, nome: e.target.value})} />
                           </MDBox>
                           {/*  Descrição*/}
                           <MDBox mb={2}>
@@ -263,7 +263,7 @@ function Tables() {
                                 multiline rows={5}
                                 label="Descrição"
                                 value={tratamento.descricao}
-                                onChange={(e) => setTratamento({...tratamento, descricao: e.target.value})} />
+                                onChange={(e) => setTratamento({...tratamento, dataNascimento: e.target.value})} />
                           </MDBox>
                           {/*  Paciente*/}
                           <MDBox mb={2}>
@@ -274,9 +274,9 @@ function Tables() {
                               isOptionEqualToValue={(option, value) => option ? value : ""}
                               onChange={(e, value) => {
                                 if (value) {
-                                  setTratamento({...tratamento, idPaciente: value.id, nomePaciente: value.nome})
+                                  setTratamento({...tratamento, naturalidade: value.id, sexo: value.nome})
                                 } else {
-                                  setTratamento({...tratamento, idPaciente: 0});
+                                  setTratamento({...tratamento, naturalidade: 0});
                                 }
                               }}
                               renderInput={(params) =>

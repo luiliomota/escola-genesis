@@ -49,7 +49,7 @@ function Tables() {
       })
       .catch(error => console.error(error));
 
-    api.get("/api/paciente")
+    api.get("/api/aluno")
         .then((response) => {
           setListaPacientes(response.data.content);
         })
@@ -201,9 +201,9 @@ function Tables() {
                             isOptionEqualToValue={(option, value) => option.id === value}
                             onChange={(e, value) => {
                               if (value) {
-                                setUsuario({...usuario, idPaciente: value.id})
+                                setUsuario({...usuario, naturalidade: value.id})
                               } else {
-                                setUsuario({...usuario, idPaciente: 0});
+                                setUsuario({...usuario, naturalidade: 0});
                               }
                             }}
                             renderInput={(params) =>

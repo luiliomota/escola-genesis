@@ -28,7 +28,8 @@ import DirecaoAtualizar from "layouts/direcao/atualizar";
 import DirecaoComparador from "layouts/direcao/comparador";
 
 import Secretaria from "layouts/secretaria";
-import SecretariaNovo from "layouts/secretaria/novo";
+import SecretariaMatricula from "layouts/secretaria/matricula";
+import SecretariaDeclaracao from "layouts/secretaria/atualizar";
 import SecretariaAtualizar from "layouts/secretaria/atualizar";
 
 import Coordenacao from "layouts/coordenacao";
@@ -63,9 +64,9 @@ const routes = [
   }, 
   {
     type: "collapseDirecao",
-    name: "Exemplo1",
+    name: "Relatórios",
     key: "direcao/todos",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <Icon fontSize="small">summarize</Icon>,
     route: "/direcao/todos",
     component: <Direcao />,
     isPrivate: true,
@@ -73,9 +74,9 @@ const routes = [
   },
   {
     type: "collapseDirecao",
-    name: "Exemplo2",
+    name: "Declaração",
     key: "direcao/novo",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/direcao/novo",
     component: <DirecaoNovo/>,
     isPrivate: true,
@@ -113,10 +114,20 @@ const routes = [
   {
     type: "collapseSecretaria",
     name: "Matricula/Rematricula",
-    key: "secretaria/novo",
+    key: "secretaria/matricula",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/novo",
-    component: <SecretariaNovo />,
+    component: <SecretariaMatricula />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    type: "collapseSecretaria",
+    name: "Declaração",
+    key: "secretaria/declaracao",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/novo",
+    component: <SecretariaDeclaracao />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
