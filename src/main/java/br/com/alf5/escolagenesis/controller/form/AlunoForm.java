@@ -40,7 +40,7 @@ public class AlunoForm {
     private String observacao;
 
     public Aluno cadastro(SexoRepository sexoRepository, SimOuNaoRepository simOuNaoRepository, TurnoRepository turnoRepository,
-                          ResponsavelRepository responsavelRepository) {
+                          ResponsavelRepository responsavelRepository, EnderecoRepository enderecoRepository) {
         if(sexoRepository.existsByNome(sexo) &&
             simOuNaoRepository.existsByNome(cuidadoEspecial) &&
             turnoRepository.existsByNome(turno) &&
@@ -52,6 +52,7 @@ public class AlunoForm {
             Responsavel pai = responsavelRepository.getReferenceById(idPai);
             Responsavel mae = responsavelRepository.getReferenceById(idMae);
             Endereco endereco = new Endereco(this.cep, this.logradouro, this.cidade, this.estado);
+            enderecoRepository.save(endereco);
 
             Aluno aluno = new Aluno(this.nome, this.dataNascimento, this.dataMatricula, this.idade, sexo, this.naturalidade,
                     this.nacionalidade, cuidadoEspecial, this.especificacao, endereco, this.anoLetivo, this.anoInicial, this.situacao,

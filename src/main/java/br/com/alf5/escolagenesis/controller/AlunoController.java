@@ -32,12 +32,14 @@ public class AlunoController {
     private ResponsavelRepository responsavelRepository;
     @Autowired
     private AlunoRepository alunoRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     //Cadastrar aluno
     @PostMapping
     @Transactional
     public ResponseEntity<AlunoDto> cadastrar(@RequestBody @Valid AlunoForm form, UriComponentsBuilder uriBuilder) {
-        Aluno aluno = form.cadastro(sexoRepository, simOuNaoRepository, turnoRepository, responsavelRepository);
+        Aluno aluno = form.cadastro(sexoRepository, simOuNaoRepository, turnoRepository, responsavelRepository, enderecoRepository);
         if (aluno == null) {
             return ResponseEntity.badRequest().build();
         }
