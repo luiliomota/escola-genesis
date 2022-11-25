@@ -32,7 +32,6 @@ public class ResponsavelController {
     @Transactional
     public ResponseEntity<ResponsavelDto> cadastrar(@RequestBody @Valid ResponsavelForm form, UriComponentsBuilder uriBuilder) {
         Responsavel responsavel = form.cadastro(sexoRepository, estadoCivilRepository);
-        System.out.println(responsavel);
         if (responsavel == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -54,7 +53,7 @@ public class ResponsavelController {
 //    @Cacheable(value = "lista_responsaveis_id")
     public ResponseEntity<ResponsavelDto> responsavel(@PathVariable Long id) {
         if (responsavelRepository.existsById(id)) {
-            Responsavel responsavel = responsavelRepository.findById(id).get();
+            Responsavel responsavel = responsavelRepository.getReferenceById(id);
             return ResponseEntity.ok(new ResponsavelDto(responsavel));
         }
         return ResponseEntity.notFound().build();

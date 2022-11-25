@@ -9,46 +9,78 @@ public class AlunoDto {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Long id;
     private String nome;
+    private String dataCadastro;
+    private String dataNascimento;
+    private String dataMatricula;
+    private Long idade;
     private String sexo;
     private String naturalidade;
-    private String dataNascimento;
-    private String dataCadastro;
+    private String nacionalidade;
+    private String cuidadoEspecial;
+    private String especificacao;
+    private String cep;
+    private String logradouro;
+    private String cidade;
+    private String estado;
+    private Long anoLetivo;
+    private Long anoInicial;
+    private String situacao;
+    private Long serie;
+    private String turma;
+    private String turno;
+    private String nomePai;
+    private String telefonePai;
+    private String profissaoPai;
+    private String localTrabalhoPai;
+    private String contatoTrabalhoPai;
+    private String nomeMae;
+    private String telefoneMae;
+    private String profissaoMae;
+    private String localTrabalhoMae;
+    private String contatoTrabalhoMae;
+    private String contatoEmergencia1;
+    private String contatoEmergencia2;
+    private String observacao;
 
     public AlunoDto(Aluno aluno) {
         this.id = aluno.getId();
         this.nome = aluno.getNome();
+        this.dataCadastro = aluno.getDataCadastro().format(formatter);
+        this.dataNascimento = aluno.getDataNascimento().format(formatter);
+        this.dataMatricula = aluno.getDataMatricula().format(formatter);
+        this.idade = aluno.getIdade();
         this.sexo = aluno.getSexo().getNome();
         this.naturalidade = aluno.getNaturalidade();
-        this.dataNascimento = aluno.getDataNascimento().format(formatter);
-        this.dataCadastro = aluno.getDataCadastro().format(formatter);
+        this.nacionalidade = aluno.getNacionalidade();
+        this.cuidadoEspecial = aluno.getCuidadoEspecial().getNome();
+        this.especificacao = aluno.getEspecificacao();
+        this.cep = aluno.getEndereco().getCep();
+        this.logradouro = aluno.getEndereco().getLogradouro();
+        this.cidade = aluno.getEndereco().getCidade();
+        this.estado = aluno.getEndereco().getEstado();
+        this.anoLetivo = aluno.getAnoLetivo();
+        this.anoInicial = aluno.getAnoInicial();
+        this.situacao = aluno.getSituacao();
+        this.serie = aluno.getSerie();
+        this.turma = aluno.getTurma();
+        this.turno = aluno.getTurno().getNome();
+        this.nomePai = aluno.getPai().getNome();
+        this.telefonePai = aluno.getPai().getTelefone();
+        this.profissaoPai = aluno.getPai().getProfissao();
+        this.localTrabalhoPai = aluno.getPai().getLocalTrabalho();
+        this.contatoTrabalhoPai = aluno.getPai().getTelefoneTrabalho();
+        this.nomeMae = aluno.getMae().getNome();
+        this.telefoneMae = aluno.getMae().getTelefone();
+        this.profissaoMae = aluno.getMae().getProfissao();
+        this.localTrabalhoMae = aluno.getMae().getLocalTrabalho();
+        this.contatoTrabalhoMae = aluno.getMae().getTelefoneTrabalho();
+        this.contatoEmergencia1 = aluno.getContatoEmergencia1();
+        this.contatoEmergencia2 = aluno.getContatoEmergencia2();
+        this.observacao = aluno.getObservacao();
     }
 
     public static Page<AlunoDto> converter(Page<Aluno> alunos) {
         return alunos.map(AlunoDto::new);
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public String getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(String dataCadastro) {
-        this.dataCadastro = dataCadastro;
     }
 
     public Long getId() {
@@ -66,6 +98,47 @@ public class AlunoDto {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public String getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getDataMatricula() {
+        return dataMatricula;
+    }
+
+    public void setDataMatricula(String dataMatricula) {
+        this.dataMatricula = dataMatricula;
+    }
+
+    public Long getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Long idade) {
+        this.idade = idade;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
     public String getNaturalidade() {
         return naturalidade;
     }
@@ -74,4 +147,211 @@ public class AlunoDto {
         this.naturalidade = naturalidade;
     }
 
+    public String getNacionalidade() {
+        return nacionalidade;
+    }
+
+    public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
+    }
+
+    public String getCuidadoEspecial() {
+        return cuidadoEspecial;
+    }
+
+    public void setCuidadoEspecial(String cuidadoEspecial) {
+        this.cuidadoEspecial = cuidadoEspecial;
+    }
+
+    public String getEspecificacao() {
+        return especificacao;
+    }
+
+    public void setEspecificacao(String especificacao) {
+        this.especificacao = especificacao;
+    }
+
+    public String getContatoEmergencia1() {
+        return contatoEmergencia1;
+    }
+
+    public void setContatoEmergencia1(String contatoEmergencia1) {
+        this.contatoEmergencia1 = contatoEmergencia1;
+    }
+
+    public String getContatoEmergencia2() {
+        return contatoEmergencia2;
+    }
+
+    public void setContatoEmergencia2(String contatoEmergencia2) {
+        this.contatoEmergencia2 = contatoEmergencia2;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Long getAnoLetivo() {
+        return anoLetivo;
+    }
+
+    public void setAnoLetivo(Long anoLetivo) {
+        this.anoLetivo = anoLetivo;
+    }
+
+    public Long getAnoInicial() {
+        return anoInicial;
+    }
+
+    public void setAnoInicial(Long anoInicial) {
+        this.anoInicial = anoInicial;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public Long getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Long serie) {
+        this.serie = serie;
+    }
+
+    public String getTurma() {
+        return turma;
+    }
+
+    public void setTurma(String turma) {
+        this.turma = turma;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public String getNomePai() {
+        return nomePai;
+    }
+
+    public void setNomePai(String nomePai) {
+        this.nomePai = nomePai;
+    }
+
+    public String getTelefonePai() {
+        return telefonePai;
+    }
+
+    public void setTelefonePai(String telefonePai) {
+        this.telefonePai = telefonePai;
+    }
+
+    public String getProfissaoPai() {
+        return profissaoPai;
+    }
+
+    public void setProfissaoPai(String profissaoPai) {
+        this.profissaoPai = profissaoPai;
+    }
+
+    public String getLocalTrabalhoPai() {
+        return localTrabalhoPai;
+    }
+
+    public void setLocalTrabalhoPai(String localTrabalhoPai) {
+        this.localTrabalhoPai = localTrabalhoPai;
+    }
+
+    public String getContatoTrabalhoPai() {
+        return contatoTrabalhoPai;
+    }
+
+    public void setContatoTrabalhoPai(String contatoTrabalhoPai) {
+        this.contatoTrabalhoPai = contatoTrabalhoPai;
+    }
+
+    public String getNomeMae() {
+        return nomeMae;
+    }
+
+    public void setNomeMae(String nomeMae) {
+        this.nomeMae = nomeMae;
+    }
+
+    public String getTelefoneMae() {
+        return telefoneMae;
+    }
+
+    public void setTelefoneMae(String telefoneMae) {
+        this.telefoneMae = telefoneMae;
+    }
+
+    public String getProfissaoMae() {
+        return profissaoMae;
+    }
+
+    public void setProfissaoMae(String profissaoMae) {
+        this.profissaoMae = profissaoMae;
+    }
+
+    public String getLocalTrabalhoMae() {
+        return localTrabalhoMae;
+    }
+
+    public void setLocalTrabalhoMae(String localTrabalhoMae) {
+        this.localTrabalhoMae = localTrabalhoMae;
+    }
+
+    public String getContatoTrabalhoMae() {
+        return contatoTrabalhoMae;
+    }
+
+    public void setContatoTrabalhoMae(String contatoTrabalhoMae) {
+        this.contatoTrabalhoMae = contatoTrabalhoMae;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
 }

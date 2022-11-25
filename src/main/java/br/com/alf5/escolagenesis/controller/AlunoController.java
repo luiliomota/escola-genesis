@@ -7,9 +7,7 @@ import br.com.alf5.escolagenesis.controller.form.AtualizarPacienteForm;
 import br.com.alf5.escolagenesis.controller.form.PacienteForm;
 import br.com.alf5.escolagenesis.model.Aluno;
 import br.com.alf5.escolagenesis.model.Paciente;
-import br.com.alf5.escolagenesis.repository.AlunoRepository;
-import br.com.alf5.escolagenesis.repository.PacienteRepository;
-import br.com.alf5.escolagenesis.repository.SexoRepository;
+import br.com.alf5.escolagenesis.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,13 +25,19 @@ public class AlunoController {
     @Autowired
     private SexoRepository sexoRepository;
     @Autowired
+    private SimOuNaoRepository simOuNaoRepository;
+    @Autowired
+    private TurnoRepository turnoRepository;
+    @Autowired
+    private ResponsavelRepository responsavelRepository;
+    @Autowired
     private AlunoRepository alunoRepository;
 
     //Cadastrar aluno
     @PostMapping
     @Transactional
     public ResponseEntity<AlunoDto> cadastrar(@RequestBody @Valid AlunoForm form, UriComponentsBuilder uriBuilder) {
-        Aluno aluno = form.cadastro(sexoRepository);
+        Aluno aluno = form.cadastro(sexoRepository, simOuNaoRepository, turnoRepository, responsavelRepository);
         if (aluno == null) {
             return ResponseEntity.badRequest().build();
         }

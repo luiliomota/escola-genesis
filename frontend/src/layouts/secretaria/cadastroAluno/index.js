@@ -26,6 +26,20 @@ import InputMask from "react-input-mask";
 
 function Tables() {
 
+    const [pai, setPai] = useState({
+        nome: "",
+        telefone: "",
+        profissao: "",
+        localTrabalho: "",
+        telefoneTrabalho: "",
+    });
+    const [mae, setMae] = useState({
+        nome: "",
+        telefone: "",
+        profissao: "",
+        localTrabalho: "",
+        telefoneTrabalho: "",
+    });
     const [aluno, setAluno] = useState({
         nome: "",
         dataNascimento: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
@@ -34,23 +48,36 @@ function Tables() {
         sexo: "",
         naturalidade: "",
         nacionalidade: "",
-        cuidadoespecial: "",
+        cuidadoEspecial: "",
+        especificacao: "",
         cep: "",
         logradouro: "",
         cidade: "",
-        estado: "",
-        anoletivo: "",
-        anoinicial: "",
+        listaEstado: "",
+        pais: "",
+        anoLetivo: "",
+        anoInicial: "",
         situacao: "",
         serie: "",
         turma: "",
         turno: "",
-        pai: "",
-        mae: "",
-        contatosemergencia: "",
+        idPai: 0,
+        idMae: 0,
+        contatoEmergencia1: "",
+        contatoEmergencia2: "",
+        observacao: "",
     });
     const [listaAlunos, setListaAlunos] = useState([]);
     const [listaResponsaveis, setListaResponsaveis] = useState([]);
+    const [listaEstado, setListaEstado] = useState([]);
+    const [listaMunicipio, setListaMunicipio] = useState([]);
+    const [listaEndereco, setListaEndereco] = useState({
+        cep: "",
+        logradouro: "",
+        localidade: "",
+        uf: "",
+    });
+    const [listaTurno, setListaTurno] = useState([]);
 
     const [successSB, setSuccessSB] = useState(false);
     const [errorSB, setErrorSB] = useState(false);
@@ -74,6 +101,55 @@ function Tables() {
         })
             .catch((error) => console.error(error))
     },[]);
+
+    useEffect( () => {
+        api.get("/api/turno")
+            .then((response) => {
+                setListaTurno(response.data.content);
+            })
+            .catch((error) => console.error(error))
+    },[]);
+
+    useEffect( () => {
+        api.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados/")
+            .then((response) => {
+                setListaEstado(response.data);
+            })
+            .catch((error) => console.error(error))
+    },[]);
+
+    function localizaMunicipio (idEstado) {
+        api.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idEstado}/municipios`)
+            .then((response) => {
+                setListaMunicipio(response.data);
+            })
+            .catch((error) => console.error(error))
+    }
+
+    function localizaEndereco (cep) {
+        api.get(`https://viacep.com.br/ws/${cep}/json`)
+            .then((response) => {
+                setListaEndereco(response.data);
+            })
+            .catch((error) => console.error(error))
+    }
+
+    function apiPai (id) {
+        api.get(`/api/responsavel/${id}`)
+            .then((response) => {
+                setPai(response.data);
+                console.log(response.data);
+            })
+            .catch((error) => console.error(error))
+    }
+
+    function apiMae (id) {
+        api.get(`/api/responsavel/${id}`)
+            .then((response) => {
+                setMae(response.data);
+            })
+            .catch((error) => console.error(error))
+    }
 
     const renderSuccessSB = (
         <MDSnackbar
@@ -126,20 +202,44 @@ function Tables() {
             sexo: "",
             naturalidade: "",
             nacionalidade: "",
-            cuidadoespecial: "",
+            cuidadoEspecial: "",
+            especificacao: "",
             cep: "",
             logradouro: "",
             cidade: "",
-            estado: "",
-            anoletivo: "",
-            anoinicial: "",
+            listaEstado: "",
+            pais: "",
+            anoLetivo: "",
+            anoInicial: "",
             situacao: "",
             serie: "",
             turma: "",
             turno: "",
-            pai: "",
-            mae: "",
-            contatosemergencia: "",
+            idPai: 0,
+            idMae: 0,
+            contatoEmergencia1: "",
+            contatoEmergencia2: "",
+            observacao: "",
+        });
+        setListaEndereco({
+            cep: "",
+            logradouro: "",
+            localidade: "",
+            uf: "",
+        });
+        setPai({
+            nome: "",
+            telefone: "",
+            profissao: "",
+            localTrabalho: "",
+            telefoneTrabalho: "",
+        });
+        setMae ({
+            nome: "",
+            telefone: "",
+            profissao: "",
+            localTrabalho: "",
+            telefoneTrabalho: "",
         });
     }
 
@@ -217,6 +317,27 @@ function Tables() {
                                                 })}/>
                                         </MDBox>
                                     </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <MDBox mb={1}>
+                                            <InputMask
+                                                mask="999 Anos"
+                                                maskChar=' '
+                                                value={aluno.idade}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    idade: e.target.value
+                                                })}
+                                            >
+                                                {() =>
+                                                    <TextField
+                                                        fullWidth
+                                                        label="Idade"
+                                                        // multiline rows={5}
+                                                    />
+                                                }
+                                            </InputMask>
+                                        </MDBox>
+                                    </Grid>
                                     <Grid item xs={12} md={12}>
                                         <MDBox mb={1}>
                                             <FormControl fullWidth>
@@ -232,45 +353,258 @@ function Tables() {
                                                     <FormControlLabel value="Feminino" control={<Radio />} label="Feminino" />
                                                 </RadioGroup>
                                             </FormControl>
-
-                                            {/*<MDInput*/}
-                                            {/*    fullWidth*/}
-                                            {/*    type="text"*/}
-                                            {/*    label="Sexo"*/}
-                                            {/*    value={aluno.sexo}*/}
-                                            {/*    onChange={(e) => setAluno({*/}
-                                            {/*        ...aluno,*/}
-                                            {/*        sexo: e.target.value*/}
-                                            {/*    })}/>*/}
                                        </MDBox>
+                                    </Grid>
+
+                                    <Grid item xs={12} md={12}>
+                                        <MDTypography fontSize={15} color="dark">
+                                            Naturalidade
+                                        </MDTypography>
+                                    </Grid>
+
+                                    <Grid item xs={12} md={2}>
+                                        <MDBox mb={1}>
+                                            <Autocomplete
+                                                options={listaEstado}
+                                                getOptionLabel={(option) => option ? option.sigla : ""}
+                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                onChange={(e, value) => {
+                                                    if (value) {
+                                                        localizaMunicipio(value.id);
+                                                    }
+                                                }}
+                                                renderInput={(params) =>
+                                                    <TextField
+                                                        {...params}
+                                                        label="Estado"/>}
+                                            />
+                                        </MDBox>
                                     </Grid>
                                     <Grid item xs={12} md={4}>
                                         <MDBox mb={1}>
-                                        <MDInput
-                                            fullWidth
-                                            type="text"
-                                            label="Naturalidade"
-                                            value={aluno.naturalidade}
-                                            onChange={(e) => setAluno({
-                                                ...aluno,
-                                                naturalidade: e.target.value
-                                            })}/>
-                                    </MDBox>
+                                            <Autocomplete
+                                                options={listaMunicipio}
+                                                getOptionLabel={(option) => option ? option.nome : ""}
+                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                onChange={(e, value) => {
+                                                    if (value) {
+                                                        setAluno({...aluno, naturalidade: value.nome});
+                                                    } else {
+                                                        setAluno({...aluno, naturalidade: ""});
+                                                    }
+                                                }}
+                                                renderInput={(params) =>
+                                                    <TextField
+                                                        {...params}
+                                                        label="Municipio"/>}
+                                            />
+                                        </MDBox>
                                     </Grid>
                                     <Grid item xs={12} md={8}>
                                         <MDBox mb={4}>
                                             <MDInput
                                                 fullWidth
                                                 type="text"
-                                                label="Endereço residencial"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
+                                                label="Nacionalidade"
+                                                value={aluno.nacionalidade}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    nacionalidade: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>
+                                    <Grid item xs={12} md={5}>
+                                        <MDBox mb={1}>
+                                            <FormControl fullWidth>
+                                                <FormLabel style={{fontSize:"1rem"}} id="select-simounao-label">Necessita de cuidados especiais?</FormLabel>
+                                                <RadioGroup
+                                                    row
+                                                    aria-labelledby="select-simounao-label"
+                                                    name="select-simounao-radio-group"
+                                                    value={aluno.cuidadoEspecial}
+                                                    onChange={(e) => setAluno({...aluno, cuidadoEspecial: e.target.value})}
+                                                >
+                                                    <FormControlLabel value="Sim" control={<Radio />} label="Sim" />
+                                                    <FormControlLabel value="Não" control={<Radio />} label="Não" />
+                                                </RadioGroup>
+                                            </FormControl>
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={7}>
+                                        <MDBox mb={4}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="Especificar"
+                                                value={aluno.especificacao}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    especificacao: e.target.value
+                                                })}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <MDBox mb={1}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="CEP"
+                                                value={aluno.cep}
+                                                onChange={(e) => {
+                                                        setAluno({...aluno, cep: e.target.value});
+                                                        localizaEndereco(e.target.value);
+                                                    }
+                                                }
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <MDBox mb={1}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="Logradouro"
+                                                value={listaEndereco.logradouro}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    logradouro: e.target.value
+                                                })}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <MDBox mb={1}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="Cidade"
+                                                value={listaEndereco.localidade}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    cidade: e.target.value
+                                                })}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <MDBox mb={1}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="Estado"
+                                                value={listaEndereco.uf}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    estado: e.target.value
+                                                })}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <MDBox mb={1}>
+                                            <InputMask
+                                                mask="9999"
+                                                value={aluno.anoLetivo}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    anoLetivo: e.target.value
+                                                })}
+                                            >
+                                                {() =>
+                                                    <TextField
+                                                        fullWidth
+                                                        label="Ano Letivo"
+                                                    />
+                                                }
+                                            </InputMask>
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <MDBox mb={1}>
+                                            <InputMask
+                                                mask="9999"
+                                                value={aluno.anoInicial}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    anoInicial: e.target.value
+                                                })}
+                                            >
+                                                {() =>
+                                                    <TextField
+                                                        fullWidth
+                                                        label="Ano Inicial"
+                                                    />
+                                                }
+                                            </InputMask>
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={12}>
+                                        <MDBox mb={1}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="Situação"
+                                                value={aluno.situacao}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    situacao: e.target.value
+                                                })}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={12}>
+                                        <MDBox mb={1}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="Série"
+                                                value={aluno.serie}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    serie: e.target.value
+                                                })}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={12}>
+                                        <MDBox mb={1}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="Turma"
+                                                value={aluno.turma}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    turma: e.target.value
+                                                })}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={4}>
+                                        <MDBox mb={1}>
+                                            <Autocomplete
+                                                options={listaTurno}
+                                                getOptionLabel={(option) => option ? option.nome : ""}
+                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                onChange={(e, value) => {
+                                                    if (value) {
+                                                        setAluno({...aluno, turno: value.nome});
+                                                    } else {
+                                                        setAluno({...aluno, turno: ""});
+                                                    }
+                                                }}
+                                                renderInput={(params) =>
+                                                    <TextField
+                                                        {...params}
+                                                        label="Turno"/>}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+
+
+
 
                                     {/*Filiação*/}
                                     <Grid item xs={12} md={12}>
@@ -279,45 +613,44 @@ function Tables() {
                                         </MDTypography>
                                     </Grid>
                                         {/*Pai*/}
-                                    <Grid item xs={12} md={12}>
-                                        <MDBox mb={1}>
-                                        <MDInput
-                                            fullWidth
-                                            type="text"
-                                            label="Nome Pai"
-                                            // value={aluno.titulo}
-                                            // onChange={(e) => setAluno({
-                                            //     ...aluno,
-                                            //     titulo: e.target.value
-                                            // })}
-                                        />
-                                    </MDBox>
-                                    </Grid>
                                     <Grid item xs={12} md={6}>
                                         <MDBox mb={1}>
-                                        <MDInput
-                                            fullWidth
-                                            type="text"
-                                            label="Telefone"
-                                            // value={aluno.titulo}
-                                            // onChange={(e) => setAluno({
-                                            //     ...aluno,
-                                            //     titulo: e.target.value
-                                            // })}
-                                        />
-                                    </MDBox>
+                                            <Autocomplete
+                                                options={listaResponsaveis}
+                                                getOptionLabel={(option) => option ? option.nome : ""}
+                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                onChange={(e, value) => {
+                                                    if (value) {
+                                                        setAluno({...aluno, idPai: value.id});
+                                                        apiPai(value.id);
+                                                    } else {
+                                                        setAluno({...aluno, idPai: 0});
+                                                    }
+                                                }}
+                                                renderInput={(params) =>
+                                                    <TextField
+                                                        {...params}
+                                                        label="Nome do pai"/>}
+                                            />
+                                        </MDBox>
                                     </Grid>
-                                    <Grid item xs={12} md={6}>
+                                    <Grid item xs={12} md={3}>
+                                        <MDBox mb={1}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="Telefone"
+                                                value={pai.telefone}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
                                         <MDBox mb={1}>
                                             <MDInput
                                                 fullWidth
                                                 type="text"
                                                 label="Profissão"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
+                                                value={pai.profissao}
                                             />
                                         </MDBox>
                                     </Grid>
@@ -327,68 +660,62 @@ function Tables() {
                                                 fullWidth
                                                 type="text"
                                                 label="Local de trabalho"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
+                                                value={pai.localTrabalho}
                                             />
                                         </MDBox>
                                     </Grid>
-                                    <Grid item xs={12} md={6}>
+                                    <Grid item xs={12} md={3}>
                                         <MDBox mb={6}>
                                             <MDInput
                                                 fullWidth
                                                 type="text"
                                                 label="Contato trabalho"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
+                                                value={pai.telefoneTrabalho}
                                             />
                                         </MDBox>
                                     </Grid>
+
+
+
                                         {/*Mãe*/}
-                                    <Grid item xs={12} md={12}>
+                                    <Grid item xs={12} md={6}>
                                         <MDBox mb={1}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="Nome Mãe"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
+                                            <Autocomplete
+                                                options={listaResponsaveis}
+                                                getOptionLabel={(option) => option ? option.nome : ""}
+                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                onChange={(e, value) => {
+                                                    if (value) {
+                                                        setAluno({...aluno, idMae: value.id});
+                                                        apiMae(value.id);
+                                                    } else {
+                                                        setAluno({...aluno, idMae: 0});
+                                                    }
+                                                }}
+                                                renderInput={(params) =>
+                                                    <TextField
+                                                        {...params}
+                                                        label="Nome da mãe"/>}
                                             />
                                         </MDBox>
                                     </Grid>
-                                    <Grid item xs={12} md={6}>
+                                    <Grid item xs={12} md={3}>
                                     <MDBox mb={1}>
                                         <MDInput
                                             fullWidth
                                             type="text"
                                             label="Telefone"
-                                            // value={aluno.titulo}
-                                            // onChange={(e) => setAluno({
-                                            //     ...aluno,
-                                            //     titulo: e.target.value
-                                            // })}
+                                            value={mae.telefone}
                                         />
                                     </MDBox>
                                     </Grid>
-                                    <Grid item xs={12} md={6}>
+                                    <Grid item xs={12} md={3}>
                                         <MDBox mb={1}>
                                                 <MDInput
                                                     fullWidth
                                                     type="text"
                                                     label="Profissão"
-                                                    // value={aluno.titulo}
-                                                    // onChange={(e) => setAluno({
-                                                    //     ...aluno,
-                                                    //     titulo: e.target.value
-                                                    // })}
+                                                    value={mae.profissao}
                                                 />
                                             </MDBox>
                                     </Grid>
@@ -398,110 +725,70 @@ function Tables() {
                                                 fullWidth
                                                 type="text"
                                                 label="Local de trabalho"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
+                                                value={mae.localTrabalho}
                                             />
                                         </MDBox>
                                     </Grid>
-                                    <Grid item xs={12} md={6}>
+                                    <Grid item xs={12} md={3}>
                                         <MDBox mb={4}>
                                             <MDInput
                                                 fullWidth
                                                 type="text"
                                                 label="Contato trabalho"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
+                                                value={mae.telefoneTrabalho}
                                             />
                                         </MDBox>
                                     </Grid>
 
-                                    {/*Situação escolar*/}
+                                    {/*Emerência*/}
                                     <Grid item xs={12} md={12}>
                                         <MDTypography variant="h6" color="dark">
-                                            Situação Escolar
+                                            Emergência
                                         </MDTypography>
                                     </Grid>
-
-                                    <Grid item xs={12} md={12}>
-                                        <MDBox mb={4}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="Descrição"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
-                                            />
-                                        </MDBox>
-                                    </Grid>
-
-                                    {/*Outras informações*/}
-                                    <Grid item xs={12} md={12}>
-                                        <MDTypography variant="h6" color="dark">
-                                            Outras Informações
-                                        </MDTypography>
-                                    </Grid>
-
-                                    <Grid item xs={12} md={12}>
+                                    <Grid item xs={12} md={6}>
                                         <MDBox mb={1}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="Turno"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
-                                            />
+                                            <InputMask
+                                                mask="(99) 99999-9999"
+                                                value={aluno.contatoEmergencia1}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    contatoEmergencia1: e.target.value
+                                                })}
+                                            >
+                                                {() =>
+                                                    <TextField
+                                                        fullWidth
+                                                        label="Contato telefone 1"
+                                                    />
+                                                }
+                                            </InputMask>
                                         </MDBox>
                                     </Grid>
-                                    <Grid item xs={12} md={12}>
-                                        <MDTypography fontSize={15} color="dark">
-                                            Necessita de cuidados especiais?
-                                        </MDTypography>
-                                    </Grid>
-                                    <Grid item xs={12} md={3}>
-                                        <MDBox mb={1}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="Sim/Não"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
-                                            />
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={8}>
+                                    <Grid item xs={12} md={6}>
                                         <MDBox mb={4}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="Especificar"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
-                                            />
+                                            <InputMask
+                                                mask="(99) 99999-9999"
+                                                value={aluno.contatoEmergencia2}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    contatoEmergencia2: e.target.value
+                                                })}
+                                            >
+                                                {() =>
+                                                    <TextField
+                                                        fullWidth
+                                                        label="Contato telefone 2"
+                                                    />
+                                                }
+                                            </InputMask>
                                         </MDBox>
                                     </Grid>
 
                                     {/*Observaçoes*/}
                                     <Grid item xs={12} md={12}>
                                         <MDTypography variant="h6" color="dark">
-                                            Observaçoes
+                                            Observação
                                         </MDTypography>
                                     </Grid>
                                     <Grid item xs={12} md={12}>
@@ -509,17 +796,19 @@ function Tables() {
                                             <MDInput
                                                 fullWidth
                                                 type="text"
-                                                multiline row={10}
-                                                // label="Observaçoes"
-                                                // value={aluno.titulo}
-                                                // onChange={(e) => setAluno({
-                                                //     ...aluno,
-                                                //     titulo: e.target.value
-                                                // })}
+                                                multiline row={5}
+                                                value={aluno.observacao}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    observacao: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>
+
                                 </Grid>
+
+
                                 <Grid mt={6} container justifyContent='inherit' spacing={2}>
                                     <Grid item xs={12} md={3}>
                                         <MDButton
