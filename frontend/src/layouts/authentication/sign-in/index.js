@@ -29,7 +29,7 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
 import bgImage from "assets/images/fundoceg.jpg";
-import bgImage2 from "assets/images/ceg1.png";
+import bgImage2 from 'assets/images/ceg.png';
 
 import { Context } from '../../../context/auth';
 import {Image} from "@mui/icons-material";
