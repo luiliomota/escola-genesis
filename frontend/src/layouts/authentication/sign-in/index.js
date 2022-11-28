@@ -49,8 +49,8 @@ function Basic() {
   return (
     <BasicLayout image={bgImage}>
       <Footer light />
-      <Card style={{backgroundColor: 'transparent', boxShadow: 'none'}}>
-        <img style={{padding: '30px'}} src={bgImage2}/>
+      <Card style={{backgroundColor: 'transparent', boxShadow: 'none', alignItems: 'center'}}>
+        <img style={{padding: '30px', width: '20rem'}} src={bgImage2}/>
       </Card>
       <Card>
         <MDBox
