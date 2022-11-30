@@ -51,7 +51,7 @@ export default function useAuth() {
           setRoles(perfis);
           setMensagens("");
 
-          navigate('/direcao/todos');
+          navigate('/secretaria/requerimentomatricula');
         }
     } catch (error) {
       if (error.response) {

@@ -98,13 +98,19 @@ const routes = [
     isPrivate: true,
     perfis: ["DIRECAO"],
   },
+
   {
     type: "titleSecretaria",
     title: "Secretaria",
     key: "secretaria",
   },
   {
-    type: "collapseSecretaria",
+    type: "TitleCadastroSecretaria",
+    title: "Cadastros",
+    key: "cadastros",
+  },
+  {
+    type: "collapseCadastroSecretaria",
     name: "Cadastro responsável",
     key: "secretaria/cadastroresponsavel",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
@@ -114,7 +120,7 @@ const routes = [
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
-    type: "collapseSecretaria",
+    type: "collapseCadastroSecretaria",
     name: "Cadastro aluno",
     key: "secretaria/cadastroaluno",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
@@ -124,7 +130,12 @@ const routes = [
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
-    type: "collapseSecretaria",
+    type: "TitleRelatorioSecretaria",
+    title: "Relatórios",
+    key: "Relatorios",
+  },
+  {
+    type: "collapseRelatorioSecretaria",
     name: "Requerimento matrícula",
     key: "secretaria/requerimentomatricula",
     icon: <Icon fontSize="small">summarize</Icon>,
@@ -134,7 +145,7 @@ const routes = [
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
-    type: "collapseSecretaria",
+    type: "collapseRelatorioSecretaria",
     name: "Contrato",
     key: "secretaria/contrato",
     icon: <Icon fontSize="small">summarize</Icon>,
@@ -150,6 +161,7 @@ const routes = [
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
+
   {
     type: "titleCoordenacao",
     title: "Coordenação",
@@ -183,6 +195,7 @@ const routes = [
     isPrivate: true,
     perfis: ["DIRECAO","COORDENACAO"],
   },
+
   {
     type: "titleProfessor",
     title: "Professor",
@@ -216,11 +229,12 @@ const routes = [
     isPrivate: true,
     perfis: ["DIRECAO","PROFESSOR"],
   },
+
   {
     type: "titleAutenticacao",
     title: "Autenticação",
     key: "autenticacao",
-    perfis: ["DIRECAO"],
+    perfis: ["DIRECAO","SECRETARIA","COORDENACAO","PROFESSOR"],
   },
   // {
   //   type: "collapse",
@@ -232,8 +246,8 @@ const routes = [
   //   isPrivate: true,
   // },
   {
-    type: "collapseAutenticacao",
-    name: "Autenticar",
+    // type: "collapseAutenticacao",
+    // name: "Autenticar",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",

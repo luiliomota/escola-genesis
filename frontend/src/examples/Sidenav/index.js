@@ -13,13 +13,13 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import {useEffect, useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 
 // react-router-dom components
-import { useLocation, NavLink } from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
-import PropTypes, {element} from "prop-types";
+import PropTypes from "prop-types";
 
 // @mui material components
 import List from "@mui/material/List";
@@ -38,23 +38,18 @@ import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 
-import { Context } from 'context/auth';
+import {Context} from 'context/auth';
 
 // Material Dashboard 2 React context
-import {
-  useMaterialUIController,
-  setMiniSidenav,
-  setTransparentSidenav,
-  setWhiteSidenav,
-} from "context";
-import ListItemText from "@mui/material/ListItemText";
-import {Collapse, ListItemButton, ListSubheader} from "@mui/material";
-import ListItemIcon from "@mui/material/ListItemIcon";
+import {setMiniSidenav, setTransparentSidenav, setWhiteSidenav, useMaterialUIController,} from "context";
+import {Collapse, ListItemButton} from "@mui/material";
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [openDirecao, setOpenDirecao] = useState(false);
   const [openSecretaria, setOpenSecretaria] = useState(false);
+  const [openCadastroSecretaria, setOpenCadastroSecretaria] = useState(false);
+  const [openRelatorioSecretaria, setOpenRelatorioSecretaria] = useState(false);
   const [openCoordenacao, setOpenCoordenacao] = useState(false);
   const [openProfessor, setOpenProfessor] = useState(false);
   const [openAutenticacao, setOpenAutenticacao] = useState(true);
@@ -99,18 +94,24 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const handleClickDirecao = () => {
         setOpenDirecao(!openDirecao);
   }
-    const handleClickSecretaria = () => {
+  const handleClickSecretaria = () => {
         setOpenSecretaria(!openSecretaria);
-    }
-    const handleClickCoordenacao = () => {
+  }
+  const handleClickCadastroSecretaria = () => {
+        setOpenCadastroSecretaria(!openCadastroSecretaria);
+  }
+  const handleClickRelatorioSecretaria = () => {
+        setOpenRelatorioSecretaria(!openRelatorioSecretaria);
+  }
+  const handleClickCoordenacao = () => {
         setOpenCoordenacao(!openCoordenacao);
-    }
-    const handleClickProfessor = () => {
+  }
+  const handleClickProfessor = () => {
         setOpenProfessor(!openProfessor);
-    }
-    const handleClickAutenticacao = () => {
-        setOpenAutenticacao(!openAutenticacao);
-    }
+  }
+    // const handleClickAutenticacao = () => {
+    //     setOpenAutenticacao(!openAutenticacao);
+    // }
 
     // Render all the routes from the routes.js (All the visible items on the Sidenav)
   const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, href, route, perfis }) => {
@@ -146,15 +147,15 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
               </Collapse>
           );
       break;
-      case "collapseSecretaria" :
+      case "collapseCadastroSecretaria" :
         returnValue = href ? (
-            <Collapse in={openSecretaria}>
+            <Collapse in={openCadastroSecretaria && openSecretaria}>
               <Link
                   href={href}
                   key={key}
                   target="_blank"
                   rel="noreferrer"
-                  sx={{ textDecoration: "none" }}
+                  sx={{ textDecoration: "none"}}
               >
                 <SidenavCollapse
                     name={name}
@@ -165,13 +166,39 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
               </Link>
             </Collapse>
         ) : (
-            <Collapse in={openSecretaria}>
+            <Collapse in={openCadastroSecretaria && openSecretaria}>
               <NavLink key={key} to={route}>
-                <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
+                <SidenavCollapse style={{marginLeft: "2rem"}} name={name} icon={icon} active={key === collapseName} />
               </NavLink>
             </Collapse>
         );
         break;
+      case "collapseRelatorioSecretaria" :
+            returnValue = href ? (
+                <Collapse in={openRelatorioSecretaria && openSecretaria}>
+                    <Link
+                        href={href}
+                        key={key}
+                        target="_blank"
+                        rel="noreferrer"
+                        sx={{ textDecoration: "none" }}
+                    >
+                        <SidenavCollapse
+                            name={name}
+                            icon={icon}
+                            active={key === collapseName}
+                            noCollapse={noCollapse}
+                        />
+                    </Link>
+                </Collapse>
+            ) : (
+                <Collapse in={openRelatorioSecretaria && openSecretaria}>
+                    <NavLink key={key} to={route}>
+                        <SidenavCollapse style={{marginLeft: "2rem"}} name={name} icon={icon} active={key === collapseName} />
+                    </NavLink>
+                </Collapse>
+            );
+            break;
       case "collapseCoordenacao" :
         returnValue = href ? (
             <Collapse in={openCoordenacao}>
@@ -224,7 +251,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             </Collapse>
         );
         break;
-        case "collapseAutenticacao" :
+      case "collapseAutenticacao" :
             returnValue = href ? (
                 <Collapse in={openAutenticacao}>
                     <Link
@@ -295,6 +322,50 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             </MDTypography>
         );
         break;
+      case "TitleCadastroSecretaria" :
+            returnValue = (
+                <Collapse in={openSecretaria}>
+                    <MDTypography
+                        key={key}
+                        color={textColor}
+                        display="block"
+                        variant="caption"
+                        fontSize={15}
+                        pl={1}
+                        // mt={2}
+                        // mb={1}
+                        ml={1}
+                    >
+                        <ListItemButton onClick={handleClickCadastroSecretaria}>
+                            {title}&nbsp;&nbsp;
+                            {openCadastroSecretaria ? <ExpandLess /> : <ExpandMore />}
+                        </ListItemButton>
+                    </MDTypography>
+                </Collapse>
+            );
+            break;
+      case "TitleRelatorioSecretaria" :
+            returnValue = (
+                <Collapse in={openSecretaria}>
+                    <MDTypography
+                        key={key}
+                        color={textColor}
+                        display="block"
+                        variant="caption"
+                        fontSize={15}
+                        pl={1}
+                        // mt={2}
+                        // mb={1}
+                        ml={1}
+                    >
+                        <ListItemButton onClick={handleClickRelatorioSecretaria}>
+                            {title}&nbsp;&nbsp;
+                            {openRelatorioSecretaria ? <ExpandLess /> : <ExpandMore />}
+                        </ListItemButton>
+                    </MDTypography>
+                </Collapse>
+            );
+            break;
       case "titleCoordenacao" :
         returnValue = (
             <MDTypography
@@ -339,28 +410,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             </MDTypography>
         );
         break;
-        case "titleAutenticacao" :
-            returnValue = (
-                <MDTypography
-                    key={key}
-                    color={textColor}
-                    display="block"
-                    variant="caption"
-                    fontWeight="regular"
-                    fontSize={15}
-                    // textTransform="uppercase"
-                    pl={1}
-                    mt={4}
-                    // mb={1}
-                    // ml={1}
-                >
-                    <ListItemButton onClick={handleClickAutenticacao}>
-                        {title}&nbsp;&nbsp;
-                        {openAutenticacao ? <ExpandLess /> : <ExpandMore />}
-                    </ListItemButton>
-                </MDTypography>
-            );
-            break;
 
       case "divider" :
           returnValue = (
