@@ -8,6 +8,7 @@ public class EnderecoForm {
     private String logradouro;
     private String cidade;
     private String estado;
+    private String complemento;
 
     public String getCep() {
         return cep;
@@ -25,8 +26,12 @@ public class EnderecoForm {
         return estado;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
     public Endereco cadastro() {
-            Endereco endereco = new Endereco(this.cep, this.logradouro, this.cidade, this.estado);
+            Endereco endereco = new Endereco(this.cep, this.logradouro, this.cidade, this.estado, this.complemento);
             return endereco;
     }
 }

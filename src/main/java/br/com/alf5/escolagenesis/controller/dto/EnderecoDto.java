@@ -9,6 +9,7 @@ public class EnderecoDto {
     private String logradouro;
     private String cidade;
     private String estado;
+    private String complemento;
 
     public EnderecoDto(Endereco endereco) {
         this.id = endereco.getId();
@@ -16,6 +17,7 @@ public class EnderecoDto {
         this.logradouro = endereco.getLogradouro();
         this.cidade = endereco.getCidade();
         this.estado = endereco.getEstado();
+        this.complemento = endereco.getComplemento();
     }
 
     public static Page<EnderecoDto> converter(Page<Endereco> enderecos) {
@@ -62,4 +64,11 @@ public class EnderecoDto {
         this.estado = estado;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 }

@@ -13,7 +13,6 @@ public class AlunoForm {
     private String nome;
     private LocalDate dataNascimento;
     private LocalDate dataMatricula;
-    private Long idade;
     private String sexo;
     private String naturalidade;
     private String nacionalidade;
@@ -23,43 +22,34 @@ public class AlunoForm {
     private String logradouro;
     private String cidade;
     private String estado;
+    private String complemento;
     private Long anoLetivo;
-    private Long anoInicial;
+    private String anoInicial;
     private String situacao;
-    private Long serie;
     private String turma;
     private String turno;
     private Long idPai;
     private Long idMae;
-    private String telefoneMae;
-    private String profissaoMae;
-    private String localTrabalhoMae;
-    private String contatoTrabalhoMae;
+    private Long idResponsavel;
     private String contatoEmergencia1;
     private String contatoEmergencia2;
     private String observacao;
 
     public Aluno cadastro(SexoRepository sexoRepository, SimOuNaoRepository simOuNaoRepository, TurnoRepository turnoRepository,
                           ResponsavelRepository responsavelRepository, EnderecoRepository enderecoRepository) {
-        if(sexoRepository.existsByNome(sexo) &&
-            simOuNaoRepository.existsByNome(cuidadoEspecial) &&
-            turnoRepository.existsByNome(turno) &&
-                (responsavelRepository.existsById(idPai) || responsavelRepository.existsById(idMae))
-        ){
             Sexo sexo = sexoRepository.findByNome(this.sexo);
             SimOuNao cuidadoEspecial = simOuNaoRepository.findByNome(this.cuidadoEspecial);
             Turno turno = turnoRepository.findByNome(this.turno);
             Responsavel pai = responsavelRepository.getReferenceById(idPai);
             Responsavel mae = responsavelRepository.getReferenceById(idMae);
-            Endereco endereco = new Endereco(this.cep, this.logradouro, this.cidade, this.estado);
+            Responsavel responsavel = responsavelRepository.getReferenceById(idResponsavel);
+            Endereco endereco = new Endereco(this.cep, this.logradouro, this.cidade, this.estado, this.complemento);
             enderecoRepository.save(endereco);
 
-            Aluno aluno = new Aluno(this.nome, this.dataNascimento, this.dataMatricula, this.idade, sexo, this.naturalidade,
-                    this.nacionalidade, cuidadoEspecial, this.especificacao, endereco, this.anoLetivo, this.anoInicial, this.situacao,
-                    this.serie, this.turma, turno, pai, mae, this.contatoEmergencia1, this.contatoEmergencia2, this.observacao);
+            Aluno aluno = new Aluno(this.nome, this.dataNascimento, this.dataMatricula, this.sexo, this.naturalidade,
+                    this.nacionalidade, this.cuidadoEspecial, this.especificacao, endereco, this.anoLetivo, this.anoInicial, this.situacao,
+                    this.turma, this.turno, pai, mae, responsavel, this.contatoEmergencia1, this.contatoEmergencia2, this.observacao);
             return aluno;
-        }
-        return null;
     }
 
     public String getNome() {
@@ -72,10 +62,6 @@ public class AlunoForm {
 
     public LocalDate getDataMatricula() {
         return dataMatricula;
-    }
-
-    public Long getIdade() {
-        return idade;
     }
 
     public String getSexo() {
@@ -114,20 +100,20 @@ public class AlunoForm {
         return estado;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
     public Long getAnoLetivo() {
         return anoLetivo;
     }
 
-    public Long getAnoInicial() {
+    public String getAnoInicial() {
         return anoInicial;
     }
 
     public String getSituacao() {
         return situacao;
-    }
-
-    public Long getSerie() {
-        return serie;
     }
 
     public String getTurma() {
@@ -146,20 +132,8 @@ public class AlunoForm {
         return idMae;
     }
 
-    public String getTelefoneMae() {
-        return telefoneMae;
-    }
-
-    public String getProfissaoMae() {
-        return profissaoMae;
-    }
-
-    public String getLocalTrabalhoMae() {
-        return localTrabalhoMae;
-    }
-
-    public String getContatoTrabalhoMae() {
-        return contatoTrabalhoMae;
+    public Long getIdResponsavel() {
+        return idResponsavel;
     }
 
     public String getContatoEmergencia1() {

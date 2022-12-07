@@ -14,15 +14,17 @@ public class Endereco {
     private String logradouro;
     private String cidade;
     private String estado;
+    private String complemento;
 
     public Endereco() {
     }
 
-    public Endereco(String cep, String logradouro, String cidade, String estado) {
+    public Endereco(String cep, String logradouro, String cidade, String estado, String complemento) {
         this.cep = cep;
         this.logradouro = logradouro;
         this.cidade = cidade;
         this.estado = estado;
+        this.complemento = complemento;
     }
 
     public Long getId() {
@@ -65,4 +67,11 @@ public class Endereco {
         this.estado = estado;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 }

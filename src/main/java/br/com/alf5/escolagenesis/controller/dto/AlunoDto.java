@@ -12,7 +12,6 @@ public class AlunoDto {
     private String dataCadastro;
     private String dataNascimento;
     private String dataMatricula;
-    private Long idade;
     private String sexo;
     private String naturalidade;
     private String nacionalidade;
@@ -22,10 +21,10 @@ public class AlunoDto {
     private String logradouro;
     private String cidade;
     private String estado;
+    private String complemento;
     private Long anoLetivo;
-    private Long anoInicial;
+    private String anoInicial;
     private String situacao;
-    private Long serie;
     private String turma;
     private String turno;
     private String nomePai;
@@ -38,6 +37,11 @@ public class AlunoDto {
     private String profissaoMae;
     private String localTrabalhoMae;
     private String contatoTrabalhoMae;
+    private String nomeResponsavel;
+    private String telefoneResponsavel;
+    private String profissaoResponsavel;
+    private String localTrabalhoResponsavel;
+    private String contatoTrabalhoResponsavel;
     private String contatoEmergencia1;
     private String contatoEmergencia2;
     private String observacao;
@@ -48,22 +52,21 @@ public class AlunoDto {
         this.dataCadastro = aluno.getDataCadastro().format(formatter);
         this.dataNascimento = aluno.getDataNascimento().format(formatter);
         this.dataMatricula = aluno.getDataMatricula().format(formatter);
-        this.idade = aluno.getIdade();
-        this.sexo = aluno.getSexo().getNome();
+        this.sexo = aluno.getSexo();
         this.naturalidade = aluno.getNaturalidade();
         this.nacionalidade = aluno.getNacionalidade();
-        this.cuidadoEspecial = aluno.getCuidadoEspecial().getNome();
+        this.cuidadoEspecial = aluno.getCuidadoEspecial();
         this.especificacao = aluno.getEspecificacao();
         this.cep = aluno.getEndereco().getCep();
         this.logradouro = aluno.getEndereco().getLogradouro();
         this.cidade = aluno.getEndereco().getCidade();
         this.estado = aluno.getEndereco().getEstado();
+        this.complemento = aluno.getEndereco().getComplemento();
         this.anoLetivo = aluno.getAnoLetivo();
         this.anoInicial = aluno.getAnoInicial();
         this.situacao = aluno.getSituacao();
-        this.serie = aluno.getSerie();
         this.turma = aluno.getTurma();
-        this.turno = aluno.getTurno().getNome();
+        this.turno = aluno.getTurno();
         this.nomePai = aluno.getPai().getNome();
         this.telefonePai = aluno.getPai().getTelefone();
         this.profissaoPai = aluno.getPai().getProfissao();
@@ -74,6 +77,11 @@ public class AlunoDto {
         this.profissaoMae = aluno.getMae().getProfissao();
         this.localTrabalhoMae = aluno.getMae().getLocalTrabalho();
         this.contatoTrabalhoMae = aluno.getMae().getTelefoneTrabalho();
+        this.nomeResponsavel = aluno.getResponsavel().getNome();
+        this.telefoneResponsavel = aluno.getResponsavel().getTelefone();
+        this.profissaoResponsavel = aluno.getResponsavel().getProfissao();
+        this.localTrabalhoResponsavel = aluno.getResponsavel().getLocalTrabalho();
+        this.contatoTrabalhoResponsavel = aluno.getResponsavel().getTelefoneTrabalho();
         this.contatoEmergencia1 = aluno.getContatoEmergencia1();
         this.contatoEmergencia2 = aluno.getContatoEmergencia2();
         this.observacao = aluno.getObservacao();
@@ -121,14 +129,6 @@ public class AlunoDto {
 
     public void setDataMatricula(String dataMatricula) {
         this.dataMatricula = dataMatricula;
-    }
-
-    public Long getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Long idade) {
-        this.idade = idade;
     }
 
     public String getSexo() {
@@ -219,6 +219,14 @@ public class AlunoDto {
         this.estado = estado;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
     public Long getAnoLetivo() {
         return anoLetivo;
     }
@@ -227,11 +235,11 @@ public class AlunoDto {
         this.anoLetivo = anoLetivo;
     }
 
-    public Long getAnoInicial() {
+    public String getAnoInicial() {
         return anoInicial;
     }
 
-    public void setAnoInicial(Long anoInicial) {
+    public void setAnoInicial(String anoInicial) {
         this.anoInicial = anoInicial;
     }
 
@@ -241,14 +249,6 @@ public class AlunoDto {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
-    }
-
-    public Long getSerie() {
-        return serie;
-    }
-
-    public void setSerie(Long serie) {
-        this.serie = serie;
     }
 
     public String getTurma() {
@@ -353,5 +353,45 @@ public class AlunoDto {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public String getNomeResponsavel() {
+        return nomeResponsavel;
+    }
+
+    public void setNomeResponsavel(String nomeResponsavel) {
+        this.nomeResponsavel = nomeResponsavel;
+    }
+
+    public String getTelefoneResponsavel() {
+        return telefoneResponsavel;
+    }
+
+    public void setTelefoneResponsavel(String telefoneResponsavel) {
+        this.telefoneResponsavel = telefoneResponsavel;
+    }
+
+    public String getProfissaoResponsavel() {
+        return profissaoResponsavel;
+    }
+
+    public void setProfissaoResponsavel(String profissaoResponsavel) {
+        this.profissaoResponsavel = profissaoResponsavel;
+    }
+
+    public String getLocalTrabalhoResponsavel() {
+        return localTrabalhoResponsavel;
+    }
+
+    public void setLocalTrabalhoResponsavel(String localTrabalhoResponsavel) {
+        this.localTrabalhoResponsavel = localTrabalhoResponsavel;
+    }
+
+    public String getContatoTrabalhoResponsavel() {
+        return contatoTrabalhoResponsavel;
+    }
+
+    public void setContatoTrabalhoResponsavel(String contatoTrabalhoResponsavel) {
+        this.contatoTrabalhoResponsavel = contatoTrabalhoResponsavel;
     }
 }

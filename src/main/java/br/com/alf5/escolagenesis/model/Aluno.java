@@ -11,40 +11,37 @@ public class Aluno {
     private LocalDate dataCadastro = LocalDate.now();
     private LocalDate dataNascimento;
     private LocalDate dataMatricula;
-    private Long idade;
-    @OneToOne
-    private Sexo sexo;
+    private String sexo;
     private String naturalidade;
     private String nacionalidade;
-    @OneToOne
-    private SimOuNao cuidadoEspecial;
+    private String cuidadoEspecial;
     private String especificacao;
     @OneToOne
     private Endereco endereco;
     private Long anoLetivo;
-    private Long anoInicial;
+    private String anoInicial;
     private String situacao;
-    private Long serie;
     private String turma;
-    @OneToOne
-    private Turno turno;
+    private String turno;
     @OneToOne
     private Responsavel pai;
     @OneToOne
     private Responsavel mae;
+    @OneToOne
+    private Responsavel responsavel;
     private String contatoEmergencia1;
     private String contatoEmergencia2;
     private String observacao;
 
-    public Aluno(String nome, LocalDate dataNascimento, LocalDate dataMatricula,
-                 Long idade, Sexo sexo, String naturalidade, String nacionalidade, SimOuNao cuidadoEspecial,
-                 String especificacao, Endereco endereco, Long anoLetivo, Long anoInicial, String situacao, Long serie,
-                 String turma, Turno turno, Responsavel pai, Responsavel mae, String contatoEmergencia1,
+    public Aluno(String nome, LocalDate dataNascimento, LocalDate dataMatricula, String sexo,
+                 String naturalidade, String nacionalidade, String cuidadoEspecial,
+                 String especificacao, Endereco endereco, Long anoLetivo, String anoInicial,
+                 String situacao, String turma, String turno, Responsavel pai,
+                 Responsavel mae, Responsavel responsavel, String contatoEmergencia1,
                  String contatoEmergencia2, String observacao) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.dataMatricula = dataMatricula;
-        this.idade = idade;
         this.sexo = sexo;
         this.naturalidade = naturalidade;
         this.nacionalidade = nacionalidade;
@@ -54,11 +51,11 @@ public class Aluno {
         this.anoLetivo = anoLetivo;
         this.anoInicial = anoInicial;
         this.situacao = situacao;
-        this.serie = serie;
         this.turma = turma;
         this.turno = turno;
         this.pai = pai;
         this.mae = mae;
+        this.responsavel = responsavel;
         this.contatoEmergencia1 = contatoEmergencia1;
         this.contatoEmergencia2 = contatoEmergencia2;
         this.observacao = observacao;
@@ -67,11 +64,11 @@ public class Aluno {
     public Aluno() {
     }
 
-    public Sexo getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(Sexo sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -122,14 +119,6 @@ public class Aluno {
         this.dataMatricula = dataMatricula;
     }
 
-    public Long getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Long idade) {
-        this.idade = idade;
-    }
-
     public String getNacionalidade() {
         return nacionalidade;
     }
@@ -138,11 +127,11 @@ public class Aluno {
         this.nacionalidade = nacionalidade;
     }
 
-    public SimOuNao getCuidadoEspecial() {
+    public String getCuidadoEspecial() {
         return cuidadoEspecial;
     }
 
-    public void setCuidadoEspecial(SimOuNao cuidadoEspecial) {
+    public void setCuidadoEspecial(String cuidadoEspecial) {
         this.cuidadoEspecial = cuidadoEspecial;
     }
 
@@ -170,11 +159,11 @@ public class Aluno {
         this.anoLetivo = anoLetivo;
     }
 
-    public Long getAnoInicial() {
+    public String getAnoInicial() {
         return anoInicial;
     }
 
-    public void setAnoInicial(Long anoInicial) {
+    public void setAnoInicial(String anoInicial) {
         this.anoInicial = anoInicial;
     }
 
@@ -186,14 +175,6 @@ public class Aluno {
         this.situacao = situacao;
     }
 
-    public Long getSerie() {
-        return serie;
-    }
-
-    public void setSerie(Long serie) {
-        this.serie = serie;
-    }
-
     public String getTurma() {
         return turma;
     }
@@ -202,11 +183,11 @@ public class Aluno {
         this.turma = turma;
     }
 
-    public Turno getTurno() {
+    public String getTurno() {
         return turno;
     }
 
-    public void setTurno(Turno turno) {
+    public void setTurno(String turno) {
         this.turno = turno;
     }
 
@@ -248,5 +229,13 @@ public class Aluno {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public Responsavel getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(Responsavel responsavel) {
+        this.responsavel = responsavel;
     }
 }
