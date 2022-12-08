@@ -26,6 +26,8 @@ import logo from "../../../assets/images/ceg.png";
 import Checkbox from "@mui/material/Checkbox";
 
 function Tables() {
+    const anoLetivo = "2023";
+
     const componentRef = useRef(null);
 
     const [aluno, setAluno] = useState({
@@ -33,6 +35,7 @@ function Tables() {
         id: 0,
     });
     const [listaAlunos, setListaAlunos] = useState([]);
+    const [valorParcela, setValorParcela] = useState();
 
     const reactToPrintContent = useCallback(() => {
         return componentRef.current;
@@ -43,12 +46,56 @@ function Tables() {
     });
 
     useEffect(() => {
-        api.get("/api/aluno/")
+        api.get("/api/aluno?size=500")
           .then((response) => {
               setListaAlunos(response.data.content);
           })
           .catch((error) => console.error(error))
     }, []);
+
+    useEffect(() => {
+        switch (aluno.anoInicial) {
+            case "NIVEL 1":
+                setValorParcela("R$ 420,00")
+                break;
+            case "NIVEL 2":
+                setValorParcela("R$ 420,00")
+                break;
+            case "NIVEL 3":
+                setValorParcela("R$ 420,00")
+                break;
+            case "1º ANO":
+                setValorParcela("R$ 480,00")
+                break;
+            case "2º ANO":
+                setValorParcela("R$ 480,00")
+                break;
+            case "3º ANO":
+                setValorParcela("R$ 480,00")
+                break;
+            case "4º ANO":
+                setValorParcela("R$ 480,00")
+                break;
+            case "5º ANO":
+                setValorParcela("R$ 480,00")
+                break;
+            case "6º ANO":
+                setValorParcela("R$ 520,00")
+                break;
+            case "7º ANO":
+                setValorParcela("R$ 520,00")
+                break;
+            case "8º ANO":
+                setValorParcela("R$ 520,00")
+                break;
+            case "9º ANO":
+                setValorParcela("R$ 520,00")
+                break;
+            case false:
+                setValorParcela("")
+                console.log("Informação não encontrada no BD")
+        }
+    })
 
     return (
       <DashboardLayout>
@@ -86,7 +133,6 @@ function Tables() {
                                             isOptionEqualToValue={(option, value) => option ? value : ""}
                                             onChange={(e, value) => {
                                                 if (value) {
-                                                    console.log(value);
                                                     setAluno(value);
                                                 }
                                             }}
@@ -134,75 +180,70 @@ function Tables() {
                                       </MDTypography>
                                       <br/>
                                       <MDTypography mb={0} variant="h5" color="dark" textTransform="uppercase" sx={{textAlign: 'center'}}>
-                                          Contrato de Prestação de Serviços Educacionais para 2022
+                                          Contrato de Prestação de Serviços Educacionais para {anoLetivo}
                                       </MDTypography>
                                   </Grid>
                               </MDBox>
-                              <MDBox p={3} pb={3}>
+                              <MDBox p={3} pb={3} ml={3} mr={3}>
                                   <Grid container justifyContent='inherit' spacing={1}>
                                       <Grid item xs={12} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              DE UM COMO CONTRATANTE: {aluno.nome}
+                                              DE UM COMO CONTRATANTE: {aluno.nomeResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              CPF/MF: {aluno.dataNascimento}
+                                              CPF/MF: {aluno.cpfResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              IDENTIDADE: {aluno.sexo}
+                                              IDENTIDADE: {aluno.rgResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              ÓRGÃO/EXP: {aluno.sexo}
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography variant="body2" color="dark">
-                                              NACIONALIDADE: {aluno.sexo}
+                                              NACIONALIDADE: {aluno.nacionalidadeResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              ESTADO CIVIL: {aluno.naturalidade}
+                                              ESTADO CIVIL: {aluno.estadoCivilResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              PROFISSÃO: {aluno.naturalidade}
+                                              PROFISSÃO: {aluno.profissaoResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              ENDEREÇO RESIDENCIAL: {aluno.nomePai}
+                                              ENDEREÇO RESIDENCIAL: {aluno.logradouro+" "+aluno.complemento}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              BAIRRO: {aluno.nomePai}
+                                              BAIRRO: {aluno.bairro}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              CIDADE: {aluno.nomePai}
+                                              CIDADE: {aluno.cidade+"-"+aluno.estado}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              CEP: {aluno.nomePai}
+                                              CEP: {aluno.cep}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              TELEFONES: {aluno.nomePai}
+                                              TELEFONES: {aluno.contatoEmergencia1+" / "+aluno.contatoEmergencia2}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              E-MAIL: {aluno.nomePai}
+                                              E-MAIL: {aluno.emailResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
                                       <br/>
@@ -216,52 +257,52 @@ function Tables() {
                                       <br/>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              NOME:
+                                              NOME: _________________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              CPF/MF:
+                                              CPF/MF: _______________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              VÍNCULO COM O(A) ALUNO(A)?:
+                                              VÍNCULO COM O(A) ALUNO(A)?: ________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              TELEFONE:
+                                              TELEFONE: _____________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              BAIRRO:
+                                              BAIRRO: _______________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              NOME:
+                                              NOME: _________________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              CPF/MF:
+                                              CPF/MF: _______________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              VÍNCULO COM O(A) ALUNO(A)?:
+                                              VÍNCULO COM O(A) ALUNO(A)?: ________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              TELEFONE:
+                                              TELEFONE: _____________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={6}>
                                           <MDTypography variant="body2" color="dark">
-                                              BAIRRO:
+                                              BAIRRO: _______________________________________
                                           </MDTypography>
                                       </Grid>
                                       <br/>
@@ -269,7 +310,7 @@ function Tables() {
                                       <Grid item xs={12} md={12}>
                                           <MDTypography variant="body2" color="dark">
                                               Na qualidade de representante legal do(a) aluno(a): {aluno.nome},
-                                              matriculado(a) no(a) # do ensino # devidamente qualificado(a) na ficha de
+                                              matriculado(a) no(a) {aluno.anoInicial} do ensino {aluno.situacao} devidamente qualificado(a) na ficha de
                                               matrícula, que passa a fazer parte deste instrumento de contrato, desde já reconheço e declaro serem verdadeiras as informações prestadas neste instrumento de contrato, especialmente em relação às condições de saúde do aluno (a) abaixo declaradas:
                                           </MDTypography>
                                       </Grid>
@@ -345,7 +386,7 @@ function Tables() {
                                       <br/>
                                       <Grid item xs={12} md={12}>
                                           <MDTypography variant="body2" color="dark">
-                                              CLÁUSULA 1ª -  O  objeto  do  presente  contrato é a prestação de serviços  educacionais  pela  CONTRATADA, ao aluno indicado pelo CONTRATANTE, durante o ano de 2020 de acordo com o seu Plano Escolar.
+                                              CLÁUSULA 1ª -  O  objeto  do  presente  contrato é a prestação de serviços  educacionais  pela  CONTRATADA, ao aluno indicado pelo CONTRATANTE, durante o ano de {anoLetivo} de acordo com o seu Plano Escolar.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
@@ -400,14 +441,14 @@ function Tables() {
                                       </Grid>
                                       <Grid item xs={12} md={12}>
                                           <MDTypography variant="h6" color="dark">
-                                              CLAUSULA 3ª – Como contraprestação pelos serviços a serem prestados referentes ao período letivo de janeiro a dezembro de 2021 conforme previsto na cláusula 2ª, será a anuidade paga da seguinte forma:
+                                              CLAUSULA 3ª – Como contraprestação pelos serviços a serem prestados referentes ao período letivo de janeiro a dezembro de {anoLetivo} conforme previsto na cláusula 2ª, será a anuidade paga da seguinte forma:
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
                                           <table border={1}>
                                               <thead>
                                               <tr>
-                                                <th colSpan={4}>TABELA DE PRECOS DE CONTRATO PARA O  ANO LETIVO DE 2021</th>
+                                                <th colSpan={4}>TABELA DE PRECOS DE CONTRATO PARA O  ANO LETIVO DE {anoLetivo}</th>
                                               </tr>
                                                 <tr>
                                                     <th>
@@ -446,7 +487,7 @@ function Tables() {
                                                   </td>
                                                   <td>
                                                         <MDTypography variant="h6" color="dark">
-                                                      R$ 420,00
+                                                            {valorParcela}
                                                         </MDTypography>
                                                   </td>
                                                   <td>
@@ -573,6 +614,16 @@ function Tables() {
                                       </Grid>
                                   </Grid>
                               </MDBox>
+                              <MDBox p={3} pb={3} ml={3} mr={3}>
+                                  <Grid container justifyContent='inherit' spacing={1}>
+                                      <Grid item xs={12} md={12}>
+                                          <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'end'}}>
+                                              Palmas, {new Date().toLocaleDateString()}
+                                              {/*Palmas, {moment.locale('pt-br')}*/}
+                                          </MDTypography>
+                                      </Grid>
+                                  </Grid>
+                              </MDBox>
                               <MDBox p={3} pb={3} display="flex" alignItems="center"
                                      sx={{flexDirection: 'column'}}>
                                   <Grid>
@@ -600,23 +651,23 @@ function Tables() {
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography variant="h6" color="dark">
-                                              1ª ________________________________
+                                          <MDTypography variant="body2" color="dark">
+                                              1ª ________________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography variant="h6" color="dark">
-                                              CPF ______________________________
+                                          <MDTypography variant="body2" color="dark">
+                                              CPF _______________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography variant="h6" color="dark">
-                                              2ª ________________________________
+                                          <MDTypography variant="body2" color="dark">
+                                              2ª ________________________________________
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography variant="h6" color="dark">
-                                              CPF ______________________________
+                                          <MDTypography variant="body2" color="dark">
+                                              CPF _______________________________________
                                           </MDTypography>
                                       </Grid>
                                   </Grid>

@@ -111,7 +111,7 @@ const routes = [
   },
   {
     type: "collapseCadastroSecretaria",
-    name: "Cadastro responsável",
+    name: "Pai/Mãe/Responsável",
     key: "secretaria/cadastroresponsavel",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/cadastroresponsavel",
@@ -121,7 +121,7 @@ const routes = [
   },
   {
     type: "collapseCadastroSecretaria",
-    name: "Cadastro aluno",
+    name: "Aluno(a)",
     key: "secretaria/cadastroaluno",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/cadastroaluno",

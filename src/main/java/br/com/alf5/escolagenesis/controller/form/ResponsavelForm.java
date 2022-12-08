@@ -12,6 +12,7 @@ public class ResponsavelForm {
     private String telefone;
     private String sexo;
     private String profissao;
+    private String email;
     private String localTrabalho;
     private String telefoneTrabalho;
     private String cpf;
@@ -59,14 +60,13 @@ public class ResponsavelForm {
         return telefoneTrabalho;
     }
 
-    public Responsavel cadastro(SexoRepository sexoRepository, EstadoCivilRepository estadoCivilRepository) {
-        if(sexoRepository.existsByNome(sexo) && estadoCivilRepository.existsByNome(estadoCivil)){
-            Sexo sexo = sexoRepository.findByNome(this.sexo);
-            EstadoCivil estadoCivil = estadoCivilRepository.findByNome(this.estadoCivil);
-            Responsavel responsavel = new Responsavel(this.nome, this.telefone, sexo, this.profissao, this.localTrabalho, this.telefoneTrabalho,
-                    this.cpf, this.rg, estadoCivil, nacionalidade);
+    public String getEmail() {
+        return email;
+    }
+
+    public Responsavel cadastro() {
+            Responsavel responsavel = new Responsavel(this.nome, this.telefone, this.sexo, this.profissao, this.email, this.localTrabalho, this.telefoneTrabalho,
+                    this.cpf, this.rg, this.estadoCivil, this.nacionalidade);
             return responsavel;
-        }
-        return null;
     }
 }

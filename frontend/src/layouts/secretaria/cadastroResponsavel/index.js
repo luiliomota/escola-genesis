@@ -32,6 +32,7 @@ function Tables() {
         telefone: "",
         sexo: "",
         profissao: "",
+        email: "",
         localTrabalho: "",
         telefoneTrabalho: "",
         cpf: "",
@@ -41,6 +42,8 @@ function Tables() {
     });
     const [listaResponsaveis, setListaResponsaveis] = useState([]);
     const [listaEstadoCivil, setListaEstadoCivil] = useState([]);
+    const [listaNacionalidade, setListaNacionalidade] = useState([]);
+
 
     const [successSB, setSuccessSB] = useState(false);
     const [errorSB, setErrorSB] = useState(false);
@@ -50,7 +53,7 @@ function Tables() {
     const closeErrorSB = () => setErrorSB(false);
 
     useEffect(() => {
-        api.get("/api/responsavel")
+        api.get("/api/responsavel?size=500")
             .then((response) => {
                 setListaResponsaveis(response.data.content);
             })
@@ -61,6 +64,14 @@ function Tables() {
         api.get("api/estadocivil")
             .then((response) => {
                 setListaEstadoCivil(response.data.content);
+            })
+            .catch((error) => console.error(error))
+    },[]);
+
+    useEffect( () => {
+        api.get("/api/nacionalidade")
+            .then((response) => {
+                setListaNacionalidade(response.data.content);
             })
             .catch((error) => console.error(error))
     },[]);
@@ -114,6 +125,7 @@ function Tables() {
             telefone: "",
             sexo: "",
             profissao: "",
+            email: "",
             localTrabalho: "",
             telefoneTrabalho: "",
             cpf: "",
@@ -143,7 +155,7 @@ function Tables() {
                                 coloredShadow="secondary"
                             >
                                 <MDTypography textTransform="uppercase" variant="h6" color="white">
-                                    Cadastro Responsável
+                                    Cadastro Pai/Mãe/Responsável
                                 </MDTypography>
                             </MDBox>
                             <MDBox p={3} pb={3}>
@@ -151,7 +163,7 @@ function Tables() {
                                     {/*Identificação*/}
                                     <Grid item xs={12} md={12}>
                                         <MDTypography mb={1} variant="h6" color="dark">
-                                            Identificação do(a) responsavel(a)
+                                            Identificação
                                         </MDTypography>
                                     </Grid>
 
@@ -241,6 +253,20 @@ function Tables() {
                                     </Grid>
                                     <Grid item xs={12} md={4}>
                                         <MDBox mb={1}>
+                                            <MDInput
+                                                fullWidth
+                                                type="text"
+                                                label="Email"
+                                                value={responsavel.email}
+                                                onChange={(e) => setResponsavel({
+                                                    ...responsavel,
+                                                    email: e.target.value
+                                                })}
+                                            />
+                                        </MDBox>
+                                    </Grid>
+                                    <Grid item xs={12} md={4}>
+                                        <MDBox mb={1}>
                                             <Autocomplete
                                                 options={listaEstadoCivil}
                                                 getOptionLabel={(option) => option ? option.nome : ""}
@@ -260,16 +286,22 @@ function Tables() {
                                         </MDBox>
                                     </Grid>
                                     <Grid item xs={12} md={4}>
-                                        <MDBox mb={1}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="Nacionalidade"
-                                                value={responsavel.nacionalidade}
-                                                onChange={(e) => setResponsavel({
-                                                    ...responsavel,
-                                                    nacionalidade: e.target.value
-                                                })}
+                                        <MDBox mb={4}>
+                                            <Autocomplete
+                                                options={listaNacionalidade}
+                                                getOptionLabel={(option) => option ? option.nome : ""}
+                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                onChange={(e, value) => {
+                                                    if (value) {
+                                                        setResponsavel({...responsavel, nacionalidade: value.nome});
+                                                    } else {
+                                                        setResponsavel({...responsavel, nacionalidade: ""});
+                                                    }
+                                                }}
+                                                renderInput={(params) =>
+                                                    <TextField
+                                                        {...params}
+                                                        label="Nacionalidade"/>}
                                             />
                                         </MDBox>
                                     </Grid>

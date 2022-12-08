@@ -19,6 +19,7 @@ public class AlunoDto {
     private String especificacao;
     private String cep;
     private String logradouro;
+    private String bairro;
     private String cidade;
     private String estado;
     private String complemento;
@@ -42,6 +43,17 @@ public class AlunoDto {
     private String profissaoResponsavel;
     private String localTrabalhoResponsavel;
     private String contatoTrabalhoResponsavel;
+    private String nomeResponsavelContrato;
+    private String cpfResponsavelContrato;
+    private String rgResponsavelContrato;
+    private String nacionalidadeResponsavelContrato;
+    private String estadoCivilResponsavelContrato;
+    private String telefoneResponsavelContrato;
+    private String profissaoResponsavelContrato;
+    private String emailResponsavelContrato;
+    private String localTrabalhoResponsavelContrato;
+    private String contatoTrabalhoResponsavelContrato;
+    private String dataContrato;
     private String contatoEmergencia1;
     private String contatoEmergencia2;
     private String observacao;
@@ -50,38 +62,102 @@ public class AlunoDto {
         this.id = aluno.getId();
         this.nome = aluno.getNome();
         this.dataCadastro = aluno.getDataCadastro().format(formatter);
-        this.dataNascimento = aluno.getDataNascimento().format(formatter);
-        this.dataMatricula = aluno.getDataMatricula().format(formatter);
+        if(aluno.getDataNascimento() == null)
+            this.dataNascimento = null;
+        else this.dataNascimento = aluno.getDataNascimento().format(formatter);
+        if(aluno.getDataMatricula() == null)
+            this.dataMatricula = null;
+        else this.dataMatricula = aluno.getDataMatricula().format(formatter);
         this.sexo = aluno.getSexo();
         this.naturalidade = aluno.getNaturalidade();
         this.nacionalidade = aluno.getNacionalidade();
         this.cuidadoEspecial = aluno.getCuidadoEspecial();
         this.especificacao = aluno.getEspecificacao();
-        this.cep = aluno.getEndereco().getCep();
-        this.logradouro = aluno.getEndereco().getLogradouro();
-        this.cidade = aluno.getEndereco().getCidade();
-        this.estado = aluno.getEndereco().getEstado();
-        this.complemento = aluno.getEndereco().getComplemento();
+        if(aluno.getEndereco() == null){
+            this.cep = null;
+            this.logradouro = null;
+            this.bairro = null;
+            this.cidade = null;
+            this.estado = null;
+            this.complemento = null;
+        } else {
+            this.cep = aluno.getEndereco().getCep();
+            this.logradouro = aluno.getEndereco().getLogradouro();
+            this.bairro = aluno.getEndereco().getBairro();
+            this.cidade = aluno.getEndereco().getCidade();
+            this.estado = aluno.getEndereco().getEstado();
+            this.complemento = aluno.getEndereco().getComplemento();
+        }
         this.anoLetivo = aluno.getAnoLetivo();
         this.anoInicial = aluno.getAnoInicial();
         this.situacao = aluno.getSituacao();
         this.turma = aluno.getTurma();
         this.turno = aluno.getTurno();
-        this.nomePai = aluno.getPai().getNome();
-        this.telefonePai = aluno.getPai().getTelefone();
-        this.profissaoPai = aluno.getPai().getProfissao();
-        this.localTrabalhoPai = aluno.getPai().getLocalTrabalho();
-        this.contatoTrabalhoPai = aluno.getPai().getTelefoneTrabalho();
-        this.nomeMae = aluno.getMae().getNome();
-        this.telefoneMae = aluno.getMae().getTelefone();
-        this.profissaoMae = aluno.getMae().getProfissao();
-        this.localTrabalhoMae = aluno.getMae().getLocalTrabalho();
-        this.contatoTrabalhoMae = aluno.getMae().getTelefoneTrabalho();
-        this.nomeResponsavel = aluno.getResponsavel().getNome();
-        this.telefoneResponsavel = aluno.getResponsavel().getTelefone();
-        this.profissaoResponsavel = aluno.getResponsavel().getProfissao();
-        this.localTrabalhoResponsavel = aluno.getResponsavel().getLocalTrabalho();
-        this.contatoTrabalhoResponsavel = aluno.getResponsavel().getTelefoneTrabalho();
+        if(aluno.getPai() == null){
+            this.nomePai = null;
+            this.telefonePai = null;
+            this.profissaoPai = null;
+            this.localTrabalhoPai = null;
+            this.contatoTrabalhoPai = null;
+        } else {
+            this.nomePai = aluno.getPai().getNome();
+            this.telefonePai = aluno.getPai().getTelefone();
+            this.profissaoPai = aluno.getPai().getProfissao();
+            this.localTrabalhoPai = aluno.getPai().getLocalTrabalho();
+            this.contatoTrabalhoPai = aluno.getPai().getTelefoneTrabalho();
+        }
+        if(aluno.getMae() == null){
+            this.nomeMae = null;
+            this.telefoneMae = null;
+            this.profissaoMae = null;
+            this.localTrabalhoMae = null;
+            this.contatoTrabalhoMae = null;
+        } else {
+            this.nomeMae = aluno.getMae().getNome();
+            this.telefoneMae = aluno.getMae().getTelefone();
+            this.profissaoMae = aluno.getMae().getProfissao();
+            this.localTrabalhoMae = aluno.getMae().getLocalTrabalho();
+            this.contatoTrabalhoMae = aluno.getMae().getTelefoneTrabalho();
+        }
+        if(aluno.getResponsavel() == null){
+            this.nomeResponsavel = null;
+            this.telefoneResponsavel = null;
+            this.profissaoResponsavel = null;
+            this.localTrabalhoResponsavel = null;
+            this.contatoTrabalhoResponsavel = null;
+        } else {
+            this.nomeResponsavel = aluno.getResponsavel().getNome();
+            this.telefoneResponsavel = aluno.getResponsavel().getTelefone();
+            this.profissaoResponsavel = aluno.getResponsavel().getProfissao();
+            this.localTrabalhoResponsavel = aluno.getResponsavel().getLocalTrabalho();
+            this.contatoTrabalhoResponsavel = aluno.getResponsavel().getTelefoneTrabalho();
+        }
+        if(aluno.getResponsavelContrato() == null){
+            this.nomeResponsavelContrato = null;
+            this.cpfResponsavelContrato = null;
+            this.rgResponsavelContrato = null;
+            this.nacionalidadeResponsavelContrato = null;
+            this.estadoCivilResponsavelContrato = null;
+            this.telefoneResponsavelContrato = null;
+            this.profissaoResponsavelContrato = null;
+            this.emailResponsavelContrato = null;
+            this.localTrabalhoResponsavelContrato = null;
+            this.contatoTrabalhoResponsavelContrato = null;
+        } else {
+            this.nomeResponsavelContrato = aluno.getResponsavelContrato().getNome();
+            this.cpfResponsavelContrato = aluno.getResponsavelContrato().getCpf();
+            this.rgResponsavelContrato = aluno.getResponsavelContrato().getRg();
+            this.nacionalidadeResponsavelContrato = aluno.getResponsavelContrato().getNacionalidade();
+            this.estadoCivilResponsavelContrato = aluno.getResponsavelContrato().getEstadoCivil();
+            this.telefoneResponsavelContrato = aluno.getResponsavelContrato().getTelefone();
+            this.profissaoResponsavelContrato = aluno.getResponsavelContrato().getProfissao();
+            this.emailResponsavelContrato = aluno.getResponsavelContrato().getEmail();
+            this.localTrabalhoResponsavelContrato = aluno.getResponsavelContrato().getLocalTrabalho();
+            this.contatoTrabalhoResponsavelContrato = aluno.getResponsavelContrato().getTelefoneTrabalho();
+        }
+        if(aluno.getDataContrato() == null)
+            this.dataContrato = null;
+        else this.dataContrato = aluno.getDataContrato().format(formatter);
         this.contatoEmergencia1 = aluno.getContatoEmergencia1();
         this.contatoEmergencia2 = aluno.getContatoEmergencia2();
         this.observacao = aluno.getObservacao();
@@ -201,6 +277,14 @@ public class AlunoDto {
 
     public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public String getCidade() {
@@ -393,5 +477,93 @@ public class AlunoDto {
 
     public void setContatoTrabalhoResponsavel(String contatoTrabalhoResponsavel) {
         this.contatoTrabalhoResponsavel = contatoTrabalhoResponsavel;
+    }
+
+    public String getNomeResponsavelContrato() {
+        return nomeResponsavelContrato;
+    }
+
+    public void setNomeResponsavelContrato(String nomeResponsavelContrato) {
+        this.nomeResponsavelContrato = nomeResponsavelContrato;
+    }
+
+    public String getTelefoneResponsavelContrato() {
+        return telefoneResponsavelContrato;
+    }
+
+    public void setTelefoneResponsavelContrato(String telefoneResponsavelContrato) {
+        this.telefoneResponsavelContrato = telefoneResponsavelContrato;
+    }
+
+    public String getProfissaoResponsavelContrato() {
+        return profissaoResponsavelContrato;
+    }
+
+    public void setProfissaoResponsavelContrato(String profissaoResponsavelContrato) {
+        this.profissaoResponsavelContrato = profissaoResponsavelContrato;
+    }
+
+    public String getLocalTrabalhoResponsavelContrato() {
+        return localTrabalhoResponsavelContrato;
+    }
+
+    public void setLocalTrabalhoResponsavelContrato(String localTrabalhoResponsavelContrato) {
+        this.localTrabalhoResponsavelContrato = localTrabalhoResponsavelContrato;
+    }
+
+    public String getContatoTrabalhoResponsavelContrato() {
+        return contatoTrabalhoResponsavelContrato;
+    }
+
+    public void setContatoTrabalhoResponsavelContrato(String contatoTrabalhoResponsavelContrato) {
+        this.contatoTrabalhoResponsavelContrato = contatoTrabalhoResponsavelContrato;
+    }
+
+    public String getDataContrato() {
+        return dataContrato;
+    }
+
+    public void setDataContrato(String dataContrato) {
+        this.dataContrato = dataContrato;
+    }
+
+    public String getCpfResponsavelContrato() {
+        return cpfResponsavelContrato;
+    }
+
+    public void setCpfResponsavelContrato(String cpfResponsavelContrato) {
+        this.cpfResponsavelContrato = cpfResponsavelContrato;
+    }
+
+    public String getRgResponsavelContrato() {
+        return rgResponsavelContrato;
+    }
+
+    public void setRgResponsavelContrato(String rgResponsavelContrato) {
+        this.rgResponsavelContrato = rgResponsavelContrato;
+    }
+
+    public String getNacionalidadeResponsavelContrato() {
+        return nacionalidadeResponsavelContrato;
+    }
+
+    public void setNacionalidadeResponsavelContrato(String nacionalidadeResponsavelContrato) {
+        this.nacionalidadeResponsavelContrato = nacionalidadeResponsavelContrato;
+    }
+
+    public String getEstadoCivilResponsavelContrato() {
+        return estadoCivilResponsavelContrato;
+    }
+
+    public void setEstadoCivilResponsavelContrato(String estadoCivilResponsavelContrato) {
+        this.estadoCivilResponsavelContrato = estadoCivilResponsavelContrato;
+    }
+
+    public String getEmailResponsavelContrato() {
+        return emailResponsavelContrato;
+    }
+
+    public void setEmailResponsavelContrato(String emailResponsavelContrato) {
+        this.emailResponsavelContrato = emailResponsavelContrato;
     }
 }

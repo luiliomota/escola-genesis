@@ -2,7 +2,6 @@
 /* eslint-disable react/function-component-definition */
 
 import {useCallback, useEffect, useRef, useState} from "react";
-import {useNavigate} from "react-router-dom";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -13,7 +12,6 @@ import {Autocomplete, TextField} from "@mui/material";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDSnackbar from "components/MDSnackbar";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -23,12 +21,14 @@ import Footer from "examples/Footer";
 import MDButton from "components/MDButton";
 
 import api from "api";
-import {Impressao} from './impressao';
 import {useReactToPrint} from 'react-to-print';
-import Button from "@mui/material/Button";
 import logo from "../../../assets/images/ceg.png";
+import moment from "moment";
 
 function Tables() {
+  // moment.locale('pt-BR');
+  // console.log(moment().format('LL'));
+
   const componentRef = useRef(null);
 
   const [aluno, setAluno] = useState({
@@ -46,8 +46,8 @@ function Tables() {
   });
 
   useEffect(() => {
-    api.get("/api/aluno/")
-      .then((response) => {
+    api.get("/api/aluno?size=500")
+    .then((response) => {
         setListaAlunos(response.data.content);
       })
       .catch((error) => console.error(error))
@@ -137,11 +137,11 @@ function Tables() {
                     </MDTypography>
                     <br/>
                     <MDTypography mb={0} variant="h5" color="dark" textTransform="uppercase" sx={{textAlign: 'center'}}>
-                      Requerimento de Matrícula
+                      Requerimento de Matrícula - Ano Letivo: 2023
                     </MDTypography>
                   </Grid>
                 </MDBox>
-                <MDBox p={3} pb={3}>
+                <MDBox p={3} pb={3} ml={3} mr={3}>
                 <Grid container justifyContent='inherit' spacing={1}>
                   <Grid item xs={12} md={12}>
                     <MDTypography mb={1} variant="h6" color="dark">
@@ -200,7 +200,7 @@ function Tables() {
                   </Grid>
                   <Grid item xs={6} md={6}>
                     <MDTypography variant="body2" color="dark">
-                      Profissão: {aluno.profissaoPai}
+                      Profissão: {aluno.profissaoMae}
                     </MDTypography>
                   </Grid>
                   <Grid item xs={6} md={6}>
@@ -215,12 +215,17 @@ function Tables() {
                   </Grid>
                   <Grid item xs={12} md={12}>
                     <MDTypography variant="body2" color="dark">
-                      Endereço Residencial: {aluno.telefoneMae}
+                      Endereço Residencial: {aluno.logradouro+" "+aluno.complemento+", "+aluno.bairro+", "+aluno.cidade+"-"+aluno.estado}
                     </MDTypography>
                   </Grid>
                   <Grid item xs={12} md={12}>
+                      <MDTypography variant="body2" color="dark">
+                        CEP: {aluno.cep}
+                      </MDTypography>
+                  </Grid>
+                  <Grid item xs={12} md={12}>
                     <MDTypography variant="body2" color="dark">
-                      Telefones: {aluno.telefoneMae} (mãe) / {aluno.telefonePai} (pai)
+                      Telefones: {aluno.contatoEmergencia1} / {aluno.contatoEmergencia2}
                     </MDTypography>
                   </Grid>
                   <Grid item xs={12} md={12}>
@@ -230,7 +235,7 @@ function Tables() {
                   </Grid>
                   <Grid item xs={12} md={12}>
                     <MDTypography mb={1} variant="body2" color="dark">
-                      Nível: {aluno.situacao}
+                      {aluno.anoInicial+" - "+aluno.situacao}
                     </MDTypography>
                   </Grid>
                   <Grid item xs={12} md={12}>
@@ -240,8 +245,58 @@ function Tables() {
                   </Grid>
                   <Grid item xs={12} md={12}>
                     <MDTypography mb={1} variant="body2" color="dark">
+                      Turno: {aluno.turno}
+                    </MDTypography>
+                  </Grid>
+                  <Grid item xs={12} md={5}>
+                    <MDTypography mb={1} variant="body2" color="dark">
+                      Necessita de cuidados especiais? {aluno.cuidadoEspecial}
+                    </MDTypography>
+                  </Grid>
+                  <Grid item xs={12} md={7}>
+                    <MDTypography mb={1} variant="body2" color="dark">
+                      Especificar: {aluno.especificacao}
+                    </MDTypography>
+                  </Grid>
+                  <Grid item xs={12} md={12}>
+                    <MDTypography mb={1} variant="body2" color="dark">
                       {aluno.observacao}
                     </MDTypography>
+                  </Grid>
+                  <br/>
+                  <Grid container justifyContent='inherit' spacing={1}>
+                    <Grid item xs={12} md={12}>
+                      <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'end'}}>
+                        Palmas, {new Date().toLocaleDateString()}
+                        {/*Palmas, {moment.locale('pt-br')}*/}
+                      </MDTypography>
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                      <MDTypography mb={0} variant="body2" color="dark" sx={{textAlign: 'center'}}>
+                        ______________________________________
+                      </MDTypography>
+                      <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                        Pai/Mãe ou Responsável
+                      </MDTypography>
+                      <br/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <MDTypography mb={0} variant="body2" color="dark" sx={{textAlign: 'center'}}>
+                        ______________________________________
+                      </MDTypography>
+                      <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                        Diretor (a)
+                      </MDTypography>
+                      <br/>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <MDTypography mb={0} variant="body2" color="dark" sx={{textAlign: 'center'}}>
+                        ______________________________________
+                      </MDTypography>
+                      <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                        Secretário (a)
+                      </MDTypography>
+                    </Grid>
                   </Grid>
                 </Grid>
               </MDBox>

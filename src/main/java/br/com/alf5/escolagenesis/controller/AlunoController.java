@@ -23,12 +23,6 @@ import java.net.URI;
 @RequestMapping("/api/aluno")
 public class AlunoController {
     @Autowired
-    private SexoRepository sexoRepository;
-    @Autowired
-    private SimOuNaoRepository simOuNaoRepository;
-    @Autowired
-    private TurnoRepository turnoRepository;
-    @Autowired
     private ResponsavelRepository responsavelRepository;
     @Autowired
     private AlunoRepository alunoRepository;
@@ -39,7 +33,7 @@ public class AlunoController {
     @PostMapping
     @Transactional
     public ResponseEntity<AlunoDto> cadastrar(@RequestBody @Valid AlunoForm form, UriComponentsBuilder uriBuilder) {
-        Aluno aluno = form.cadastro(sexoRepository, simOuNaoRepository, turnoRepository, responsavelRepository, enderecoRepository);
+        Aluno aluno = form.cadastro(responsavelRepository, enderecoRepository);
         if (aluno == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -50,7 +44,7 @@ public class AlunoController {
 
     //Busca de todos alunos
     @GetMapping
-//    @Cacheable(value = "lista_alunos")
+    //@Cacheable(value = "lista_alunos")
     public Page<AlunoDto> listaAlunos(Pageable paginacao) {
         Page<Aluno> alunos = alunoRepository.findAll(paginacao);
         return AlunoDto.converter(alunos);

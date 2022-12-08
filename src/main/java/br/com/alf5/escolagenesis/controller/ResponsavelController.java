@@ -21,17 +21,13 @@ import java.net.URI;
 @RequestMapping("/api/responsavel")
 public class ResponsavelController {
     @Autowired
-    private SexoRepository sexoRepository;
-    @Autowired
     private ResponsavelRepository responsavelRepository;
-    @Autowired
-    private EstadoCivilRepository estadoCivilRepository;
 
     //Cadastrar responsavel
     @PostMapping
     @Transactional
     public ResponseEntity<ResponsavelDto> cadastrar(@RequestBody @Valid ResponsavelForm form, UriComponentsBuilder uriBuilder) {
-        Responsavel responsavel = form.cadastro(sexoRepository, estadoCivilRepository);
+        Responsavel responsavel = form.cadastro();
         if (responsavel == null) {
             return ResponseEntity.badRequest().build();
         }

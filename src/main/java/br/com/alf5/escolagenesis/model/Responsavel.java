@@ -10,23 +10,23 @@ public class Responsavel {
     private LocalDate dataCadastro = LocalDate.now();
     private String nome;
     private String telefone;
-    @OneToOne
-    private Sexo sexo;
+    private String sexo;
     private String profissao;
+    public String email;
     private String localTrabalho;
     private String telefoneTrabalho;
     private String cpf;
     private String rg;
-    @OneToOne
-    private EstadoCivil estadoCivil;
+    private String estadoCivil;
     private String nacionalidade;
 
-    public Responsavel(String nome, String telefone, Sexo sexo, String profissao, String localTrabalho, String telefoneTrabalho,
-                       String cpf, String rg, EstadoCivil estadoCivil, String nacionalidade) {
+    public Responsavel(String nome, String telefone, String sexo, String profissao, String email, String localTrabalho, String telefoneTrabalho,
+                       String cpf, String rg, String estadoCivil, String nacionalidade) {
         this.nome = nome;
         this.telefone = telefone;
         this.sexo = sexo;
         this.profissao = profissao;
+        this.email = email;
         this.localTrabalho = localTrabalho;
         this.telefoneTrabalho = telefoneTrabalho;
         this.cpf = cpf;
@@ -38,11 +38,11 @@ public class Responsavel {
     public Responsavel() {
     }
 
-    public Sexo getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(Sexo sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -109,11 +109,11 @@ public class Responsavel {
         this.rg = rg;
     }
 
-    public EstadoCivil getEstadoCivil() {
+    public String getEstadoCivil() {
         return estadoCivil;
     }
 
-    public void setEstadoCivil(EstadoCivil estadoCivil) {
+    public void setEstadoCivil(String estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
 
@@ -131,5 +131,13 @@ public class Responsavel {
 
     public void setTelefoneTrabalho(String telefoneTrabalho) {
         this.telefoneTrabalho = telefoneTrabalho;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -20,6 +20,7 @@ public class AlunoForm {
     private String especificacao;
     private String cep;
     private String logradouro;
+    private String bairro;
     private String cidade;
     private String estado;
     private String complemento;
@@ -31,26 +32,33 @@ public class AlunoForm {
     private Long idPai;
     private Long idMae;
     private Long idResponsavel;
+    private Long idResponsavelContrato;
+    private LocalDate dataContrato;
     private String contatoEmergencia1;
+    private String nomeEmergencia1;
     private String contatoEmergencia2;
+    private String nomeEmergencia2;
     private String observacao;
 
-    public Aluno cadastro(SexoRepository sexoRepository, SimOuNaoRepository simOuNaoRepository, TurnoRepository turnoRepository,
-                          ResponsavelRepository responsavelRepository, EnderecoRepository enderecoRepository) {
-            Sexo sexo = sexoRepository.findByNome(this.sexo);
-            SimOuNao cuidadoEspecial = simOuNaoRepository.findByNome(this.cuidadoEspecial);
-            Turno turno = turnoRepository.findByNome(this.turno);
-            Responsavel pai = responsavelRepository.getReferenceById(idPai);
-            Responsavel mae = responsavelRepository.getReferenceById(idMae);
-            Responsavel responsavel = responsavelRepository.getReferenceById(idResponsavel);
-            Endereco endereco = new Endereco(this.cep, this.logradouro, this.cidade, this.estado, this.complemento);
-            enderecoRepository.save(endereco);
+    public Aluno cadastro(ResponsavelRepository responsavelRepository, EnderecoRepository enderecoRepository) {
+        Responsavel pai = new Responsavel();
+        Responsavel mae = new Responsavel();
+        Responsavel responsavel = new Responsavel();
+        Responsavel responsavelContrato = new Responsavel();
+        if(idPai == null){pai = null;} else {pai = responsavelRepository.getReferenceById(idPai);}
+        if(idMae == null){mae = null;} else {mae = responsavelRepository.getReferenceById(idMae);}
+        if(idResponsavel == null){responsavel = null;} else {responsavel = responsavelRepository.getReferenceById(idResponsavel);}
+        if(idResponsavelContrato == null){responsavelContrato = null;} else {responsavelContrato = responsavelRepository.getReferenceById(idResponsavelContrato);}
+        Endereco endereco = new Endereco(this.cep, this.logradouro, this.bairro, this.cidade, this.estado, this.complemento);
+        enderecoRepository.save(endereco);
+        String emergencia1 = this.contatoEmergencia1+" "+this.nomeEmergencia1;
+        String emergencia2 = this.contatoEmergencia2+" "+this.nomeEmergencia2;
 
-            Aluno aluno = new Aluno(this.nome, this.dataNascimento, this.dataMatricula, this.sexo, this.naturalidade,
-                    this.nacionalidade, this.cuidadoEspecial, this.especificacao, endereco, this.anoLetivo, this.anoInicial, this.situacao,
-                    this.turma, this.turno, pai, mae, responsavel, this.contatoEmergencia1, this.contatoEmergencia2, this.observacao);
-            return aluno;
-    }
+    Aluno aluno = new Aluno(this.nome, this.dataNascimento, this.dataMatricula, this.sexo, this.naturalidade,
+            this.nacionalidade, this.cuidadoEspecial, this.especificacao, endereco, this.anoLetivo, this.anoInicial, this.situacao,
+            this.turma, this.turno, pai, mae, responsavel, responsavelContrato, dataContrato, emergencia1, emergencia2, this.observacao);
+        return aluno;
+}
 
     public String getNome() {
         return nome;
@@ -90,6 +98,10 @@ public class AlunoForm {
 
     public String getLogradouro() {
         return logradouro;
+    }
+
+    public String getBairro() {
+        return bairro;
     }
 
     public String getCidade() {
@@ -136,12 +148,28 @@ public class AlunoForm {
         return idResponsavel;
     }
 
+    public Long getIdResponsavelContrato() {
+        return idResponsavelContrato;
+    }
+
+    public LocalDate getDataContrato() {
+        return dataContrato;
+    }
+
     public String getContatoEmergencia1() {
         return contatoEmergencia1;
     }
 
     public String getContatoEmergencia2() {
         return contatoEmergencia2;
+    }
+
+    public String getNomeEmergencia1() {
+        return nomeEmergencia1;
+    }
+
+    public String getNomeEmergencia2() {
+        return nomeEmergencia2;
     }
 
     public String getObservacao() {

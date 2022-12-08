@@ -27,8 +27,11 @@ public class Aluno {
     private Responsavel pai;
     @OneToOne
     private Responsavel mae;
-    @OneToOne
+    @ManyToOne
     private Responsavel responsavel;
+    @ManyToOne
+    private Responsavel responsavelContrato;
+    private LocalDate dataContrato;
     private String contatoEmergencia1;
     private String contatoEmergencia2;
     private String observacao;
@@ -37,8 +40,8 @@ public class Aluno {
                  String naturalidade, String nacionalidade, String cuidadoEspecial,
                  String especificacao, Endereco endereco, Long anoLetivo, String anoInicial,
                  String situacao, String turma, String turno, Responsavel pai,
-                 Responsavel mae, Responsavel responsavel, String contatoEmergencia1,
-                 String contatoEmergencia2, String observacao) {
+                 Responsavel mae, Responsavel responsavel, Responsavel responsavelContrato,
+                 LocalDate dataContrato, String contatoEmergencia1, String contatoEmergencia2, String observacao) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.dataMatricula = dataMatricula;
@@ -56,6 +59,8 @@ public class Aluno {
         this.pai = pai;
         this.mae = mae;
         this.responsavel = responsavel;
+        this.responsavelContrato = responsavelContrato;
+        this.dataContrato = dataContrato;
         this.contatoEmergencia1 = contatoEmergencia1;
         this.contatoEmergencia2 = contatoEmergencia2;
         this.observacao = observacao;
@@ -237,5 +242,21 @@ public class Aluno {
 
     public void setResponsavel(Responsavel responsavel) {
         this.responsavel = responsavel;
+    }
+
+    public Responsavel getResponsavelContrato() {
+        return responsavelContrato;
+    }
+
+    public void setResponsavelContrato(Responsavel responsavelContrato) {
+        this.responsavelContrato = responsavelContrato;
+    }
+
+    public LocalDate getDataContrato() {
+        return dataContrato;
+    }
+
+    public void setDataContrato(LocalDate dataContrato) {
+        this.dataContrato = dataContrato;
     }
 }

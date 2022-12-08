@@ -13,6 +13,7 @@ public class ResponsavelDto {
     private String telefone;
     private String sexo;
     private String profissao;
+    private String email;
     private String localTrabalho;
     private String telefoneTrabalho;
     private String cpf;
@@ -25,13 +26,14 @@ public class ResponsavelDto {
         this.dataCadastro = responsavel.getDataCadastro().format(formatter);
         this.nome = responsavel.getNome();
         this.telefone = responsavel.getTelefone();
-        this.sexo = responsavel.getSexo().getNome();
+        this.sexo = responsavel.getSexo();
         this.profissao = responsavel.getProfissao();
+        this.email = responsavel.getEmail();
         this.localTrabalho = responsavel.getLocalTrabalho();
         this.telefoneTrabalho = responsavel.getTelefoneTrabalho();
         this.cpf =  responsavel.getCpf();
         this.rg = responsavel.getRg();
-        this.estadoCivil = responsavel.getEstadoCivil().getNome();
+        this.estadoCivil = responsavel.getEstadoCivil();
         this.nacionalidade = responsavel.getNacionalidade();
     }
 
@@ -133,5 +135,13 @@ public class ResponsavelDto {
 
     public void setTelefoneTrabalho(String telefoneTrabalho) {
         this.telefoneTrabalho = telefoneTrabalho;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
