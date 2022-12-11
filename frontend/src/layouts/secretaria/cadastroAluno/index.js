@@ -83,7 +83,7 @@ function Tables() {
         // idResponsavel: 0,
         // contatoEmergencia1: "",
         // contatoEmergencia2: "",
-        // observacao: "",
+        // observacao: "____________________________________________________________________________________________________"
     });
     const [listaAlunos, setListaAlunos] = useState([]);
     const [listaResponsaveis, setListaResponsaveis] = useState([]);
@@ -198,7 +198,6 @@ function Tables() {
     function localizaEndereco (e) {
         api.get(`https://viacep.com.br/ws/${e}/json`)
             .then((response) => {
-                console.log(response.data);
                 if (response.status == 200) {
                     setAluno({...aluno, cep: e, logradouro: response.data.logradouro,
                         cidade: response.data.localidade, estado: response.data.uf, bairro: response.data.bairro
@@ -302,7 +301,7 @@ function Tables() {
             // idResponsavel: 0,
             // contatoEmergencia1: "",
             // contatoEmergencia2: "",
-            // observacao: "",
+            // observacao: "____________________________________________________________________________________________________"
         });
         setListaEndereco({
             cep: "",
@@ -1063,21 +1062,13 @@ function Tables() {
                                         <MDBox mb={1}>
                                             <MDInput
                                                 fullWidth
-                                                type="text"
-                                                multiline row={5}
+                                                label="Observação"
+                                                multiline rows={4}
                                                 value={aluno.observacao}
-                                                onChange={(e, value) => {
-                                                        if(value){
-                                                            setAluno({...aluno, observacao: e.target.value});
-                                                        } else {
-                                                            setAluno({...aluno, observacao: "___________________" +
-                                                                    "________________________________________________" +
-                                                                    "________________________________________________" +
-                                                                    "_________________________________________________" +
-                                                                    "_________________________________________________"});
-                                                        }
-                                                    }
-                                                }
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    observacao: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>

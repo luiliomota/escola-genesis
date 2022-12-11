@@ -139,7 +139,7 @@ function Tables() {
                                       </Grid>
                                   </Grid>
                               </MDBox>
-                              <MDBox p={6} pb={1}>
+                              <MDBox p={4} pb={1}>
                                   <Grid container justifyContent='center' alignItems="center" spacing={1} mr={2} ml={2}>
                                       <Grid>
                                           <MDTypography mb={0} variant="h5" color="dark" textTransform="uppercase" sx={{textAlign: 'center'}}>
@@ -148,192 +148,218 @@ function Tables() {
                                       </Grid>
                                   </Grid>
                               </MDBox>
-                              <MDBox p={6} pb={3}>
+                              <MDBox p={3} pb={3}>
                                   <Grid container justifyContent='inherit' spacing={1}>
                                       <Grid item xs={12} md={7}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              DE UM COMO CONTRATANTE: <b><u>{aluno.nomeResponsavelContrato}</u></b>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>CONTRATADA:</b> GENESIS CENTRO EDUCACIONAL LTDA ME
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={5}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              CPF/MF: <b><u>{aluno.cpfResponsavelContrato}</u></b>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>CNPJ:</b> 44.472.869/0001-04
                                           </MDTypography>
                                       </Grid>
-                                      <Grid item xs={6} md={7}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              IDENTIDADE: <b><u>{aluno.rgResponsavelContrato}</u></b>
+                                      <Grid item xs={12} md={4}>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>CONTRATANTE: </b>{aluno.nomeResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
-                                      <Grid item xs={6} md={5}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              NACIONALIDADE: <b><u>{aluno.nacionalidadeResponsavelContrato}</u></b>
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={12} md={7}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              ESTADO CIVIL: <b><u>{aluno.estadoCivilResponsavelContrato}</u></b>
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={12} md={5}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              PROFISSÃO: <b><u>{aluno.profissaoResponsavelContrato}</u></b>
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={7}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              ENDEREÇO RESIDENCIAL: <b><u>{aluno.logradouro}  {aluno.complemento}</u></b>
+                                      <Grid item xs={12} md={3}>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>CPF: </b>{aluno.cpfResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={5}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              BAIRRO: <b><u>{aluno.bairro}</u></b>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>RG: </b>{aluno.rgResponsavelContrato}
+                                          </MDTypography>
+                                      </Grid>
+                                      <Grid item xs={12} md={12}>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>PROFISSÃO: </b>{aluno.profissaoResponsavelContrato}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={7}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              CIDADE: <b><u>{aluno.cidade} {aluno.estado}</u></b>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>ENDEREÇO RESIDENCIAL: </b>{aluno.logradouro}  {aluno.complemento}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={5}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              CEP: <b><u>{aluno.cep}</u></b>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>BAIRRO: </b>{aluno.bairro}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={7}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              TELEFONES: <b><u>{aluno.contatoEmergencia1} / {aluno.contatoEmergencia2}</u></b>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>CIDADE: </b>{aluno.cidade} {aluno.estado}
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={5}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              E-MAIL: <b><u>{aluno.emailResponsavelContrato}</u></b>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>CEP: </b>{aluno.cep}
                                           </MDTypography>
                                       </Grid>
-                                      <br/>
+                                      <Grid item xs={6} md={12}>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>E-MAIL: </b>{aluno.emailResponsavelContrato}
+                                          </MDTypography>
+                                      </Grid>
+                                      <br/><br/>
+                                      <Grid item xs={6} md={4}>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>ALUNO(A): </b>{aluno.nome}
+                                          </MDTypography>
+                                      </Grid>
+                                      <Grid item xs={6} md={8}>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>CURSO/SÉRIE: </b>{aluno.anoInicial}-{aluno.situacao} / {aluno.turno}
+                                          </MDTypography>
+                                      </Grid>
+                                      <Grid item xs={6} md={4}>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>MATRÍCULA: </b>{aluno.id} [{aluno.dataMatricula}]
+                                          </MDTypography>
+                                      </Grid>
+                                      <Grid item xs={6} md={8}>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>SITUAÇÃO: </b>Ativo
+                                          </MDTypography>
+                                      </Grid>
+                                      <br/><br/>
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        <b>NACIONALIDADE: </b>{aluno.nacionalidadeResponsavelContrato}*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={12} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        <b>ESTADO CIVIL: </b>{aluno.estadoCivilResponsavelContrato}*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        <b>TELEFONES: </b>{aluno.contatoEmergencia1} / {aluno.contatoEmergencia2}*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={12} md={12}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        PESSOAS AUTORIZADAS PARA EM NOME DE A CONTRATANTE RETIRAR O/A ALUNO DAS DEPENDÊNCIAS DA ESCOLA, RECEBER COMUNICADOS INSTITUCIONAIS, CITAÇÕES E OU INTIMAÇÕES:*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<br/>*/}
+                                      {/*<br/>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        NOME: _________________________________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        CPF/MF: _______________________________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        VÍNCULO COM O(A) ALUNO(A)?: ________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        TELEFONE: _____________________________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        BAIRRO: _______________________________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        NOME: _________________________________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        CPF/MF: _______________________________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        VÍNCULO COM O(A) ALUNO(A)?: ________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        TELEFONE: _____________________________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      {/*<Grid item xs={6} md={6}>*/}
+                                      {/*    <MDTypography fontSize="0.8rem" variant="body2" color="dark">*/}
+                                      {/*        BAIRRO: _______________________________________*/}
+                                      {/*    </MDTypography>*/}
+                                      {/*</Grid>*/}
+                                      <Grid item xs={12} md={12}>
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              Devidamente qualificado(a) na ficha de matrícula, que passa a fazer parte deste instrumento de contrato, desde já reconheço e declaro serem verdadeiras as informações prestadas neste instrumento de contrato, especialmente em relação às condições de saúde do(a) aluno(a) abaixo declaradas:
+                                          </MDTypography>
+                                      </Grid>
                                       <br/>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              PESSOAS AUTORIZADAS PARA EM NOME DE A CONTRATANTE RETIRAR O/A ALUNO DAS DEPENDÊNCIAS DA ESCOLA, RECEBER COMUNICADOS INSTITUCIONAIS, CITAÇÕES E OU INTIMAÇÕES:
-                                          </MDTypography>
-                                      </Grid>
-                                      <br/>
-                                      <br/>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              NOME: _________________________________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              CPF/MF: _______________________________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              VÍNCULO COM O(A) ALUNO(A)?: ________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              TELEFONE: _____________________________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              BAIRRO: _______________________________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              NOME: _________________________________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              CPF/MF: _______________________________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              VÍNCULO COM O(A) ALUNO(A)?: ________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              TELEFONE: _____________________________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={6} md={6}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              BAIRRO: _______________________________________
-                                          </MDTypography>
-                                      </Grid>
-                                      <br/>
-                                      <br/>
-                                      <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              Na qualidade de representante legal do(a) aluno(a): <b><u>{aluno.nome}</u></b>,
-                                              matriculado(a) no(a) <b><u>{aluno.anoInicial}</u></b> do ensino <b><u>{aluno.situacao}</u></b> devidamente qualificado(a) na ficha de
-                                              matrícula, que passa a fazer parte deste instrumento de contrato, desde já reconheço e declaro serem verdadeiras as informações prestadas neste instrumento de contrato, especialmente em relação às condições de saúde do aluno (a) abaixo declaradas:
-                                          </MDTypography>
-                                      </Grid>
-                                      <br/>
-                                      <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              *	Goza de boa saúde, não fazendo uso regular de quaisquer medicamentos?
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>Goza de boa saúde, não fazendo uso regular de quaisquer medicamentos?</b>
                                           </MDTypography>
                                           <FormControlLabel control={<Checkbox />} label="Sim" />
                                           <FormControlLabel control={<Checkbox />} label="Não" />
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              *	Faz uso de medicamentos regulares?
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>Faz uso de medicamentos regulares?</b>
                                           </MDTypography>
                                           <FormControlLabel control={<Checkbox />} label="Sim" />
                                           <FormControlLabel control={<Checkbox />} label="Não" />
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               Em caso positivo, quais são os medicamentos?
                                           </MDTypography>
                                           <Input fullWidth />
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              *	É portador de necessidade especial?
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>É portador de necessidade especial?</b>
                                           </MDTypography>
                                           <FormControlLabel control={<Checkbox />} label="Sim" />
                                           <FormControlLabel control={<Checkbox />} label="Não" />
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               Em caso positivo, quais são os medicamentos?
                                           </MDTypography>
                                           <Input fullWidth />
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              *	Tem necessidades de utilização de equipamentos especiais?
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>Tem necessidades de utilização de equipamentos especiais?</b>
                                           </MDTypography>
                                           <FormControlLabel control={<Checkbox />} label="Sim" />
                                           <FormControlLabel control={<Checkbox />} label="Não" />
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               Em caso positivo, quais são os equipamentos?
                                           </MDTypography>
                                           <Input fullWidth />
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              Tem necessidade de utilização de mão-de-obra e/ou acompanhamento especializado?
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>Tem necessidade de utilização de mão-de-obra e/ou acompanhamento especializado?</b>
                                           </MDTypography>
                                           <FormControlLabel control={<Checkbox />} label="Sim" />
                                           <FormControlLabel control={<Checkbox />} label="Não" />
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               Em caso positivo especifique qual mão-de-obra e/ou acompanhamento especializado?
                                           </MDTypography>
                                           <Input fullWidth />
@@ -341,76 +367,76 @@ function Tables() {
                                       <br/>
                                       <br/>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>OBSERVAÇÃO: Avisar sempre com antecedência de no mínimo 30 minutos, caso o responsável autorizado à retirar o aluno, seja alterado no/s dia/s em questão.</b>
                                           </MDTypography>
                                       </Grid>
                                       <br/>
                                       <br/>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              <b>DE OUTRO LADO COMO CONTRATADA CENTRO EDUCACIONAL GÊNESIS</b>, pessoa jurídica de direito privado, com sede na Rua T-02, Qd 01, Lote 12A, Setor Santa Fé – Taquaralto, Palmas – TO, inscrita no CNPJ nº 10.522.194/0001-49, neste ato representada por sua Secretária Carla Pereira Saraiva, R.G. nº 1.613.412 SSP - MA e CPF nº 466.797.073-15, firmam o presente CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS, sob a forma dos Arts. 1º inciso IV; 5º, inciso II; 173, inciso IV; 206, inciso II e III; e 209, todos da Constituição Federal e Arts. 389, 476 e 597do Código Civil Brasileiro; da Lei nº 8.069/90 (Estatuto da Criança e do Adolescente); da Lei nº 8.078/90 (Código do Consumidor), Lei nº 8.088/94, Lei nº 9.069/95, Lei nº 9.870/99, mediante cláusulas e condições a seguir especificadas e cujo cumprimento se obrigam mutuamente.
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>DE OUTRO LADO COMO CONTRATADA GÊNESIS CENTRO EDUCACIONAL LTDA ME</b>, pessoa jurídica de direito privado, com sede na Rua T-02, Qd 01, Lote 12A, Setor Santa Fé – Taquaralto, Palmas – TO, inscrita no CNPJ nº 44.472.869/0001-04, neste ato representada por Vitório Pereira da Silva Júnior, R.G. n° 310.197 SSP-TO e CPF n° 960.386.911-20, firmam o presente CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS, sob a forma dos Arts. 1º inciso IV; 5º, inciso II; 173, inciso IV; 206, inciso II e III; e 209, todos da Constituição Federal e Arts. 389, 476 e 597do Código Civil Brasileiro; da Lei nº 8.069/90 (Estatuto da Criança e do Adolescente); da Lei nº 8.078/90 (Código do Consumidor), Lei nº 8.088/94, Lei nº 9.069/95, Lei nº 9.870/99, mediante cláusulas e condições a seguir especificadas e cujo cumprimento se obrigam mutuamente.
                                           </MDTypography>
                                       </Grid>
                                       <br/>
                                       <br/>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               CLÁUSULA 1ª -  O  objeto  do  presente  contrato é a prestação de serviços  educacionais  pela  CONTRATADA, ao aluno indicado pelo CONTRATANTE, durante o ano de {anoLetivo} de acordo com o seu Plano Escolar.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                               Parágrafo único - A CONTRATADA tem sua proposta educacional orientada para o seguinte objetivo: tem como pilares educacionais aprender a ser, aprender a conhecer, aprender a fazer e aprender a conviver, desenvolvendo a capacidade crítica em relação às disciplinas do currículo de ensino e a aplicação dos conhecimentos, competências e habilidades, inteirando-os na metodologia sóciointeracionista, sendo ensinados também princípios cristãos,  os  ensinamentos de cunho religioso, são fundamentados na Bíblia Sagrada baseados no respeito mútuo, amor ao próximo e convivência  com diversas culturas religiosas;
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>CLÁUSULA 2ª</b> - A <b>CONTRATADA</b>, assegura ao <b>CONTRATANTE</b>, uma vaga no seu corpo discente a ser utilizada conforme a série, grau, turno, especificidade na ficha de matrícula, ministrando o ensino através de aulas e demais atividades escolares cujo planejamento pedagógico atenda ao disposto na legislação em vigor.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>§ 1º</b> - As aulas serão ministradas em sala de aula de forma presencial e em  locais que a <b>CONTRATADA</b> indicar, tendo em vista a natureza dos conteúdos e as técnicas pedagógicas que se fizerem necessárias de modo a atender o novo sistema de ensino.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>§ 2º</b> - Reservar-se a  <b>CONTRATADA</b>, até 10 (dez) dias após o início de cada período letivo, o direito de cancelar qualquer turma cujo número de estudantes seja inferior a 50% (cinquenta por cento), do número máximo de alunos por sala de aula, proporcionando ao aluno, neste caso, o direito de ocupar uma vaga em outra turma da mesma série, modalidade de ensino, do mesmo ou em outro turno, desde que exista vaga.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>§ 3º</b> - É de exclusiva competência e responsabilidade da <b>CONTRATADA</b> a orientação técnica e pedagógica decorrente a prestação dos serviços educacionais.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>§ 4º</b> - Acordam as partes que a CONTRATADA, por não realizar o transporte de alunos, não é responsável por alunos deixados por  empresas transportadoras ou pelos pais e ou responsáveis fora do portões da escola, sendo responsável tão somente pelos alunos devidamente recebidos pela CONTRATADA e que estiverem dentro das suas dependências.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                               § 5º - Acordam as partes que a CONTRATADA além de  se responsabilizar pelos alunos que estiverem nas suas dependências internas, tal responsabilização se restringe aos horários de aula, que serão flexiveis de acordo o cronograma de aula em  conformidade da lei e calendário próprio.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                               § 6º - Acordam as partes que é da exclusiva responsabilidade da CONTRATANTE a permanência dos alunos antes ou depois dos horários especificados no § 5º, seja dentro, ou seja, fora das dependências da CONTRATADA, e que a saída de alunos após o turno tem tolerância máxima de 20 (Vinte) minutos.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>§ 7º - Acordam as partes que a título de penalidade, a partir da extrapolação do horário de tolerância, por três vezes consecutivas ou intercaladas no mês, a CONTRATANTE pagará a CONTRATADA o valor de R$ 25,00 (vinte reais) por dia excedido no mês</b>.  após o término de cada horário sendo no turno matutino o término das aulas às11:30 e   às 17:30 para o turno vespertino.  Em datas e horários extra aula, é de inteira responsabilidade dos responsáveis o trânsito ou permanência dos alunos antes ou depois dos horários especificados dentro ou fora das dependências da mesma. Os pais serão chamados se ocorrer rotina de atrasos em buscar o seu filho (a).
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>§ 8º</b> - Saída de alunos após o turno com tolerância de apenas 10 minutos. A CONTRATADA informa que após a saída do aluno no horário oficial conforme parágrafo acima, o CONTRATANTE terá tolerância de apenas 15 minutos após o horário, por um período de três vezes ao mês, e que o não cumprimento, será pago uma taxa por parte do CONTRATANTE no valor de R$ 25,00 (vinte reais) por dia excedido dentro do mês.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                               CLAUSULA 3ª – Como contraprestação pelos serviços a serem prestados referentes ao período letivo de janeiro a dezembro de {anoLetivo} conforme previsto na cláusula 2ª, será a anuidade paga da seguinte forma:
                                           </MDTypography>
                                       </Grid>
@@ -422,22 +448,22 @@ function Tables() {
                                               </tr>
                                                 <tr>
                                                     <th>
-                                                        <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                        <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                             CURSO
                                                         </MDTypography>
                                                     </th>
                                                     <th>
-                                                        <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                        <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                         N. DE PARCELAS
                                                         </MDTypography>
                                                     </th>
                                                     <th>
-                                                        <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                        <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                         VALOR DA PARCELA
                                                         </MDTypography>
                                                     </th>
                                                     <th>
-                                                        <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                        <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                         DIA DO VENCIMENTO
                                                         </MDTypography>
                                                     </th>
@@ -446,132 +472,132 @@ function Tables() {
                                             <tbody>
                                               <tr>
                                                   <td>
-                                                        <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                        <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                             Educação Infantil - Nível 1 ao Nível 3
                                                         </MDTypography>
                                                   </td>
                                                   <td>
-                                                        <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                        <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                       12
                                                         </MDTypography>
                                                   </td>
                                                   <td>
-                                                        <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                        <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                             R$ 650,00
                                                         </MDTypography>
                                                   </td>
                                                   <td>
-                                                        <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                        <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                       08 de cada mês (vigente)
                                                         </MDTypography>
                                                   </td>
                                               </tr>
                                               <tr>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           Ensino Fundamental I - 1° ao 5° Ano
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           12
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           R$ 675,00
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           08 de cada mês (vigente)
                                                       </MDTypography>
                                                   </td>
                                               </tr>
                                               <tr>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           Ensino Fundamental II - 6° Ano
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           12
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           R$ 725,00
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           08 de cada mês (vigente)
                                                       </MDTypography>
                                                   </td>
                                               </tr>
                                               <tr>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           Ensino Fundamental II - 7° Ano
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           12
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           R$ 725,00
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           08 de cada mês (vigente)
                                                       </MDTypography>
                                                   </td>
                                               </tr>
                                               <tr>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           Ensino Fundamental II - 8° Ano
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           12
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           R$ 725,00
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           08 de cada mês (vigente)
                                                       </MDTypography>
                                                   </td>
                                               </tr>
                                               <tr>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           Ensino Fundamental II - 9° Ano
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           12
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           R$ 725,00
                                                       </MDTypography>
                                                   </td>
                                                   <td>
-                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                      <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                                           08 de cada mês (vigente)
                                                       </MDTypography>
                                                   </td>
@@ -581,67 +607,62 @@ function Tables() {
 
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
-                                              § 1º - O valor da contraprestação acima pactuado poderá ser reajustado quando expressamente permitido por lei, bem como, para preservar o equilíbrio contratual, caso qualquer mudança legislativa ou normativa altere a equação econômico-financeira do presente instrumento de contrato.
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>Parágrafo único</b> – A primeira parcela será cobrada no ato da matrícula ou até o dia 08 do mês vigente. § 1º - O valor da contraprestação acima pactuado poderá ser reajustado quando expressamente permitido por lei, bem como, para preservar o equilíbrio contratual, caso qualquer mudança legislativa ou normativa altere a equação econômico-financeira do presente instrumento de contrato.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              <b>Parágrafo único</b> – A primeira parcela será cobrada no ato da matrícula ou até o dia 08 do mês vigente.
-                                          </MDTypography>
-                                      </Grid>
-                                      <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                               CLÁUSULA 4ª – O CONTRATANTE declara que teve conhecimento prévio das condições financeiras deste contrato que foi exposto em local de fácil acesso e visualização (art. 2º da Lei nº 9.870/99), conhecendo-as e aceitando-as livremente.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                               CLÁUSULA 5ª – Os pagamentos das parcelas deverão ser efetuados até o dia 08 de cada mês, por via de cobrança bancária ou nos locais indicados pela CONTRATADA.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>§ 1º</b> - O pagamento da parcela vigente, efetuado até o dia 08 de cada mês, terá desconto  para a Educação Infantil e o Ensino Fundamental (1º ao 5º Ano) e  6º Ano 9º Ano.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                               § 2 º - O pagamento efetuado após a data de vencimento será acrescido de multa no percentual de 2% (dois por cento) sobre o valor da prestação em atraso, mais correção monetária e juros de mora de 1% (um por cento) ao mês.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>§ 3º</b> - Em caso de inadimplência, o <b>CONTRATANTE</b> perderá todo e qualquer desconto do qual seja eventualmente beneficiário.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>§ 4º</b> - O pagamento das obrigações financeiras do CONTRATANTE será comprovado mediante apresentação do recibo (ou carnê) que individualize a obrigação quitada. O <b>CONTRATANTE</b> deverá apresentar tais comprovantes sempre que forem solicitados.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              <b>§ 5º - O Bolsista do Programa da escola</b> com mensalidades em atraso do mês corrente, terá que pagar a CONTRATANTE o valor da Mensalidade conforme tabela da Cláusula 3ª do parágrafo 6ª deste contrato.
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
+                                              <b>§ 5º - O Bolsista do Programa da escola</b> que atrasar o pagamento da sua mensalidade, para a regularização do programa e para voltar a usufruir dos seus benefícios, terá que pagar a CONTRATANTE o valor da mensalidade disponibilizada na tabela da Cláusula 3ª deste contrato, cujo valor também será aplicado em caso de necessidade de cobrança judicial ou extrajudicial.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
-                                              § 6º - Acordam as partes que a CONTRATADA após 30 (trinta) dias de atraso injustificado ao pagamento de qualquer parcela pactuada neste instrumento de contrato, poderá a seu exclusivo critério emitir e protestar duplicatas e ou letras de câmbio de prestação de serviço, tudo em conformidade com a legislação em vigor, podendo de forma isolada ou cumulada registrar o débito em serviço de proteção ao crédito, SERASA e ainda propor demandas objetivando receber o débito, sendo desde já acordado que é da responsabilidade da CONTRATANTE o pagamento de honorários advocatícios pactuados em 20% e demais despesas Judiciais ou extrajudiciais, ou pagamento de taxas emoluentes em caso a contratante for a protestos;
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
+                                              § 6º - Acordam as partes que a CONTRATADA após 30 (trinta) dias de atraso injustificado do pagamento de qualquer parcela pactuada neste instrumento de contrato, poderá a seu exclusivo e livre critério emitir e protestar duplicatas e ou letras de câmbio de prestação de serviço, tudo em conformidade com a legislação em vigor, podendo de forma isolada ou cumulativa registrar o débito nos serviços de proteção ao crédito, SERASA e ainda propor as competentes demandas objetivando receber o débito, sendo desde já acordado que é da responsabilidade da CONTRATANTE o pagamento de honorários advocatícios que ficam desde já pactuados em 20%, sem prejuízo do pagamento das demais despesas judiciais ou extrajudiciais, ou ainda do pagamento das demais taxas e emoluentes em caso da contratante ser protestada;
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <b>CLÁUSULA 6ª</b> – Os valores da contraprestação acima pactuada satisfazem, exclusivamente a prestação de serviços decorrentes da carga horária constante da proposta curricular da <b>CONTRATADA</b> e de seu calendário escolar.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                               § 1º - Acordam as partes que este contrato não inclui o fornecimento de livros didáticos, apostilas, serviços de estudos de recuperação fora do seu expediente em que o contratante contratou os serviços (não previstos no calendário), cursos paralelos, serviços facultativos e primeiros e segunda via de documentos escolares, pelos quais a CONTRATADA cobrará as despesas correspondentes de dez por cento (10% ) do valor da mensalidade em casos da primeira ( 1º e 2º )  via de documentos e perda de provas sem atestado médico.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               <p><strong>&sect; 2&ordm; - Acordam as partes que para suprir despesas e tributos, os servi&ccedil;os extraordin&aacute;rios efetivamente prestados ao aluno, tais como: segunda chamada de provas e exames, declara&ccedil;&otilde;es, estudo de recupera&ccedil;&atilde;o, adapta&ccedil;&atilde;o, segunda via de boletim de notas, segunda via de hist&oacute;rico escolar, segunda via de documento de conclus&atilde;o, segunda via de carn&ecirc; de pagamento, ser&atilde;o cobrados &agrave; parte, no valor de dez por cento (10%) do valor da mensalidade.</strong></p>
                                               <p>&nbsp;</p>
                                               <p><strong>&sect; 3&ordm; - O CONTRATANTE fica ciente, ainda, que a CONTRATADA n&atilde;o presta quaisquer tipos de servi&ccedil;os em rela&ccedil;&atilde;o a estacionamento, vigil&acirc;ncia ou guarda de ve&iacute;culos automotores de qualquer natureza, n&atilde;o assumindo, portanto para si, a responsabilidade de indeniza&ccedil;&atilde;o por danos, furtos, roubos, inc&ecirc;ndios, atropelamentos, colis&otilde;es etc., que venham a ocorrer nos p&aacute;tios internos, externos, ou circunvizinhos de seus pr&eacute;dios, cuja responsabilidade ser&aacute; exclusivamente de seu condutor e/ou propriet&aacute;rio.</strong></p>
@@ -656,11 +677,11 @@ function Tables() {
                                               <p>&nbsp;</p>
                                               <p><strong>&sect; 3&ordm; - O presente contrato poder&aacute; ser rescindido por iniciativa da CONTRATADA, caso o benefici&aacute;rio do contrato cometa infra&ccedil;&atilde;o disciplinar que assim o justifique seu desligamento do estabelecimento de ensino, nos termos do regimento escolar.</strong></p>
                                               <p>&nbsp;</p>
-                                              <p><strong>&sect; 4&ordm;</strong> - Em caso de desist&ecirc;ncia da matr&iacute;cula por parte do <strong>CONTRATANTE</strong>, apenas ser&aacute; devolvida 80% da parcela j&aacute; paga, retendo a CONTRATADA a diferen&ccedil;a para cobertura de tributos e contribui&ccedil;&otilde;es, quando o cancelamento ocorrer antes do in&iacute;cio do ano letivo.</p>
+                                              <p><strong>&sect; 4&ordm;</strong> - Em caso de desist&ecirc;ncia da matr&iacute;cula por parte do <strong>CONTRATANTE</strong> antes do ano letivo, será restituido 80% da parcela adimplida pela <strong>CONTRATANTE</strong>, retendo a <strong>CONTRATADA</strong> 20% do valor pago a título de ressarcimento dos gastos com tributo, contribuições e custos operacionais.</p>
                                               <p>&nbsp;</p>
                                               <p><strong>&sect; 5&ordm; - O uniforme &eacute; de uso obrigat&oacute;rio do aluno, e a inobserv&acirc;ncia da utiliza&ccedil;&atilde;o do mesmo acarretar&aacute; a advert&ecirc;ncia aos seus respons&aacute;veis, que ser&atilde;o convocados para se esclarecerem junto &agrave; dire&ccedil;&atilde;o, podendo ainda os alunos serem submetidos &agrave;s penalidades do regimento escolar.</strong></p>
                                               <p>&nbsp;</p>
-                                              <p><strong>&sect; 6&ordm; - O uniforme &eacute; marca exclusiva da contratada n&atilde;o procedendo a contratante vender ou compr&aacute;-lo de terceiros, haja vista, que sofrer sans&otilde;es c&iacute;veis cab&iacute;veis, aos direitos autorais de uso de bem ou marca;</strong></p>
+                                              <p><strong>&sect; 6&ordm; - O uniforme &eacute; confeccionado com a marca da CONTRATADA sendo vedado a CONTRATANTE utilizar indevidamente da mesma sob pena das sans&otilde;es c&iacute;veis e criminais cab&iacute;veis decorrentes dos direitos autorais.</strong></p>
                                               <p>&nbsp;</p>
                                               <p><strong>CL&Aacute;USULA 8&ordf; &ndash; Ao firmar o presente contrato o CONTRATANTE declara que tem conhecimento pr&eacute;vio do Regimento Escolar e das instru&ccedil;&otilde;es espec&iacute;ficas, que lhes foram apresentados e que passam a fazer parte integrante do presente contrato, submetendo &agrave;s suas disposi&ccedil;&otilde;es, bem como, as demais obriga&ccedil;&otilde;es decorrentes da legisla&ccedil;&atilde;o aplic&aacute;vel &agrave; &aacute;rea de ensino e ao projeto pol&iacute;tico pedag&oacute;gico da escola.</strong></p>
                                               <p>&nbsp;</p>
@@ -688,18 +709,15 @@ function Tables() {
                                               <p>&nbsp;</p>
                                               <p><strong>CLAUSULA 16&ordf; &ndash; Acordam as partes que para todas as comunica&ccedil;&otilde;es referentes ao aluno (a), e ou notifica&ccedil;&otilde;es e ou cita&ccedil;&otilde;es consideram-se v&aacute;lidos al&eacute;m dos endere&ccedil;os aqui fornecidos pelo CONTRATANTE, tamb&eacute;m os constantes no requerimento de matr&iacute;cula, e consideram-se v&aacute;lidos os comunicados, notifica&ccedil;&otilde;es e ou cita&ccedil;&otilde;es realizados pelos meios eletr&ocirc;nicos tais como e-mails, whatsapp e similares, sendo consideradas entregas todas as remessas nos referidos endere&ccedil;os, salvo altera&ccedil;&otilde;es devidamente e expressamente comunicadas &agrave; secret&aacute;ria da escola.</strong></p>
                                               <p>&nbsp;</p>
-                                              <p><strong>CL&Aacute;USULA 17&ordf; - DA CL&Aacute;USULA COMPROMISS&Oacute;RIA: Toda e qualquer quest&otilde;es eventualmente oriundas do presente contrato, e a ele correlatos, ser&atilde;o resolvidas, de forma definitiva via concilia&ccedil;&atilde;o ou arbitragem, na CONCILIARBRASIL &ndash; Centro de Media&ccedil;&atilde;o, Concilia&ccedil;&atilde;o e Arbitragem, na Av. Teot&ocirc;nio Segurado, 501 Sul, Edif&iacute;cio Amaz&ocirc;nia Center, sala 401, Palmas/TO, em conformidade com as normas do regulamento interno e consoante o preceitos ditados pela Lei Federal n.&ordm; 9.307/96 de 23.09.1996.</strong></p>
+                                              <p><strong>CL&Aacute;USULA 17&ordf; - DA CL&Aacute;USULA COMPROMISS&Oacute;RIA: Toda e qualquer quest&atilde;o eventualmente oriunda do presente contrato, e a ele correlatos, ser&atilde;o resolvidas, de forma definitiva via concilia&ccedil;&atilde;o ou arbitragem com escolha pela CONTRATADA por uma das juntas de concilia&ccedil;&atilde;o e arbitragem em atua&ccedil;&atilde;o na cidade de Palmas/TO, em conformidade com as normas do seu regulamento interno e consoante os preceitos ditados pela Lei Federal n.&ordm; 9.307/96 de 23.09.1996.</strong></p>
                                           </MDTypography>
                                       </Grid>
                                   </Grid>
                               </MDBox>
-                              <br/>
-                              <br/>
-                              <br/>
                               <MDBox p={3} pb={3}>
                                   <Grid container justifyContent='inherit' spacing={1}>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" mb={0} variant="h6" color="dark" sx={{textAlign: 'end'}}>
+                                          <MDTypography fontSize="0.8rem" mb={0} variant="h6" color="dark" sx={{textAlign: 'end'}}>
                                               Palmas, {new Date().toLocaleDateString()}
                                               {/*Palmas, {moment.locale('pt-br')}*/}
                                           </MDTypography>
@@ -707,51 +725,57 @@ function Tables() {
                                   </Grid>
                               </MDBox>
                               <MDBox p={3} pb={3} display="flex" alignItems="center" sx={{flexDirection: 'column'}}>
-                                  <Grid>
-                                      <MDTypography fontSize="0.7rem" mb={0} variant="body2" color="dark" sx={{textAlign: 'center'}}>
-                                          ______________________________________
-                                      </MDTypography>
-                                      <MDTypography fontSize="0.7rem" mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
-                                          CONTRATADO
-                                      </MDTypography>
-                                      <br/>
-                                      <br/>
-                                      <MDTypography fontSize="0.7rem" mb={0} variant="body2" color="dark" sx={{textAlign: 'center'}}>
-                                          ______________________________________
-                                      </MDTypography>
-                                      <MDTypography fontSize="0.7rem" mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
-                                          CONTRATANTE
-                                      </MDTypography>
+                                  <Grid container justifyContent='inherit' spacing={1}>
+                                      <Grid item xs={12} md={6}>
+                                          <MDTypography fontSize="0.8rem" mb={0} variant="body2" color="dark" sx={{textAlign: 'center'}}>
+                                              ______________________________________
+                                          </MDTypography>
+                                      </Grid>
+                                      <Grid item xs={12} md={6}>
+                                          <MDTypography fontSize="0.8rem" mb={0} variant="body2" color="dark" sx={{textAlign: 'center'}}>
+                                              ______________________________________
+                                          </MDTypography>
+                                      </Grid>
+                                      <Grid item xs={12} md={6}>
+                                          <MDTypography fontSize="0.8rem" mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                                              CONTRATANTE
+                                          </MDTypography>
+                                      </Grid>
+                                      <Grid item xs={12} md={6}>
+                                          <MDTypography fontSize="0.8rem" mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                                              CONTRATADA
+                                          </MDTypography>
+                                      </Grid>
                                   </Grid>
                               </MDBox>
                               <MDBox p={3} pb={3}>
                                   <Grid container justifyContent='inherit' spacing={1}>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="h6" color="dark">
                                               TESTEMUNHAS
                                           </MDTypography>
                                       </Grid>
                                       <br/>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               1ª _________________________________________________________
                                           </MDTypography>
                                       </Grid>
                                       <br/>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               CPF ________________________________________________________
                                           </MDTypography>
                                       </Grid>
                                       <br/>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               2ª _________________________________________________________
                                           </MDTypography>
                                       </Grid>
                                       <br/>
                                       <Grid item xs={12} md={12}>
-                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                          <MDTypography fontSize="0.8rem" variant="body2" color="dark">
                                               CPF ________________________________________________________
                                           </MDTypography>
                                       </Grid>

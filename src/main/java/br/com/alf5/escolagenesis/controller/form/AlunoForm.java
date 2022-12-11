@@ -47,6 +47,7 @@ public class AlunoForm {
         Responsavel responsavelContrato = new Responsavel();
         String emergencia1 = null;
         String emergencia2 = null;
+        String observacao = "____________________________________________________________________________________________________________________";
         if(idPai == null){pai = null;} else {pai = responsavelRepository.getReferenceById(idPai);}
         if(idMae == null){mae = null;} else {mae = responsavelRepository.getReferenceById(idMae);}
         if(idResponsavel == null){responsavel = null;} else {responsavel = responsavelRepository.getReferenceById(idResponsavel);}
@@ -55,10 +56,11 @@ public class AlunoForm {
         enderecoRepository.save(endereco);
         if(this.contatoEmergencia1 != null) emergencia1 = this.contatoEmergencia1+" "+this.nomeEmergencia1;
         if(this.contatoEmergencia2 != null) emergencia2 = this.contatoEmergencia2+" "+this.nomeEmergencia2;
+        if(this.observacao != null) {observacao = this.observacao;}
 
     Aluno aluno = new Aluno(this.nome, this.dataNascimento, this.dataMatricula, this.sexo, this.naturalidade,
             this.nacionalidade, this.cuidadoEspecial, this.especificacao, endereco, this.anoLetivo, this.anoInicial, this.situacao,
-            this.turma, this.turno, pai, mae, responsavel, responsavelContrato, dataContrato, emergencia1, emergencia2, this.observacao);
+            this.turma, this.turno, pai, mae, responsavel, responsavelContrato, dataContrato, emergencia1, emergencia2, observacao);
         return aluno;
 }
 
