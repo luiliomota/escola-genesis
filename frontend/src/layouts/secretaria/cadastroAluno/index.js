@@ -138,6 +138,7 @@ function Tables() {
             .catch((error) => console.error(error))
     },[]);
 
+
     useEffect( () => {
         api.get("/api/turno")
             .then((response) => {
@@ -1065,10 +1066,18 @@ function Tables() {
                                                 type="text"
                                                 multiline row={5}
                                                 value={aluno.observacao}
-                                                onChange={(e) => setAluno({
-                                                    ...aluno,
-                                                    observacao: e.target.value
-                                                })}
+                                                onChange={(e, value) => {
+                                                        if(value){
+                                                            setAluno({...aluno, observacao: e.target.value});
+                                                        } else {
+                                                            setAluno({...aluno, observacao: "___________________" +
+                                                                    "________________________________________________" +
+                                                                    "________________________________________________" +
+                                                                    "_________________________________________________" +
+                                                                    "_________________________________________________"});
+                                                        }
+                                                    }
+                                                }
                                             />
                                         </MDBox>
                                     </Grid>

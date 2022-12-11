@@ -35,8 +35,6 @@ function Tables() {
         id: 0,
     });
     const [listaAlunos, setListaAlunos] = useState([]);
-    const [valorParcela, setValorParcela] = useState();
-    const [curso, setCurso] = useState();
 
     const reactToPrintContent = useCallback(() => {
         return componentRef.current;
@@ -53,95 +51,6 @@ function Tables() {
           })
           .catch((error) => console.error(error))
     }, []);
-
-    useEffect(() => {
-        switch (aluno.situacao) {
-            case "INFANTIL":
-                setCurso("Educação Infantil - "+aluno.anoInicial)
-                break;
-            case "FUNDAMENTAL":
-                switch (aluno.anoInicial) {
-                    case "1° ANO":
-                        setCurso("Ensino Fundamental I - "+aluno.anoInicial)
-                        break;
-                    case "2° ANO":
-                        setCurso("Ensino Fundamental I - "+aluno.anoInicial)
-                        break;
-                    case "3° ANO":
-                        setCurso("Ensino Fundamental I - "+aluno.anoInicial)
-                        break;
-                    case "4° ANO":
-                        setCurso("Ensino Fundamental I - "+aluno.anoInicial)
-                        break;
-                    case "5° ANO":
-                        setCurso("Ensino Fundamental I - "+aluno.anoInicial)
-                        break;
-                    case "6° ANO":
-                        setCurso("Ensino Fundamental II - "+aluno.anoInicial)
-                        break;
-                    case "7° ANO":
-                        setCurso("Ensino Fundamental II - "+aluno.anoInicial)
-                        break;
-                    case "8° ANO":
-                        setCurso("Ensino Fundamental II - "+aluno.anoInicial)
-                        break;
-                    case "9° ANO":
-                        setCurso("Ensino Fundamental II - "+aluno.anoInicial)
-                        break;
-                    case false:
-                        setCurso("")
-                        console.log("Informação não encontrada no BD")
-                }
-                break;
-            case false:
-                setCurso("")
-                console.log("Informação não encontrada no BD")
-        }
-    });
-
-    useEffect(() => {
-        switch (aluno.anoInicial) {
-            case "NIVEL 1":
-                setValorParcela("R$ 420,00")
-                break;
-            case "NIVEL 2":
-                setValorParcela("R$ 420,00")
-                break;
-            case "NIVEL 3":
-                setValorParcela("R$ 420,00")
-                break;
-            case "1° ANO":
-                setValorParcela("R$ 480,00")
-                break;
-            case "2° ANO":
-                setValorParcela("R$ 480,00")
-                break;
-            case "3° ANO":
-                setValorParcela("R$ 480,00")
-                break;
-            case "4° ANO":
-                setValorParcela("R$ 480,00")
-                break;
-            case "5° ANO":
-                setValorParcela("R$ 480,00")
-                break;
-            case "6° ANO":
-                setValorParcela("R$ 520,00")
-                break;
-            case "7° ANO":
-                setValorParcela("R$ 520,00")
-                break;
-            case "8° ANO":
-                setValorParcela("R$ 520,00")
-                break;
-            case "9° ANO":
-                setValorParcela("R$ 520,00")
-                break;
-            case false:
-                setValorParcela("")
-                console.log("Informação não encontrada no BD")
-        }
-    });
 
     return (
       <DashboardLayout>
@@ -210,23 +119,33 @@ function Tables() {
                       <Card fontSize="0.5rem">
                           <MDBox ref={componentRef} ml={2} mr={2} p={4}>
                               <MDBox p={3} pb={3} display="flex" alignItems="center" sx={{flexDirection: 'column'}}>
-                                  <Grid>
-                                      <MDBox component="img" src={logo} alt="Brand" width="10rem"/>
+                                  <Grid container justifyContent='center' alignItems="center" spacing={1} mr={2} ml={2}>
+                                      <Grid item xs={12} md={1}>
+                                          <MDBox component="img" src={logo} alt="Brand" width="8rem"/>
+                                      </Grid>
+                                      <Grid item xs={12} md={9}>
+                                          <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                                              GÊNESIS CENTRO EDUCACIONAL LTDA ME
+                                          </MDTypography>
+                                          <MDTypography  mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                                              Rua T-02. Qd 01, Lote 12A - Setor Santa Fé
+                                          </MDTypography>
+                                          <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                                              Taquaralto - Palmas - TO
+                                          </MDTypography>
+                                          <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                                              Fone (63) 3571-5751
+                                          </MDTypography>
+                                      </Grid>
                                   </Grid>
-                                  <Grid>
-                                      <MDTypography  mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
-                                          Rua T-02. Qd 01, Lote 12A - Setor Santa Fé
-                                      </MDTypography>
-                                      <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
-                                          Taquaralto - Palmas - TO
-                                      </MDTypography>
-                                      <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
-                                          Fone (63) 3571-5751
-                                      </MDTypography>
-                                      <br/>
-                                      <MDTypography mb={0} variant="h5" color="dark" textTransform="uppercase" sx={{textAlign: 'center'}}>
-                                          Contrato de Prestação de Serviços Educacionais para {anoLetivo}
-                                      </MDTypography>
+                              </MDBox>
+                              <MDBox p={6} pb={1}>
+                                  <Grid container justifyContent='center' alignItems="center" spacing={1} mr={2} ml={2}>
+                                      <Grid>
+                                          <MDTypography mb={0} variant="h5" color="dark" textTransform="uppercase" sx={{textAlign: 'center'}}>
+                                              Contrato de Prestação de Serviços Educacionais para {anoLetivo}
+                                          </MDTypography>
+                                      </Grid>
                                   </Grid>
                               </MDBox>
                               <MDBox p={6} pb={3}>
@@ -421,6 +340,12 @@ function Tables() {
                                       </Grid>
                                       <br/>
                                       <br/>
+                                      <Grid item xs={12} md={12}>
+                                          <MDTypography fontSize="0.7rem" variant="body2" color="dark">
+                                              <b>OBSERVAÇÃO: Avisar sempre com antecedência de no mínimo 30 minutos, caso o responsável autorizado à retirar o aluno, seja alterado no/s dia/s em questão.</b>
+                                          </MDTypography>
+                                      </Grid>
+                                      <br/>
                                       <br/>
                                       <Grid item xs={12} md={12}>
                                           <MDTypography fontSize="0.7rem" variant="body2" color="dark">
@@ -493,7 +418,7 @@ function Tables() {
                                           <table border={1}>
                                               <thead>
                                               <tr>
-                                                <th colSpan={4} fontSize="0.5rem">PREÇO DE CONTRATO PARA O  ANO LETIVO DE {anoLetivo}</th>
+                                                <th colSpan={4} fontSize="0.5rem">TABELA DE PREÇOS DE CONTRATO PARA O  ANO LETIVO DE {anoLetivo}</th>
                                               </tr>
                                                 <tr>
                                                     <th>
@@ -522,7 +447,7 @@ function Tables() {
                                               <tr>
                                                   <td>
                                                         <MDTypography fontSize="0.7rem" variant="h6" color="dark">
-                                                            {curso}
+                                                            Educação Infantil - Nível 1 ao Nível 3
                                                         </MDTypography>
                                                   </td>
                                                   <td>
@@ -532,13 +457,123 @@ function Tables() {
                                                   </td>
                                                   <td>
                                                         <MDTypography fontSize="0.7rem" variant="h6" color="dark">
-                                                            {valorParcela}
+                                                            R$ 650,00
                                                         </MDTypography>
                                                   </td>
                                                   <td>
                                                         <MDTypography fontSize="0.7rem" variant="h6" color="dark">
                                                       08 de cada mês (vigente)
                                                         </MDTypography>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          Ensino Fundamental I - 1° ao 5° Ano
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          12
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          R$ 675,00
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          08 de cada mês (vigente)
+                                                      </MDTypography>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          Ensino Fundamental II - 6° Ano
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          12
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          R$ 725,00
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          08 de cada mês (vigente)
+                                                      </MDTypography>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          Ensino Fundamental II - 7° Ano
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          12
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          R$ 725,00
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          08 de cada mês (vigente)
+                                                      </MDTypography>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          Ensino Fundamental II - 8° Ano
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          12
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          R$ 725,00
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          08 de cada mês (vigente)
+                                                      </MDTypography>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          Ensino Fundamental II - 9° Ano
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          12
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          R$ 725,00
+                                                      </MDTypography>
+                                                  </td>
+                                                  <td>
+                                                      <MDTypography fontSize="0.7rem" variant="h6" color="dark">
+                                                          08 de cada mês (vigente)
+                                                      </MDTypography>
                                                   </td>
                                               </tr>
                                             </tbody>
@@ -587,7 +622,7 @@ function Tables() {
                                       </Grid>
                                       <Grid item xs={12} md={12}>
                                           <MDTypography fontSize="0.7rem" variant="body2" color="dark">
-                                              <b>§ 5º - O Bolsista do Programa Educar Mais Brasil</b> com mensalidades em atraso do mês corrente, terá que pagar a CONTRATANTE o valor da Mensalidade conforme tabela da Cláusula 3ª do parágrafo 6ª deste contrato.
+                                              <b>§ 5º - O Bolsista do Programa da escola</b> com mensalidades em atraso do mês corrente, terá que pagar a CONTRATANTE o valor da Mensalidade conforme tabela da Cláusula 3ª do parágrafo 6ª deste contrato.
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={12} md={12}>

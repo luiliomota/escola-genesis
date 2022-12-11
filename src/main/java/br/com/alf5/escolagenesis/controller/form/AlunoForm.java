@@ -45,14 +45,16 @@ public class AlunoForm {
         Responsavel mae = new Responsavel();
         Responsavel responsavel = new Responsavel();
         Responsavel responsavelContrato = new Responsavel();
+        String emergencia1 = null;
+        String emergencia2 = null;
         if(idPai == null){pai = null;} else {pai = responsavelRepository.getReferenceById(idPai);}
         if(idMae == null){mae = null;} else {mae = responsavelRepository.getReferenceById(idMae);}
         if(idResponsavel == null){responsavel = null;} else {responsavel = responsavelRepository.getReferenceById(idResponsavel);}
         if(idResponsavelContrato == null){responsavelContrato = null;} else {responsavelContrato = responsavelRepository.getReferenceById(idResponsavelContrato);}
         Endereco endereco = new Endereco(this.cep, this.logradouro, this.bairro, this.cidade, this.estado, this.complemento);
         enderecoRepository.save(endereco);
-        String emergencia1 = this.contatoEmergencia1+" "+this.nomeEmergencia1;
-        String emergencia2 = this.contatoEmergencia2+" "+this.nomeEmergencia2;
+        if(this.contatoEmergencia1 != null) emergencia1 = this.contatoEmergencia1+" "+this.nomeEmergencia1;
+        if(this.contatoEmergencia2 != null) emergencia2 = this.contatoEmergencia2+" "+this.nomeEmergencia2;
 
     Aluno aluno = new Aluno(this.nome, this.dataNascimento, this.dataMatricula, this.sexo, this.naturalidade,
             this.nacionalidade, this.cuidadoEspecial, this.especificacao, endereco, this.anoLetivo, this.anoInicial, this.situacao,

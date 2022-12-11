@@ -137,12 +137,17 @@ function Tables() {
             <br/>
             <Card>
               <div ref={componentRef}>
-                <MDBox p={3} pb={1} display="flex" alignItems="center"
-                       sx={{flexDirection: 'column'}}>
-                  <Grid>
-                    <MDBox component="img" src={logo} alt="Brand" width="10rem"/>
+                <MDBox p={6} ml={3} mr={3}>
+                  <Grid container justifyContent='center' alignItems="center" spacing={1} mr={2} ml={2}>
+                {/*<MDBox p={3} pb={1} display="flex" alignItems="center"*/}
+                {/*       sx={{flexDirection: 'column'}}>*/}
+                  <Grid item xs={12} md={1}>
+                    <MDBox component="img" src={logo} alt="Brand" width="8rem"/>
                   </Grid>
-                  <Grid>
+                  <Grid item xs={12} md={9}>
+                    <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
+                      GÊNESIS CENTRO EDUCACIONAL LTDA ME
+                    </MDTypography>
                     <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
                       Rua T-02. Qd 01, Lote 12A - Setor Santa Fé
                     </MDTypography>
@@ -152,13 +157,19 @@ function Tables() {
                     <MDTypography mb={0} variant="h6" color="dark" sx={{textAlign: 'center'}}>
                       Fone (63) 3571-5751
                     </MDTypography>
-                    <br/>
-                    <MDTypography mb={0} variant="h5" color="dark" textTransform="uppercase" sx={{textAlign: 'center'}}>
-                      Requerimento de Matrícula - Ano Letivo: 2023
-                    </MDTypography>
+                  </Grid>
+                  <MDBox p={3} pb={1}>
+                    <Grid container justifyContent='center' alignItems="center" spacing={1} mr={2} ml={2}>
+                      <Grid>
+                        <MDTypography mb={0} variant="h5" color="dark" textTransform="uppercase" sx={{textAlign: 'center'}}>
+                          Requerimento de Matrícula - Ano Letivo: 2023
+                        </MDTypography>
+                      </Grid>
+                    </Grid>
+                  </MDBox>
                   </Grid>
                 </MDBox>
-                <MDBox p={3} pb={3} ml={3} mr={3}>
+                <MDBox p={1} pb={3} ml={3} mr={3}>
                 <Grid container justifyContent='inherit' spacing={1} mr={2} ml={2}>
                   <Grid item xs={12} md={12}>
                     <MDTypography fontSize="0.7rem" mb={1} variant="h6" color="dark">
@@ -315,12 +326,11 @@ function Tables() {
                       Especificar: <b><u>{aluno.especificacao}</u></b>
                     </MDTypography>
                   </Grid>
-                  <Grid item ml={2} xs={12} md={10}>
+                  <Grid pb={6} item ml={2} xs={12} md={10}>
                     <MDTypography fontSize="0.7rem" mb={1} variant="body2" color="dark">
-                      Obervações: <b><u>{aluno.observacao}</u></b>
+                        Observações: <b><u>{aluno.observacao}</u></b>
                     </MDTypography>
                   </Grid>
-                  <br/>
                   <Grid container justifyContent='inherit' spacing={1}>
                     <Grid item xs={12} md={12}>
                       <MDTypography fontSize="0.7rem" mb={0} mr={6} variant="h6" color="dark" sx={{textAlign: 'end'}}>
@@ -328,7 +338,7 @@ function Tables() {
                         {/*Palmas, {moment.locale('pt-br')}*/}
                       </MDTypography>
                     </Grid>
-                    <Grid item xs={12} md={12}>
+                    <Grid pb={6} item xs={12} md={12}>
                       <MDTypography fontSize="0.7rem" mb={0} variant="body2" color="dark" sx={{textAlign: 'center'}}>
                         ______________________________________
                       </MDTypography>
