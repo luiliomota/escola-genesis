@@ -176,7 +176,7 @@ export default function App() {
         {layout === "vr" && <Configurator />}
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/secretaria/requerimentomatricula" />} />
+          <Route path="*" element={<Navigate to="/secretaria/cadastroaluno" />} />
         </Routes>
       </Fragment>
     </ThemeProvider>

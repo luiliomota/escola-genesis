@@ -29,7 +29,9 @@ import DirecaoComparador from "layouts/direcao/comparador";
 
 import Secretaria from "layouts/secretaria";
 import SecretariaCadastroResponsavel from "layouts/secretaria/cadastroResponsavel";
+import SecretariaCadastroResponsavelNovo from "layouts/secretaria/cadastroResponsavel/novo";
 import SecretariaCadastroAluno from "layouts/secretaria/cadastroAluno";
+import SecretariaCadastroAlunoNovo from "layouts/secretaria/cadastroAluno/novo";
 import SecretariaRequerimentoMatricula from "layouts/secretaria/requerimentoMatricula";
 import SecretariaContrato from "layouts/secretaria/contrato";
 import SecretariaAtualizar from "layouts/secretaria/atualizar";
@@ -120,12 +122,32 @@ const routes = [
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
+    // type: "collapseCadastroSecretaria",
+    // name: "Aluno(a)",
+    key: "secretaria/cadastroresponsavel/novo",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/cadastroresponsavel/novo",
+    component: <SecretariaCadastroResponsavelNovo />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
     type: "collapseCadastroSecretaria",
     name: "Aluno(a)",
     key: "secretaria/cadastroaluno",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/cadastroaluno",
     component: <SecretariaCadastroAluno />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    // type: "collapseCadastroSecretaria",
+    // name: "Aluno(a)",
+    key: "secretaria/cadastroaluno/novo",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/cadastroaluno/novo",
+    component: <SecretariaCadastroAlunoNovo />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },

@@ -6,7 +6,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import {Print} from "@mui/icons-material";
+import {DataArray, Print} from "@mui/icons-material";
 import {Autocomplete, TextField} from "@mui/material";
 
 // Material Dashboard 2 React components
@@ -23,10 +23,10 @@ import MDButton from "components/MDButton";
 import api from "api";
 import {useReactToPrint} from 'react-to-print';
 import logo from "../../../assets/images/ceg.png";
-import moment from "moment";
+import moment from "moment/moment";
 
 function Tables() {
-  // moment.locale('pt-BR');
+  moment.locale('pt-BR');
   // console.log(moment().format('LL'));
   const [idade, setIdade] = useState();
 
@@ -48,16 +48,19 @@ function Tables() {
 
   //Cálculo de idade
   useEffect(() => {
-    if(aluno.dataNascimento == undefined){
+    if(aluno.dataNascimento === undefined){
       setIdade("");
     } else {
-      if (new Date().getMonth() + 1 < new Date(aluno.dataNascimento).getMonth() ||
-          (new Date().getMonth() + 1 == new Date(aluno.dataNascimento).getMonth() + 1 &&
-              new Date().getDate() < new Date(aluno.dataNascimento).getDate())
+      let dataArray = aluno.dataNascimento.toString().split('/')
+      let dataParseada = new Date(dataArray[1]+"/"+dataArray[0]+"/"+dataArray[2])
+
+      if (new Date().getMonth() + 1 < new Date(dataParseada).getMonth() ||
+          (new Date().getMonth() + 1 == new Date(dataParseada).getMonth() + 1 &&
+              new Date().getDate() < new Date(dataParseada).getDate())
       ) {
-        setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear() - 1 + " Anos");
+        setIdade(new Date().getFullYear() - new Date(dataParseada).getFullYear() - 1 + " Anos");
       } else {
-        setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear() + " Anos");
+        setIdade(new Date().getFullYear() - new Date(dataParseada).getFullYear() + " Anos");
       }
     }
   });
@@ -106,14 +109,14 @@ function Tables() {
                         isOptionEqualToValue={(option, value) => option ? value : ""}
                         onChange={(e, value) => {
                           if (value) {
-                            console.log(value);
                             setAluno(value);
                           }
                         }}
                         renderInput={(params) =>
                           <TextField
                             {...params}
-                            label="Digite o nome do(a) aluno(a)"/>}
+                            label="Digite o nome do(a) aluno(a)"
+                          />}
                       />
                     </MDBox>
                   </Grid>
@@ -158,7 +161,7 @@ function Tables() {
                       Fone (63) 3571-5751
                     </MDTypography>
                   </Grid>
-                  <MDBox p={3} pb={1}>
+                  <MDBox p={1} pb={1}>
                     <Grid container justifyContent='center' alignItems="center" spacing={1} mr={2} ml={2}>
                       <Grid>
                         <MDTypography mb={0} variant="h5" color="dark" textTransform="uppercase" sx={{textAlign: 'center'}}>
@@ -169,7 +172,7 @@ function Tables() {
                   </MDBox>
                   </Grid>
                 </MDBox>
-                <MDBox p={1} pb={3} ml={3} mr={3}>
+                <MDBox p={1} pb={1} ml={3} mr={3}>
                 <Grid container justifyContent='inherit' spacing={1} mr={2} ml={2}>
                   <Grid item xs={12} md={12}>
                     <MDTypography fontSize="0.8rem" mb={1} variant="h6" color="dark">

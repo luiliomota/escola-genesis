@@ -27,6 +27,7 @@ public class AlunoForm {
     private Long anoLetivo;
     private String anoInicial;
     private String situacao;
+    private String status;
     private String turma;
     private String turno;
     private Long idPai;
@@ -178,5 +179,9 @@ public class AlunoForm {
 
     public String getObservacao() {
         return observacao;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

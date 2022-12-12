@@ -26,6 +26,7 @@ public class AlunoDto {
     private Long anoLetivo;
     private String anoInicial;
     private String situacao;
+    private String status;
     private String turma;
     private String turno;
     private String nomePai;
@@ -91,6 +92,7 @@ public class AlunoDto {
         this.anoLetivo = aluno.getAnoLetivo();
         this.anoInicial = aluno.getAnoInicial();
         this.situacao = aluno.getSituacao();
+        this.status = aluno.getStatus();
         this.turma = aluno.getTurma();
         this.turno = aluno.getTurno();
         if(aluno.getPai() == null){
@@ -565,5 +567,13 @@ public class AlunoDto {
 
     public void setEmailResponsavelContrato(String emailResponsavelContrato) {
         this.emailResponsavelContrato = emailResponsavelContrato;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

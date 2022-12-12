@@ -41,7 +41,7 @@ function Tables() {
     const closeErrorSB = () => setErrorSB(false);
 
     useEffect(() => {
-        api.get("/api/aluno")
+        api.get("/api/paciente")
             .then((response) => {
                 setListaPacientes(response.data.content);
             })

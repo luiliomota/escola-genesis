@@ -87,7 +87,7 @@ function Tables() {
   );
 
   function handleSubmit() {
-    api.post("/api/aluno", paciente)
+    api.post("/api/paciente", paciente)
         .then((res) => {
             console.table(res);
             if (res.status == 201) {

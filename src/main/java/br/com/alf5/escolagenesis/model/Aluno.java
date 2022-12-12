@@ -21,6 +21,7 @@ public class Aluno {
     private Long anoLetivo;
     private String anoInicial;
     private String situacao;
+    private String status = "MATRICULADO";
     private String turma;
     private String turno;
     @OneToOne
@@ -258,5 +259,13 @@ public class Aluno {
 
     public void setDataContrato(LocalDate dataContrato) {
         this.dataContrato = dataContrato;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

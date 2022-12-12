@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 
-import {useEffect, useState} from "react";
-
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -10,78 +8,67 @@ import Card from "@mui/material/Card";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDSnackbar from "components/MDSnackbar";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
+import DataTable from "examples/Tables/DataTable";
 
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
-
-import api from "api";
-import {Autocomplete, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
-import InputMask from "react-input-mask";
+// Data
+import authorsTableData from "layouts/secretaria/cadastroResponsavel/data/authorsTableData";
+import MDInput from "../../../components/MDInput";
+import { useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import MDButton from "../../../components/MDButton";
+import MDSnackbar from "../../../components/MDSnackbar";
+import api from "../../../api";
+import {Navigate, useNavigate} from "react-router-dom";
 
 function Tables() {
-
-    const [responsavel, setResponsavel] = useState({
-        dataCadastro: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
-        nome: "",
-        telefone: "",
-        sexo: "",
-        profissao: "",
-        email: "",
-        localTrabalho: "",
-        telefoneTrabalho: "",
-        cpf: "",
-        rg: "",
-        estadoCivil: "",
-        nacionalidade: "",
-    });
-    const [listaResponsaveis, setListaResponsaveis] = useState([]);
-    const [listaEstadoCivil, setListaEstadoCivil] = useState([]);
-    const [listaNacionalidade, setListaNacionalidade] = useState([]);
-
+    const navigate = useNavigate();
+  const { columns, rows, filtro, idResponsavel, openDialog, setOpenDialog, setLista, setListaFiltro } = authorsTableData();
+  const [searchText, setSearchText] = useState("");
 
     const [successSB, setSuccessSB] = useState(false);
+    const [content, setContentSuccessSB] = useState("");
     const [errorSB, setErrorSB] = useState(false);
-    const openSuccessSB = () => setSuccessSB(true);
+    const handleCloseDialog = () => setOpenDialog(false);
+    const openSuccessSB = (content) => {
+        setSuccessSB(true);
+        setContentSuccessSB(content);
+    };
     const closeSuccessSB = () => setSuccessSB(false);
     const openErrorSB = () => setErrorSB(true);
     const closeErrorSB = () => setErrorSB(false);
 
-    useEffect(() => {
-        api.get("/api/responsavel?size=500")
-            .then((response) => {
-                setListaResponsaveis(response.data.content);
-            })
-            .catch((error) => console.error(error))
-    }, []);
-
-    useEffect(() => {
-        api.get("api/estadocivil")
-            .then((response) => {
-                setListaEstadoCivil(response.data.content);
-            })
-            .catch((error) => console.error(error))
-    },[]);
-
-    useEffect( () => {
-        api.get("/api/nacionalidade")
-            .then((response) => {
-                setListaNacionalidade(response.data.content);
-            })
-            .catch((error) => console.error(error))
-    },[]);
+    const renderDialog = (
+        <Dialog
+            open={openDialog}
+            onClose={handleCloseDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+        >
+            <DialogTitle id="alert-dialog-title">
+                {"Confirmar exclusão?"}
+            </DialogTitle>
+            <DialogActions>
+                <MDButton onClick={handleCloseDialog}>Cancelar</MDButton>
+                <MDButton onClick={handleDeleteSubmit} autoFocus>
+                    Sim
+                </MDButton>
+            </DialogActions>
+        </Dialog>
+    );
 
     const renderSuccessSB = (
         <MDSnackbar
             color="success"
             icon="check"
             title="Sucesso!"
-            content="responsavel salvo com sucesso."
+            content={content}
             dateTime=""
             open={successSB}
             onClose={closeSuccessSB}
@@ -104,13 +91,13 @@ function Tables() {
         />
     );
 
-    function handleSubmit() {
-        api.post("/api/responsavel", responsavel)
+    function handleDeleteSubmit() {
+        api.delete((`/api/responsavel/${idResponsavel}`))
             .then((res) => {
-                console.table(res);
-                if (res.status == 201) {
-                    openSuccessSB();
-                    resetForm();
+                if(res.status === 200){
+                    openSuccessSB("Responsavel excluido com sucesso");
+                    setOpenDialog(false);
+                    atualizarLista();
                 }
             }).catch((error) => {
             openErrorSB();
@@ -118,271 +105,82 @@ function Tables() {
         });
     }
 
-    function resetForm() {
-        setResponsavel({
-            dataCadastro: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
-            nome: "",
-            telefone: "",
-            sexo: "",
-            profissao: "",
-            email: "",
-            localTrabalho: "",
-            telefoneTrabalho: "",
-            cpf: "",
-            rg: "",
-            estadoCivil: "",
-            nacionalidade: "",
-        });
+    function atualizarLista(){
+        api.get("/api/responsavel?size=1000")
+            .then((response) => {
+                setLista(response.data.content);
+                setListaFiltro(response.data.content);
+            })
+            .catch((error) => console.error(error));
     }
 
-    return (
-        <DashboardLayout>
-            <DashboardNavbar/>
-            <MDBox pt={6} pb={3}>
-                {renderSuccessSB}
-                {renderErrorSB}
-                <Grid container spacing={6}>
-                    <Grid item xs={12}>
-                        <Card>
-                            <MDBox
-                                mx={2}
-                                mt={-3}
-                                py={3}
-                                px={2}
+  return (
+    <DashboardLayout>
+      <DashboardNavbar />
+      <MDBox pt={6} pb={3}>
+          {renderSuccessSB}
+          {renderErrorSB}
+          {renderDialog}
+        <Grid container spacing={6}>
+          <Grid item xs={12}>
+            <Card>
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="dark"
+                borderRadius="lg"
+                coloredShadow="secondary"
+              >
+                <MDTypography variant="h6" color="white">
+                  Pai/Mãe/Responsavel:
+                </MDTypography>
+              </MDBox>
+                <MDBox p={3} pb={3}>
+                    <Grid container justifyContent='interit' spacing={1}>
+                        <Grid item xs={12} md={3}>
+                            <MDButton
+                                fullWidth
                                 variant="gradient"
-                                bgColor="dark"
-                                borderRadius="lg"
-                                coloredShadow="secondary"
-                            >
-                                <MDTypography textTransform="uppercase" variant="h6" color="white">
-                                    Cadastro Pai/Mãe/Responsável
-                                </MDTypography>
-                            </MDBox>
-                            <MDBox p={3} pb={3}>
-                                <Grid container justifyContent='inherit' spacing={1}>
-                                    {/*Identificação*/}
-                                    <Grid item xs={12} md={12}>
-                                        <MDTypography mb={1} variant="h6" color="dark">
-                                            Identificação
-                                        </MDTypography>
-                                    </Grid>
-
-                                    <Grid item xs={12} md={5}>
-                                        <MDBox mb={1}>
-                                            <MDInput
-                                                fullWidth
-                                                label="Nome"
-                                                type="text"
-                                                // multiline rows={5}
-                                                value={responsavel.nome}
-                                                onChange={(e) => setResponsavel({
-                                                    ...responsavel,
-                                                    nome: e.target.value
-                                                })}
-                                            />
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={2}>
-                                        <MDBox mb={1}>
-                                            <InputMask
-                                                mask="(99) 99999-9999"
-                                                value={responsavel.telefone}
-                                                onChange={(e) => setResponsavel({
-                                                ...responsavel,
-                                                telefone: e.target.value
-                                                })}
-                                                >
-                                                {() =>
-                                                    <TextField
-                                                        fullWidth
-                                                        label="Telefone"
-                                                    />
-                                                }
-                                            </InputMask>
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={2}>
-                                        <MDBox mb={1}>
-                                            <InputMask
-                                                mask="999.999.999-99"
-                                                value={responsavel.cpf}
-                                                onChange={(e) => setResponsavel({
-                                                    ...responsavel,
-                                                    cpf: e.target.value
-                                                })}
-                                            >
-                                                { () =>
-                                                    <TextField
-                                                        fullWidth
-                                                        label="CPF"
-                                                    />
-                                                }
-                                            </InputMask>
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={3}>
-                                        <MDBox mb={1}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="RG"
-                                                value={responsavel.rg}
-                                                onChange={(e) => setResponsavel({
-                                                    ...responsavel,
-                                                    rg: e.target.value
-                                                })}
-                                            />
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={12}>
-                                            <MDBox mb={1}>
-                                                <FormControl fullWidth>
-                                                    <FormLabel style={{fontSize:"1rem"}} id="select-sexo-label">Sexo</FormLabel>
-                                                    <RadioGroup
-                                                        row
-                                                        aria-labelledby="select-sexo-label"
-                                                        name="select-sexo-radio-group"
-                                                        value={responsavel.sexo}
-                                                        onChange={(e) => setResponsavel({...responsavel, sexo: e.target.value})}
-                                                    >
-                                                        <FormControlLabel value="Masculino" control={<Radio />} label="Masculino" />
-                                                        <FormControlLabel value="Feminino" control={<Radio />} label="Feminino" />
-                                                    </RadioGroup>
-                                                </FormControl>
-                                           </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={4}>
-                                        <MDBox mb={1}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="Email"
-                                                value={responsavel.email}
-                                                onChange={(e) => setResponsavel({
-                                                    ...responsavel,
-                                                    email: e.target.value
-                                                })}
-                                            />
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={4}>
-                                        <MDBox mb={1}>
-                                            <Autocomplete
-                                                options={listaEstadoCivil}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
-                                                onChange={(e, value) => {
-                                                    if (value) {
-                                                        setResponsavel({...responsavel, estadoCivil: value.nome});
-                                                    } else {
-                                                        setResponsavel({...responsavel, estadoCivil: ""});
-                                                    }
-                                                }}
-                                                renderInput={(params) =>
-                                                    <TextField
-                                                        {...params}
-                                                        label="Estado Civil"/>}
-                                            />
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={4}>
-                                        <MDBox mb={4}>
-                                            <Autocomplete
-                                                options={listaNacionalidade}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
-                                                onChange={(e, value) => {
-                                                    if (value) {
-                                                        setResponsavel({...responsavel, nacionalidade: value.nome});
-                                                    } else {
-                                                        setResponsavel({...responsavel, nacionalidade: ""});
-                                                    }
-                                                }}
-                                                renderInput={(params) =>
-                                                    <TextField
-                                                        {...params}
-                                                        label="Nacionalidade"/>}
-                                            />
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={4}>
-                                        <MDBox mb={1}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="Profissão"
-                                                value={responsavel.profissao}
-                                                onChange={(e) => setResponsavel({
-                                                    ...responsavel,
-                                                    profissao: e.target.value
-                                                })}
-                                            />
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <MDBox mb={1}>
-                                            <MDInput
-                                                fullWidth
-                                                type="text"
-                                                label="Local de trabalho"
-                                                value={responsavel.localTrabalho}
-                                                onChange={(e) => setResponsavel({
-                                                    ...responsavel,
-                                                    localTrabalho: e.target.value
-                                                })}
-                                            />
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={2}>
-                                        <MDBox mb={1}>
-                                            <InputMask
-                                                mask="(99) 99999-9999"
-                                                value={responsavel.telefoneTrabalho}
-                                                onChange={(e) => setResponsavel({
-                                                    ...responsavel,
-                                                    telefoneTrabalho: e.target.value
-                                                })}
-                                                >
-                                                { () =>
-                                                    <TextField
-                                                    fullWidth
-                                                    label="Telefone Trabalho"
-                                                    />
-                                                }
-                                            </InputMask>
-                                        </MDBox>
-                                    </Grid>
-
-                                </Grid>
-
-                                    <Grid mt={6} container justifyContent='inherit' spacing={2}>
-                                    <Grid item xs={12} md={3}>
-                                        <MDButton
-                                            fullWidth
-                                            variant="gradient"
-                                            color="dark"
-                                            onClick={handleSubmit}>
-                                            Salvar
-                                        </MDButton>
-                                    </Grid>
-                                    <Grid item xs={12} md={3}>
-                                        <MDButton
-                                            fullWidth
-                                            color="error"
-                                            variant="outlined"
-                                            onClick={resetForm}>
-                                            Limpar
-                                        </MDButton>
-                                    </Grid>
-                                </Grid>
-                            </MDBox>
-                        </Card>
+                                color="dark"
+                                onClick={() => navigate(`/secretaria/cadastroResponsavel/novo`)}                                // onClick={navigate("/secretaria/cadastroResponsavel/novo")}
+                                >
+                                Novo
+                            </MDButton>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </MDBox>
-            <Footer/>
-        </DashboardLayout>
-    );
+                </MDBox>
+                <MDBox pt={3}>
+                <MDBox px={2}>
+                  <MDInput
+                    fullWidth
+                    type="text"
+                    label="Pesquisar (nome)"
+                    value={searchText}
+                    onChange={e => {
+                        setSearchText(e.target.value);
+                        filtro(e.target.value);
+                      }
+                    }
+                  />
+                </MDBox>
+                <DataTable
+                  table={{ columns, rows }}
+                  isSorted={false}
+                  entriesPerPage={false}
+                  showTotalEntries={true}
+                  noEndBorder
+                />
+              </MDBox>
+            </Card>
+          </Grid>
+        </Grid>
+      </MDBox>
+      <Footer />
+    </DashboardLayout>
+  );
 }
 
 export default Tables;

@@ -79,7 +79,7 @@ function Tables() {
       })
       .catch((error) => console.error(error));
 
-    api.get("/api/aluno")
+    api.get("/api/paciente")
       .then((response) => {
         setListaPacientes(response.data.content)
       })
