@@ -30,8 +30,10 @@ import DirecaoComparador from "layouts/direcao/comparador";
 import Secretaria from "layouts/secretaria";
 import SecretariaCadastroResponsavel from "layouts/secretaria/cadastroResponsavel";
 import SecretariaCadastroResponsavelNovo from "layouts/secretaria/cadastroResponsavel/novo";
+import SecretariaCadastroResponsavelModificar from "layouts/secretaria/cadastroResponsavel/modificar";
 import SecretariaCadastroAluno from "layouts/secretaria/cadastroAluno";
 import SecretariaCadastroAlunoNovo from "layouts/secretaria/cadastroAluno/novo";
+import SecretariaCadastroAlunoModificar from "layouts/secretaria/cadastroAluno/modificar";
 import SecretariaRequerimentoMatricula from "layouts/secretaria/requerimentoMatricula";
 import SecretariaContrato from "layouts/secretaria/contrato";
 import SecretariaAtualizar from "layouts/secretaria/atualizar";
@@ -132,6 +134,16 @@ const routes = [
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
+    // type: "collapseCadastroSecretaria",
+    // name: "Aluno(a)",
+    key: "secretaria/cadastroresponsavel/modificar",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/cadastroresponsavel/modificar",
+    component: <SecretariaCadastroResponsavelModificar />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
     type: "collapseCadastroSecretaria",
     name: "Aluno(a)",
     key: "secretaria/cadastroaluno",
@@ -148,6 +160,16 @@ const routes = [
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/cadastroaluno/novo",
     component: <SecretariaCadastroAlunoNovo />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    // type: "collapseCadastroSecretaria",
+    // name: "Aluno(a)",
+    key: "secretaria/cadastroaluno/modificar",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/cadastroaluno/modificar/:id",
+    component: <SecretariaCadastroAlunoModificar />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },

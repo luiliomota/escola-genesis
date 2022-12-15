@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 
-import {useState, useEffect, useContext} from "react";
-
-import { Link } from "@mui/material";
-import { Edit, Compare, Delete } from "@mui/icons-material";
+import {useContext, useEffect, useState} from "react";
+import {Edit} from "@mui/icons-material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -13,7 +11,7 @@ import MDBadge from "components/MDBadge";
 
 import api from "api";
 import IconButton from "@mui/material/IconButton";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Context} from "../../../../context/auth";
 
 export default function data() {
@@ -70,8 +68,8 @@ export default function data() {
                 </MDBox>
             ),
             acao: (
-                <>
-                    <IconButton component="a" onClick={() => navigate(`/aluno/atualizar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
+        <>
+                    <IconButton component="a" onClick={() => navigate(`/secretaria/cadastroaluno/modificar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
                         <Edit fontSize="medium" />
                     </IconButton>
                     {/*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}

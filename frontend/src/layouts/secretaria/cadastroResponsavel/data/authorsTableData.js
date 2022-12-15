@@ -71,7 +71,7 @@ export default function data() {
             // ),
             acao: (
                 <>
-                    <IconButton component="a" onClick={() => navigate(`/responsavel/atualizar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
+                    <IconButton component="a" onClick={() => navigate(`/secretaria/cadastroresponsavel/modificar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
                         <Edit fontSize="medium" />
                     </IconButton>
                     {/*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
