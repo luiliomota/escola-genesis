@@ -34,6 +34,7 @@ import SecretariaCadastroResponsavelModificar from "layouts/secretaria/cadastroR
 import SecretariaCadastroAluno from "layouts/secretaria/cadastroAluno";
 import SecretariaCadastroAlunoNovo from "layouts/secretaria/cadastroAluno/novo";
 import SecretariaCadastroAlunoModificar from "layouts/secretaria/cadastroAluno/modificar";
+import SecretariaCadastroAlunoAtualizar from "layouts/secretaria/cadastroAluno/atualizar";
 import SecretariaRequerimentoMatricula from "layouts/secretaria/requerimentoMatricula";
 import SecretariaContrato from "layouts/secretaria/contrato";
 import SecretariaAtualizar from "layouts/secretaria/atualizar";
@@ -170,6 +171,14 @@ const routes = [
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/cadastroaluno/modificar/:id",
     component: <SecretariaCadastroAlunoModificar />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    key: "secretaria/aluno/atualizar",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/aluno/atualizar/:idAluno",
+    component: <SecretariaCadastroAlunoAtualizar />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
