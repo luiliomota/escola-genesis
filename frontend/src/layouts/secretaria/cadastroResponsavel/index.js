@@ -157,6 +157,7 @@ function Tables() {
                   <MDInput
                     fullWidth
                     type="text"
+                    InputLabelProps={{shrink:true}}
                     label="Pesquisar (nome)"
                     value={searchText}
                     onChange={e => {

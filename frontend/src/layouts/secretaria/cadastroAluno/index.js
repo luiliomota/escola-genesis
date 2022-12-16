@@ -156,6 +156,7 @@ function Tables() {
                 <MDBox px={2}>
                   <MDInput
                     fullWidth
+                    InputLabelProps={{shrink:true}}
                     type="text"
                     label="Pesquisar (nome)"
                     value={searchText}

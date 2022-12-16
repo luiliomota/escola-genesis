@@ -182,6 +182,7 @@ function Tables() {
                                         <MDBox mb={1}>
                                             <MDInput
                                                 fullWidth
+                                                InputLabelProps={{shrink:true}}
                                                 label="Nome"
                                                 type="text"
                                                 // multiline rows={5}
@@ -206,6 +207,7 @@ function Tables() {
                                                 {() =>
                                                     <TextField
                                                         fullWidth
+                                                        InputLabelProps={{shrink:true}}
                                                         label="Telefone"
                                                     />
                                                 }
@@ -225,6 +227,7 @@ function Tables() {
                                                 { () =>
                                                     <TextField
                                                         fullWidth
+                                                        InputLabelProps={{shrink:true}}
                                                         label="CPF"
                                                     />
                                                 }
@@ -235,6 +238,7 @@ function Tables() {
                                         <MDBox mb={1}>
                                             <MDInput
                                                 fullWidth
+                                                InputLabelProps={{shrink:true}}
                                                 type="text"
                                                 label="RG"
                                                 value={responsavel.rg}
@@ -266,6 +270,7 @@ function Tables() {
                                         <MDBox mb={1}>
                                             <MDInput
                                                 fullWidth
+                                                InputLabelProps={{shrink:true}}
                                                 type="text"
                                                 label="Email"
                                                 value={responsavel.email}
@@ -292,6 +297,7 @@ function Tables() {
                                                 renderInput={(params) =>
                                                     <TextField
                                                         {...params}
+                                                        InputLabelProps={{shrink:true}}
                                                         label="Estado Civil"/>}
                                             />
                                         </MDBox>
@@ -312,6 +318,7 @@ function Tables() {
                                                 renderInput={(params) =>
                                                     <TextField
                                                         {...params}
+                                                        InputLabelProps={{shrink:true}}
                                                         label="Nacionalidade"/>}
                                             />
                                         </MDBox>
@@ -320,6 +327,7 @@ function Tables() {
                                         <MDBox mb={1}>
                                             <MDInput
                                                 fullWidth
+                                                InputLabelProps={{shrink:true}}
                                                 type="text"
                                                 label="Profissão"
                                                 value={responsavel.profissao}
@@ -334,6 +342,7 @@ function Tables() {
                                         <MDBox mb={1}>
                                             <MDInput
                                                 fullWidth
+                                                InputLabelProps={{shrink:true}}
                                                 type="text"
                                                 label="Local de trabalho"
                                                 value={responsavel.localTrabalho}
@@ -357,6 +366,7 @@ function Tables() {
                                                 { () =>
                                                     <TextField
                                                     fullWidth
+                                                    InputLabelProps={{shrink:true}}
                                                     label="Telefone Trabalho"
                                                     />
                                                 }

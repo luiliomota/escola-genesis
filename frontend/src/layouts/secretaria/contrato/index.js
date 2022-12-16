@@ -94,6 +94,7 @@ function Tables() {
                                             renderInput={(params) =>
                                               <TextField
                                                 {...params}
+                                                InputLabelProps={{shrink:true}}
                                                 label="Digite o nome do(a) aluno(a)"/>}
                                           />
                                       </MDBox>
