@@ -116,27 +116,6 @@ function Tables() {
     const openErrorSB = () => setErrorSB(true);
     const closeErrorSB = () => setErrorSB(false);
 
-    useEffect(() => {
-        api.get(`/api/aluno/${id}`)
-            .then((response) => {
-                aluno.dataCriacao === undefined && setAluno(response.data);
-            })
-            .catch((error) => console.error(error));
-    });
-
-        //Cálculo de idade
-    useEffect(() => {
-        if (new Date().getMonth()+1 < new Date(aluno.dataNascimento).getMonth() ||
-            (new Date().getMonth()+1 == new Date(aluno.dataNascimento).getMonth()+1 &&
-            new Date().getDate() < new Date(aluno.dataNascimento).getDate())
-        ){
-            setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear() - 1);
-        }
-        else {
-            setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear());
-        }
-    });
-
     useEffect( () => {
         api.get("/api/responsavel?size=500")
             .then((response) => {
@@ -207,7 +186,7 @@ function Tables() {
         if (new Date().getMonth()+1 < new Date(aluno.dataNascimento).getMonth() ||
           (new Date().getMonth()+1 == new Date(aluno.dataNascimento).getMonth()+1 &&
             new Date().getDate() < new Date(aluno.dataNascimento).getDate())
-        ){
+        ) {
             setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear() - 1);
         } else {
             setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear());
@@ -351,7 +330,7 @@ function Tables() {
                                         </Grid>
                                     <Grid item xs={12} md={3}>
                                         <MDBox mb={1}>
-                                            <MDInput
+                                            <TextField
                                                 fullWidth
                                                 InputLabelProps={{shrink:true}}
                                                 label="Data de nascimento"
