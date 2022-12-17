@@ -29,6 +29,34 @@ function Tables() {
 
     const { id } = useParams();
 
+    const [aluno, setAluno] = useState({
+        nome: "",
+        dataNascimento: "",
+        dataMatricula: "",
+        sexo: "",
+        naturalidade: "",
+        nacionalidade: "",
+        cuidadoEspecial: "",
+        especificacao: "",
+        cep: "",
+        logradouro: "",
+        cidade: "",
+        estado: "",
+        pais: "",
+        complemento: "",
+        anoLetivo: "",
+        anoInicial: "",
+        situacao: "",
+        turma: "",
+        turno: "",
+        idPai: 0,
+        idMae: 0,
+        idResponsavel: 0,
+        contatoEmergencia1: "",
+        contatoEmergencia2: "",
+        observacao: ""
+    });
+
     const [idade, setIdade] = useState();
     const [uf, setUf] = useState();
     const[listaContatoEmergencia, setListaContatoEmergencia] = useState([
@@ -47,6 +75,7 @@ function Tables() {
         localTrabalho: "",
         telefoneTrabalho: "",
     });
+
     const [mae, setMae] = useState({
         nome: "",
         telefone: "",
@@ -54,6 +83,7 @@ function Tables() {
         localTrabalho: "",
         telefoneTrabalho: "",
     });
+
     const [responsavel, setResponsavel] = useState({
         nome: "",
         telefone: "",
@@ -61,33 +91,7 @@ function Tables() {
         localTrabalho: "",
         telefoneTrabalho: "",
     });
-    const [aluno, setAluno] = useState({
-        // nome: "",
-        // dataNascimento: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
-        // dataMatricula: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
-        // sexo: "",
-        // naturalidade: "",
-        // nacionalidade: "",
-        // cuidadoEspecial: "",
-        // especificacao: "",
-        // cep: "",
-        // logradouro: "",
-        // cidade: "",
-        // estado: "",
-        // pais: "",
-        // complemento: "",
-        // anoLetivo: "",
-        // anoInicial: "",
-        // situacao: "",
-        // turma: "",
-        // turno: "",
-        // idPai: 0,
-        // idMae: 0,
-        // idResponsavel: 0,
-        // contatoEmergencia1: "",
-        // contatoEmergencia2: "",
-        // observacao: "____________________________________________________________________________________________________"
-    });
+
     const [listaAlunos, setListaAlunos] = useState([]);
     const [listaResponsaveis, setListaResponsaveis] = useState([]);
     const [listaResponsaveisContrato, setListaResponsaveisContrato] = useState([]);
@@ -132,14 +136,6 @@ function Tables() {
             setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear());
         }
     });
-
-    useEffect(() => {
-        api.get("/api/aluno")
-            .then((response) => {
-                setListaAlunos(response.data.content);
-            })
-            .catch((error) => console.error(error))
-    }, []);
 
     useEffect( () => {
         api.get("/api/responsavel?size=500")
@@ -197,6 +193,26 @@ function Tables() {
             })
             .catch((error) => console.error(error))
     },[]);
+
+    useEffect(() => {
+        api.get(`/api/aluno/${id}`)
+          .then((response) => {
+              aluno.dataCriacao === undefined && setAluno(response.data);
+          })
+          .catch((error) => console.error(error));
+    });
+
+    //Cálculo de idade
+    useEffect(() => {
+        if (new Date().getMonth()+1 < new Date(aluno.dataNascimento).getMonth() ||
+          (new Date().getMonth()+1 == new Date(aluno.dataNascimento).getMonth()+1 &&
+            new Date().getDate() < new Date(aluno.dataNascimento).getDate())
+        ){
+            setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear() - 1);
+        } else {
+            setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear());
+        }
+    });
 
     function localizaMunicipio (idEstado) {
         api.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idEstado}/municipios`)
@@ -284,66 +300,6 @@ function Tables() {
             openErrorSB();
             console.error(error)
         });
-    }
-
-    function resetForm() {
-        setAluno({
-            // nome: "",
-            // dataNascimento: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
-            // dataMatricula: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
-            // sexo: "",
-            // naturalidade: "",
-            // nacionalidade: "",
-            // cuidadoEspecial: "",
-            // especificacao: "",
-            // cep: "",
-            // logradouro: "",
-            // cidade: "",
-            // estado: "",
-            // pais: "",
-            // complemento: "",
-            // anoLetivo: "",
-            // anoInicial: "",
-            // situacao: "",
-            // turma: "",
-            // turno: "",
-            // idPai: 0,
-            // idMae: 0,
-            // idResponsavel: 0,
-            // contatoEmergencia1: "",
-            // contatoEmergencia2: "",
-            // observacao: "____________________________________________________________________________________________________"
-        });
-        setListaEndereco({
-            cep: "",
-            logradouro: "",
-            localidade: "",
-            uf: "",
-        });
-        setPai({
-            nome: "",
-            telefone: "",
-            profissao: "",
-            localTrabalho: "",
-            telefoneTrabalho: "",
-        });
-        setMae ({
-            nome: "",
-            telefone: "",
-            profissao: "",
-            localTrabalho: "",
-            telefoneTrabalho: "",
-        });
-        setResponsavel ({
-            nome: "",
-            telefone: "",
-            profissao: "",
-            localTrabalho: "",
-            telefoneTrabalho: "",
-        });
-        setListaResponsaveisContrato([]);
-        setIdade("");
-        setUf("");
     }
 
     return (
@@ -885,30 +841,37 @@ function Tables() {
                                     <Grid item xs={12} md={3}>
                                         <MDBox mb={4}>
                                             <Autocomplete
-                                                options={listaAnoInicial}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
-                                                onChange={(e, value) => {
-                                                    if (value) {
-                                                        setAluno({...aluno, anoInicial: value.nome});
-                                                    } else {
-                                                        setAluno({...aluno, anoInicial: ""});
-                                                    }
-                                                }}
-                                                renderInput={(params) =>
-                                                    <TextField
-                                                        {...params}
-                                                        InputLabelProps={{shrink:true}}
-                                                        label="Ano inicial"/>}
+                                              value={aluno.anoInicial}
+                                              options={listaAnoInicial}
+                                              getOptionLabel={(option) => {
+                                                  const anoInicial = listaAnoInicial.find(item => item.nome === option);
+                                                  return option ? (anoInicial ? anoInicial.nome : option.nome) : "";
+                                              }}
+                                              isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
+                                              onChange={(e, value) => {
+                                                  if (value) {
+                                                      setAluno({...aluno, anoInicial: value.nome});
+                                                  } else {
+                                                      setAluno({...aluno, anoInicial: ""});
+                                                  }
+                                              }}
+                                              renderInput={(params) =>
+                                                <TextField
+                                                  {...params}
+                                                  label="Ano inicial"/>}
                                             />
                                         </MDBox>
                                     </Grid>
                                     <Grid item xs={12} md={3}>
                                         <MDBox mb={4}>
                                             <Autocomplete
+                                                value={aluno.situacao}
                                                 options={listaSituacao}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                getOptionLabel={(option) => {
+                                                    const situacao = listaSituacao.find(item => item.nome === option);
+                                                    return option ? (situacao ? situacao.nome : option.nome) : "";
+                                                }}
+                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
                                                         setAluno({...aluno, situacao: value.nome});
@@ -919,17 +882,21 @@ function Tables() {
                                                 renderInput={(params) =>
                                                     <TextField
                                                         {...params}
-                                                        InputLabelProps={{shrink:true}}
-                                                        label="Situação"/>}
+                                                        label="Situação" />
+                                                }
                                             />
                                         </MDBox>
                                     </Grid>
                                     <Grid item xs={12} md={3}>
                                         <MDBox mb={4}>
                                             <Autocomplete
+                                                value={aluno.turma}
                                                 options={listaTurma}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                getOptionLabel={(option) => {
+                                                    const turma = listaTurma.find(item => item.nome === option);
+                                                    return option ? (turma ? turma.nome : option.nome) : "";
+                                                }}
+                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
                                                         setAluno({...aluno, turma: value.nome});
@@ -940,17 +907,21 @@ function Tables() {
                                                 renderInput={(params) =>
                                                     <TextField
                                                         {...params}
-                                                        InputLabelProps={{shrink:true}}
-                                                        label="Turma"/>}
+                                                        label="Turma" />
+                                                }
                                             />
                                         </MDBox>
                                     </Grid>
                                     <Grid item xs={12} md={3}>
                                         <MDBox mb={4}>
                                             <Autocomplete
+                                                value={aluno.turno}
                                                 options={listaTurno}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                getOptionLabel={(option) => {
+                                                    const turno = listaTurno.find(item => item.nome === option);
+                                                    return option ? (turno ? turno.nome : option.nome) : "";
+                                                }}
+                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
                                                         setAluno({...aluno, turno: value.nome});
@@ -961,8 +932,8 @@ function Tables() {
                                                 renderInput={(params) =>
                                                     <TextField
                                                         {...params}
-                                                        InputLabelProps={{shrink:true}}
-                                                        label="Turno"/>}
+                                                        label="Turno" />
+                                                }
                                             />
                                         </MDBox>
                                     </Grid>
@@ -1136,15 +1107,6 @@ function Tables() {
                                             color="dark"
                                             onClick={handleSubmit}>
                                             Salvar
-                                        </MDButton>
-                                    </Grid>
-                                    <Grid item xs={12} md={3}>
-                                        <MDButton
-                                            fullWidth
-                                            color="error"
-                                            variant="outlined"
-                                            onClick={resetForm}>
-                                            Limpar
                                         </MDButton>
                                     </Grid>
                                 </Grid>
