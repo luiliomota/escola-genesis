@@ -34,7 +34,8 @@ function Tables() {
         dataNascimento: "",
         dataMatricula: "",
         sexo: "",
-        naturalidade: "",
+        naturalidadeCidade: "",
+        naturalidadeEstado: "",
         nacionalidade: "",
         cuidadoEspecial: "",
         especificacao: "",
@@ -54,11 +55,13 @@ function Tables() {
         idResponsavel: 0,
         contatoEmergencia1: "",
         contatoEmergencia2: "",
+        nomeEmergencia1: "",
+        nomeEmergencia2: "",
         observacao: ""
     });
 
     const [idade, setIdade] = useState();
-    const [uf, setUf] = useState();
+    const [uf, setUf] = useState([]);
     const[listaContatoEmergencia, setListaContatoEmergencia] = useState([
         {nome:"Pai"},
         {nome:"Mãe"},
@@ -96,7 +99,9 @@ function Tables() {
     const [listaResponsaveis, setListaResponsaveis] = useState([]);
     const [listaResponsaveisContrato, setListaResponsaveisContrato] = useState([]);
     const [listaEstado, setListaEstado] = useState([]);
-    const [listaMunicipio, setListaMunicipio] = useState([]);
+    const [listaMunicipio, setListaMunicipio] = useState([{
+            nome: "",
+        }]);
     const [listaEndereco, setListaEndereco] = useState({
         cep: "",
         logradouro: "",
@@ -115,6 +120,23 @@ function Tables() {
     const closeSuccessSB = () => setSuccessSB(false);
     const openErrorSB = () => setErrorSB(true);
     const closeErrorSB = () => setErrorSB(false);
+
+    useEffect( () => {
+        api.get("/api/unidadeFederativaIbge?size=27")
+            .then((response) => {
+                setListaEstado(response.data.content);
+            })
+            .catch((error) => console.error(error))
+    },[]);
+
+    function localizaMunicipio (sigla) {
+        api.get("/api/municipiosIbge?size=6000")
+            .then((response) => {
+                console.log(response.data.content);
+                setListaMunicipio(response.data.content);
+            })
+            .catch((error) => console.error(error))
+    }
 
     useEffect( () => {
         api.get("/api/responsavel?size=500")
@@ -165,41 +187,39 @@ function Tables() {
             .catch((error) => console.error(error))
     },[]);
 
-    useEffect( () => {
-        api.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados/")
-            .then((response) => {
-                setListaEstado(response.data);
-            })
-            .catch((error) => console.error(error))
-    },[]);
-
-    useEffect(() => {
-        api.get(`/api/aluno/${id}`)
-          .then((response) => {
-              aluno.dataCriacao === undefined && setAluno(response.data);
-          })
-          .catch((error) => console.error(error));
-    });
-
     //Cálculo de idade
     useEffect(() => {
-        if (new Date().getMonth()+1 < new Date(aluno.dataNascimento).getMonth() ||
-          (new Date().getMonth()+1 == new Date(aluno.dataNascimento).getMonth()+1 &&
-            new Date().getDate() < new Date(aluno.dataNascimento).getDate())
-        ) {
-            setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear() - 1);
+        if(aluno.dataNascimento === undefined){
+            setIdade("");
         } else {
-            setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear());
+            let dataArray = aluno.dataNascimento.toString().split('/')
+            let dataParseada = new Date(dataArray[1]+"/"+dataArray[0]+"/"+dataArray[2])
+
+            if (new Date().getMonth() + 1 < new Date(dataParseada).getMonth() ||
+                (new Date().getMonth() + 1 == new Date(dataParseada).getMonth() + 1 &&
+                    new Date().getDate() < new Date(dataParseada).getDate())
+            ) {
+                setIdade(new Date().getFullYear() - new Date(dataParseada).getFullYear() - 1 + " Anos");
+            } else {
+                setIdade(new Date().getFullYear() - new Date(dataParseada).getFullYear() + " Anos");
+            }
         }
     });
 
-    function localizaMunicipio (idEstado) {
-        api.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idEstado}/municipios`)
+    useEffect(() => {
+        api.get(`/api/aluno/${id}`)
             .then((response) => {
-                setListaMunicipio(response.data);
+                if(response.status == 200) {
+                    api.get(`/api/municipiosIbge/porEstado/${response.data.naturalidadeEstado}/?size=-1`)
+                        .then((response) => {
+                            setListaMunicipio(response.data.content);
+                            aluno.dataCadastro === undefined && setAluno(response.data);
+                        })
+                        .catch((error) => console.error(error));
+                }
             })
-            .catch((error) => console.error(error))
-    }
+            .catch((error) => console.error(error));
+    });
 
     function localizaEndereco (e) {
         api.get(`https://viacep.com.br/ws/${e}/json`)
@@ -314,16 +334,13 @@ function Tables() {
                                     </Grid>
                                     <Grid item xs={12} md={4}>
                                         <MDBox mb={1}>
-                                            <TextField
+                                            <MDInput
                                                 fullWidth
                                                 InputLabelProps={{shrink:true}}
                                                 label="Nome"
                                                 type="text"
-                                                // multiline rows={5}
                                                 value={aluno.nome}
-                                                onChange={(e) => setAluno({
-                                                    ...aluno,
-                                                    nome: e.target.value
+                                                onChange={(e) => setAluno({...aluno, nome: e.target.value
                                                 })}
                                         />
                                         </MDBox>
@@ -334,7 +351,7 @@ function Tables() {
                                                 fullWidth
                                                 InputLabelProps={{shrink:true}}
                                                 label="Data de nascimento"
-                                                type="date"
+                                                // type="date"
                                                 value={aluno.dataNascimento}
                                                 onChange={(e) => setAluno({
                                                     ...aluno,
@@ -348,13 +365,15 @@ function Tables() {
                                                 fullWidth
                                                 InputLabelProps={{shrink:true}}
                                                 label="Data de matricula"
-                                                type="date"
-                                                // multiline rows={5}
+                                                // type="date"
                                                 value={aluno.dataMatricula}
-                                                onChange={(e) => setAluno({
-                                                    ...aluno,
-                                                    dataMatricula: e.target.value
-                                                })}
+                                                onChange={(e) => {
+                                                    setAluno({
+                                                        ...aluno,
+                                                        dataMatricula: e.target.value
+                                                    });
+                                                    console.log(e);
+                                                }}
                                             />
                                         </MDBox>
                                     </Grid>
@@ -394,36 +413,48 @@ function Tables() {
                                         </MDTypography>
                                     </Grid>
                                     <Grid item xs={12} md={2}>
-                                        <MDBox mb={1}>
+                                        <MDBox mb={4}>
                                             <Autocomplete
+                                                value={aluno.naturalidadeEstado}
                                                 options={listaEstado}
-                                                getOptionLabel={(option) => option ? option.sigla : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                getOptionLabel={(option) =>
+                                                {
+                                                    const estado = listaEstado.find(item => item.sigla === option);
+                                                    return option ? (estado ? estado.sigla : option.sigla) : "";
+                                                }}
+                                                isOptionEqualToValue={(option, value) => option ? option.sigla === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
-                                                        setUf(value.sigla);
-                                                        localizaMunicipio(value.id);
+                                                        console.log(value);
+                                                        setAluno({...aluno, naturalidadeEstado: value.sigla});
+                                                        localizaMunicipio(value.sigla);
+                                                    } else {
+                                                        setAluno({...aluno, naturalidadeEstado: ""});
                                                     }
                                                 }}
                                                 renderInput={(params) =>
                                                     <TextField
                                                         {...params}
-                                                        InputLabelProps={{shrink:true}}
-                                                        label="Estado"/>}
+                                                        label="UF" />
+                                                }
                                             />
                                         </MDBox>
                                     </Grid>
                                     <Grid item xs={12} md={4}>
                                         <MDBox mb={1}>
                                             <Autocomplete
+                                                value={aluno.naturalidadeCidade}
                                                 options={listaMunicipio}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                getOptionLabel={(option) => {
+                                                    const cidade = listaMunicipio.find(item => item.nome === option);
+                                                    return option ? (cidade ? cidade.nome : option.nome) : "";
+                                                }}
+                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
-                                                        setAluno({...aluno, naturalidade: value.nome+" - "+uf});
+                                                        setAluno({...aluno, naturalidadeCidade: value.nome});
                                                     } else {
-                                                        setAluno({...aluno, naturalidade: ""});
+                                                        setAluno({...aluno, naturalidadeCidade: ""});
                                                     }
                                                 }}
                                                 renderInput={(params) =>
@@ -499,12 +530,11 @@ function Tables() {
                                             <InputMask
                                                 mask="99999999"
                                                 maskChar=""
-                                                onChange={(e) => {
-                                                if(e.target.value.length >= 8){
-                                                    localizaEndereco(e.target.value);
-                                                        }
-                                                    }
-                                                }
+                                                value={aluno.cep}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    cep: e.target.value
+                                                })}
                                             >
                                                 {() =>
                                                     <TextField
@@ -524,6 +554,10 @@ function Tables() {
                                                 type="text"
                                                 label="Logradouro"
                                                 value={aluno.logradouro}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    logradouro: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>
@@ -552,6 +586,10 @@ function Tables() {
                                                 label="Bairro"
                                                 multiline row={5}
                                                 value={aluno.bairro}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    bairro: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>
@@ -563,6 +601,10 @@ function Tables() {
                                                 type="text"
                                                 label="Cidade"
                                                 value={aluno.cidade}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    cidade: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>
@@ -574,6 +616,10 @@ function Tables() {
                                                 type="text"
                                                 label="Estado"
                                                 value={aluno.estado}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    estado: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>
@@ -1100,3 +1146,5 @@ function Tables() {
 }
 
 export default Tables;
+
+

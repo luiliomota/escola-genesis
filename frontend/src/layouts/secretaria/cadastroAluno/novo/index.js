@@ -63,7 +63,8 @@ function Tables() {
         // dataNascimento: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
         // dataMatricula: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
         // sexo: "",
-        // naturalidade: "",
+        // naturalidadeCidade: "",
+        // naturalidadeEstado: "",
         // nacionalidade: "",
         // cuidadoEspecial: "",
         // especificacao: "",
@@ -281,7 +282,8 @@ function Tables() {
             // dataNascimento: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
             // dataMatricula: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
             // sexo: "",
-            // naturalidade: "",
+            // naturalidadeCidade: "",
+            // naturalidadeEstado: "",
             // nacionalidade: "",
             // cuidadoEspecial: "",
             // especificacao: "",
@@ -475,9 +477,11 @@ function Tables() {
                                                 isOptionEqualToValue={(option, value) => option ? value : ""}
                                                 onChange={(e, value) => {
                                                     if (value) {
-                                                        setAluno({...aluno, naturalidade: value.nome+" - "+uf});
+                                                        setAluno({...aluno, naturalidadeCidade: value.nome});
+                                                        setAluno({...aluno, naturalidadeEstado: uf});
                                                     } else {
-                                                        setAluno({...aluno, naturalidade: ""});
+                                                        setAluno({...aluno, naturalidadeCidade: ""});
+                                                        setAluno({...aluno, naturalidadeEstado: ""});
                                                     }
                                                 }}
                                                 renderInput={(params) =>
@@ -578,6 +582,10 @@ function Tables() {
                                                 InputLabelProps={{shrink:true}}
                                                 label="Logradouro"
                                                 value={aluno.logradouro}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    logradouro: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>
@@ -606,6 +614,10 @@ function Tables() {
                                                 label="Bairro"
                                                 multiline row={5}
                                                 value={aluno.bairro}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    bairro: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>
@@ -617,6 +629,10 @@ function Tables() {
                                                 InputLabelProps={{shrink:true}}
                                                 label="Cidade"
                                                 value={aluno.cidade}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    cidade: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>
@@ -628,6 +644,10 @@ function Tables() {
                                                 InputLabelProps={{shrink:true}}
                                                 label="Estado"
                                                 value={aluno.estado}
+                                                onChange={(e) => setAluno({
+                                                    ...aluno,
+                                                    estado: e.target.value
+                                                })}
                                             />
                                         </MDBox>
                                     </Grid>

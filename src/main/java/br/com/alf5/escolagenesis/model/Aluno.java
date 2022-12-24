@@ -12,7 +12,8 @@ public class Aluno {
     private LocalDate dataNascimento;
     private LocalDate dataMatricula;
     private String sexo;
-    private String naturalidade;
+    private String naturalidadeCidade;
+    private String naturalidadeEstado;
     private String nacionalidade;
     private String cuidadoEspecial;
     private String especificacao;
@@ -35,19 +36,23 @@ public class Aluno {
     private LocalDate dataContrato;
     private String contatoEmergencia1;
     private String contatoEmergencia2;
+    private String nomeEmergencia1;
+    private String nomeEmergencia2;
     private String observacao;
 
     public Aluno(String nome, LocalDate dataNascimento, LocalDate dataMatricula, String sexo,
-                 String naturalidade, String nacionalidade, String cuidadoEspecial,
+                 String naturalidadeCidade, String naturalidadeEstado, String nacionalidade, String cuidadoEspecial,
                  String especificacao, Endereco endereco, Long anoLetivo, String anoInicial,
                  String situacao, String turma, String turno, Responsavel pai,
                  Responsavel mae, Responsavel responsavel, Responsavel responsavelContrato,
-                 LocalDate dataContrato, String contatoEmergencia1, String contatoEmergencia2, String observacao) {
+                 LocalDate dataContrato, String contatoEmergencia1, String contatoEmergencia2,
+                 String nomeEmergencia1, String nomeEmergencia2, String observacao) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.dataMatricula = dataMatricula;
         this.sexo = sexo;
-        this.naturalidade = naturalidade;
+        this.naturalidadeCidade = naturalidadeCidade;
+        this.naturalidadeEstado = naturalidadeEstado;
         this.nacionalidade = nacionalidade;
         this.cuidadoEspecial = cuidadoEspecial;
         this.especificacao = especificacao;
@@ -64,6 +69,8 @@ public class Aluno {
         this.dataContrato = dataContrato;
         this.contatoEmergencia1 = contatoEmergencia1;
         this.contatoEmergencia2 = contatoEmergencia2;
+        this.nomeEmergencia1 = nomeEmergencia1;
+        this.nomeEmergencia2 = nomeEmergencia2;
         this.observacao = observacao;
     }
 
@@ -109,12 +116,20 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public String getNaturalidade() {
-        return naturalidade;
+    public String getNaturalidadeCidade() {
+        return naturalidadeCidade;
     }
 
-    public void setNaturalidade(String naturalidade) {
-        this.naturalidade = naturalidade;
+    public void setNaturalidadeCidade(String naturalidade) {
+        this.naturalidadeCidade = naturalidade;
+    }
+
+    public String getNaturalidadeEstado() {
+        return naturalidadeEstado;
+    }
+
+    public void setNaturalidadeEstado(String naturalidadeEstado) {
+        this.naturalidadeEstado = naturalidadeEstado;
     }
 
     public LocalDate getDataMatricula() {
@@ -267,5 +282,21 @@ public class Aluno {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getNomeEmergencia1() {
+        return nomeEmergencia1;
+    }
+
+    public void setNomeEmergencia1(String nomeEmergencia1) {
+        this.nomeEmergencia1 = nomeEmergencia1;
+    }
+
+    public String getNomeEmergencia2() {
+        return nomeEmergencia2;
+    }
+
+    public void setNomeEmergencia2(String nomeEmergencia2) {
+        this.nomeEmergencia2 = nomeEmergencia2;
     }
 }

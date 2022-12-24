@@ -13,7 +13,8 @@ public class AlunoDto {
     private String dataNascimento;
     private String dataMatricula;
     private String sexo;
-    private String naturalidade;
+    private String naturalidadeCidade;
+    private String naturalidadeEstado;
     private String nacionalidade;
     private String cuidadoEspecial;
     private String especificacao;
@@ -57,6 +58,8 @@ public class AlunoDto {
     private String dataContrato;
     private String contatoEmergencia1;
     private String contatoEmergencia2;
+    private String nomeEmergencia1;
+    private String nomeEmergencia2;
     private String observacao;
 
     public AlunoDto(Aluno aluno) {
@@ -70,7 +73,8 @@ public class AlunoDto {
             this.dataMatricula = null;
         else this.dataMatricula = aluno.getDataMatricula().format(formatter);
         this.sexo = aluno.getSexo();
-        this.naturalidade = aluno.getNaturalidade();
+        this.naturalidadeCidade = aluno.getNaturalidadeCidade();
+        this.naturalidadeEstado = aluno.getNaturalidadeEstado();
         this.nacionalidade = aluno.getNacionalidade();
         this.cuidadoEspecial = aluno.getCuidadoEspecial();
         this.especificacao = aluno.getEspecificacao();
@@ -162,6 +166,8 @@ public class AlunoDto {
         else this.dataContrato = aluno.getDataContrato().format(formatter);
         this.contatoEmergencia1 = aluno.getContatoEmergencia1();
         this.contatoEmergencia2 = aluno.getContatoEmergencia2();
+        this.nomeEmergencia1 = aluno.getNomeEmergencia1();
+        this.nomeEmergencia2 = aluno.getNomeEmergencia2();
         this.observacao = aluno.getObservacao();
     }
 
@@ -217,12 +223,20 @@ public class AlunoDto {
         this.sexo = sexo;
     }
 
-    public String getNaturalidade() {
-        return naturalidade;
+    public String getNaturalidadeCidade() {
+        return naturalidadeCidade;
     }
 
-    public void setNaturalidade(String naturalidade) {
-        this.naturalidade = naturalidade;
+    public void setNaturalidadeCidade(String naturalidadeCidade) {
+        this.naturalidadeCidade = naturalidadeCidade;
+    }
+
+    public String getNaturalidadeEstado() {
+        return naturalidadeEstado;
+    }
+
+    public void setNaturalidadeEstado(String naturalidadeEstado) {
+        this.naturalidadeEstado = naturalidadeEstado;
     }
 
     public String getNacionalidade() {
@@ -575,5 +589,21 @@ public class AlunoDto {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getNomeEmergencia1() {
+        return nomeEmergencia1;
+    }
+
+    public void setNomeEmergencia1(String nomeEmergencia1) {
+        this.nomeEmergencia1 = nomeEmergencia1;
+    }
+
+    public String getNomeEmergencia2() {
+        return nomeEmergencia2;
+    }
+
+    public void setNomeEmergencia2(String nomeEmergencia2) {
+        this.nomeEmergencia2 = nomeEmergencia2;
     }
 }

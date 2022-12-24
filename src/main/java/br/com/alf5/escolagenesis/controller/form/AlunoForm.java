@@ -2,11 +2,7 @@ package br.com.alf5.escolagenesis.controller.form;
 
 import br.com.alf5.escolagenesis.model.*;
 import br.com.alf5.escolagenesis.repository.*;
-import net.bytebuddy.asm.Advice;
 
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class AlunoForm {
@@ -14,7 +10,8 @@ public class AlunoForm {
     private LocalDate dataNascimento;
     private LocalDate dataMatricula;
     private String sexo;
-    private String naturalidade;
+    private String naturalidadeCidade;
+    private String naturalidadeEstado;
     private String nacionalidade;
     private String cuidadoEspecial;
     private String especificacao;
@@ -48,6 +45,8 @@ public class AlunoForm {
         Responsavel responsavelContrato = new Responsavel();
         String emergencia1 = null;
         String emergencia2 = null;
+        String emergencia1Nome = null;
+        String emergencia2Nome = null;
         String observacao = "____________________________________________________________________________________________________________________";
         if(idPai == null){pai = null;} else {pai = responsavelRepository.getReferenceById(idPai);}
         if(idMae == null){mae = null;} else {mae = responsavelRepository.getReferenceById(idMae);}
@@ -55,13 +54,16 @@ public class AlunoForm {
         if(idResponsavelContrato == null){responsavelContrato = null;} else {responsavelContrato = responsavelRepository.getReferenceById(idResponsavelContrato);}
         Endereco endereco = new Endereco(this.cep, this.logradouro, this.bairro, this.cidade, this.estado, this.complemento);
         enderecoRepository.save(endereco);
-        if(this.contatoEmergencia1 != null) emergencia1 = this.contatoEmergencia1+" "+this.nomeEmergencia1;
-        if(this.contatoEmergencia2 != null) emergencia2 = this.contatoEmergencia2+" "+this.nomeEmergencia2;
+        if(this.contatoEmergencia1 != null) emergencia1 = this.contatoEmergencia1;
+        if(this.contatoEmergencia2 != null) emergencia2 = this.contatoEmergencia2;
+        if(this.nomeEmergencia1 != null) emergencia1Nome = this.nomeEmergencia1;
+        if(this.nomeEmergencia2 != null) emergencia2Nome = this.nomeEmergencia2;
         if(this.observacao != null) {observacao = this.observacao;}
 
-    Aluno aluno = new Aluno(this.nome, this.dataNascimento, this.dataMatricula, this.sexo, this.naturalidade,
+    Aluno aluno = new Aluno(this.nome, this.dataNascimento, this.dataMatricula, this.sexo, this.naturalidadeCidade, this.naturalidadeEstado,
             this.nacionalidade, this.cuidadoEspecial, this.especificacao, endereco, this.anoLetivo, this.anoInicial, this.situacao,
-            this.turma, this.turno, pai, mae, responsavel, responsavelContrato, dataContrato, emergencia1, emergencia2, observacao);
+            this.turma, this.turno, pai, mae, responsavel, responsavelContrato, dataContrato, emergencia1, emergencia2,
+            emergencia1Nome, emergencia2Nome, observacao);
         return aluno;
 }
 
@@ -81,8 +83,12 @@ public class AlunoForm {
         return sexo;
     }
 
-    public String getNaturalidade() {
-        return naturalidade;
+    public String getNaturalidadeCidade() {
+        return naturalidadeCidade;
+    }
+
+    public String getNaturalidadeEstado() {
+        return naturalidadeEstado;
     }
 
     public String getNacionalidade() {
