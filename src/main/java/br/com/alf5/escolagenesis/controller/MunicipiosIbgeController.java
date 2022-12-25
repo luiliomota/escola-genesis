@@ -38,15 +38,13 @@ public class MunicipiosIbgeController {
     }
 
     //Busca de Municipio por Uf
-//    @GetMapping("/porEstado/{siglaUf}")
-////    @Cacheable(value = "lista_Municipios_uf")
-//    public ResponseEntity<Page<MunicipiosIbgeDto>> municipioPorUf(@PathVariable String siglaUf, Pageable paginacao) {
-//        if (municipiosIbgeRepository.existsBySiglaUf(siglaUf)) {
-//            System.out.println(siglaUf);
-////            Page<MunicipiosIbge> municipiosIbgePorEstado = municipiosIbgeRepository.findBySigla_Uf(siglaUf, paginacao);
-////            System.out.println(municipiosIbgePorEstado);
-////            return ResponseEntity.ok(MunicipiosIbgeDto.converter(municipiosIbgePorEstado));
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
+    @GetMapping("/porEstado/{siglaUf}")
+//    @Cacheable(value = "lista_Municipios_uf")
+    public ResponseEntity<Page<MunicipiosIbgeDto>> municipioPorUf(@PathVariable String siglaUf, Pageable paginacao) {
+        if (municipiosIbgeRepository.existsBySiglaUf(siglaUf)) {
+            Page<MunicipiosIbge> municipiosIbgePorEstado = municipiosIbgeRepository.findBySiglaUf(siglaUf, paginacao);
+            return ResponseEntity.ok(MunicipiosIbgeDto.converter(municipiosIbgePorEstado));
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

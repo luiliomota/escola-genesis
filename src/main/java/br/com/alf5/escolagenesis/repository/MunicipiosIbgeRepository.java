@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MunicipiosIbgeRepository extends JpaRepository<MunicipiosIbge, Long> {
     MunicipiosIbge findByNome(String nome);
-//    Page<MunicipiosIbge> findBySigla_Uf(String siglaUf, Pageable paginacao);
+    Page<MunicipiosIbge> findBySiglaUf(String siglaUf, Pageable paginacao);
     Boolean existsByNome(String nome);
     Boolean existsBySiglaUf(String siglaUf);
 }

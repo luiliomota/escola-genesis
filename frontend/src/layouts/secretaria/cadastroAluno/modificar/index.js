@@ -129,23 +129,13 @@ function Tables() {
             .catch((error) => console.error(error))
     },[]);
 
-    function localizaMunicipio (sigla) {
-        api.get("/api/municipiosIbge?size=6000")
-            .then((response) => {
-                console.log(response.data.content);
-                setListaMunicipio(response.data.content);
-            })
-            .catch((error) => console.error(error))
-    }
-
     useEffect( () => {
-        api.get("/api/responsavel?size=500")
+        api.get("/api/responsavel?size=1500")
             .then((response) => {
                 setListaResponsaveis(response.data.content);
         })
             .catch((error) => console.error(error))
     },[]);
-
 
     useEffect( () => {
         api.get("/api/turno")
@@ -209,17 +199,25 @@ function Tables() {
     useEffect(() => {
         api.get(`/api/aluno/${id}`)
             .then((response) => {
-                if(response.status == 200) {
-                    api.get(`/api/municipiosIbge/porEstado/${response.data.naturalidadeEstado}/?size=-1`)
-                        .then((response) => {
-                            setListaMunicipio(response.data.content);
-                            aluno.dataCadastro === undefined && setAluno(response.data);
+                if(response.status == 200 && aluno.dataCadastro === undefined) {
+                    api.get(`/api/municipiosIbge/porEstado/${response.data.naturalidadeEstado}/?size=1000`)
+                        .then((resp) => {
+                            setListaMunicipio(resp.data.content);
+                            setAluno(response.data);
                         })
                         .catch((error) => console.error(error));
                 }
             })
             .catch((error) => console.error(error));
     });
+
+    function localizaMunicipio (sigla) {
+        api.get(`/api/municipiosIbge/porEstado/${sigla}/?size=1000`)
+            .then((response) => {
+                setListaMunicipio(response.data.content);
+            })
+            .catch((error) => console.error(error))
+    }
 
     function localizaEndereco (e) {
         api.get(`https://viacep.com.br/ws/${e}/json`)
@@ -372,7 +370,6 @@ function Tables() {
                                                         ...aluno,
                                                         dataMatricula: e.target.value
                                                     });
-                                                    console.log(e);
                                                 }}
                                             />
                                         </MDBox>
@@ -425,7 +422,6 @@ function Tables() {
                                                 isOptionEqualToValue={(option, value) => option ? option.sigla === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
-                                                        console.log(value);
                                                         setAluno({...aluno, naturalidadeEstado: value.sigla});
                                                         localizaMunicipio(value.sigla);
                                                     } else {
@@ -468,9 +464,13 @@ function Tables() {
                                     <Grid item xs={12} md={6}>
                                         <MDBox mb={4}>
                                             <Autocomplete
+                                                value={aluno.nacionalidade}
                                                 options={listaNacionalidade}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                getOptionLabel={(option) => {
+                                                    const nacionalidade = listaNacionalidade.find((item) => item.nome === option);
+                                                    return option ? (nacionalidade ? nacionalidade.nome : option.nome) : "";
+                                                }}
+                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
                                                         setAluno({...aluno, nacionalidade: value.nome});
@@ -633,14 +633,20 @@ function Tables() {
                                     <Grid item xs={12} md={6}>
                                         <MDBox mb={1}>
                                             <Autocomplete
+                                                value={aluno.nomePai}
                                                 options={listaResponsaveis}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                getOptionLabel={(option) => {
+                                                    const responsavel = listaResponsaveis.find((item) => item.nome === option);
+                                                    return option ? (responsavel ? responsavel.nome : option.nome) : "";
+                                                }}
+                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
+                                                        setAluno({...aluno, nomePai: value.nome});
                                                         setAluno({...aluno, idPai: value.id});
                                                         apiPai(value.id);
                                                     } else {
+                                                        setAluno({...aluno, nomePai: ""});
                                                         setAluno({...aluno, idPai: ""});
                                                     }
                                                 }}
