@@ -1,10 +1,6 @@
 package br.com.alf5.escolagenesis.controller.form;
 
-import br.com.alf5.escolagenesis.model.EstadoCivil;
 import br.com.alf5.escolagenesis.model.Responsavel;
-import br.com.alf5.escolagenesis.model.Sexo;
-import br.com.alf5.escolagenesis.repository.EstadoCivilRepository;
-import br.com.alf5.escolagenesis.repository.SexoRepository;
 
 public class ResponsavelForm {
 

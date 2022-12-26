@@ -2,19 +2,17 @@
 /* eslint-disable react/function-component-definition */
 
 import {useState, useEffect, useContext} from "react";
+import {useNavigate} from "react-router-dom";
 
-import { Link } from "@mui/material";
-import { Edit, Compare, Delete } from "@mui/icons-material";
+import { Edit } from "@mui/icons-material";
+import IconButton from "@mui/material/IconButton";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
 
-import api from "api";
-import IconButton from "@mui/material/IconButton";
-import {useNavigate, useParams} from "react-router-dom";
 import {Context} from "../../../../context/auth";
+import api from "api";
 
 export default function data() {
     const [idResponsavel, setIdResponsavel] = useState("");
