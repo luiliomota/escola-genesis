@@ -42,7 +42,8 @@ import Coordenacao from "layouts/coordenacao";
 import CoordenacaoNovo from "layouts/coordenacao/novo";
 import CoordenacaoAtualizar from "layouts/coordenacao/atualizar";
 
-import Professor from "layouts/professor";
+import Disciplinas from "layouts/professor";
+import LancarNotas from "layouts/professor/lancarnotas";
 import ProfessorNovo from "layouts/professor/novo";
 import ProfessorAtualizar from "layouts/professor/atualizar";
 
@@ -247,11 +248,20 @@ const routes = [
   },
   {
     type: "collapseProfessor",
-    name: "Exemplo1",
+    name: "Disciplinas",
     key: "professor/todos",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/professor/todos",
-    component: <Professor />,
+    component: <Disciplinas />,
+    isPrivate: true,
+    perfis: ["DIRECAO","PROFESSOR"],
+  },
+  {
+    name: "Disciplinas",
+    key: "professor/lancarnotas",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/disciplina/lancarnotas/:id",
+    component: <LancarNotas />,
     isPrivate: true,
     perfis: ["DIRECAO","PROFESSOR"],
   },
