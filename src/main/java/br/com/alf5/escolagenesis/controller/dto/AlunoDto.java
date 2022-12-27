@@ -31,11 +31,13 @@ public class AlunoDto {
     private String turma;
     private String turno;
     private String nomePai;
+    private Long idPai;
     private String telefonePai;
     private String profissaoPai;
     private String localTrabalhoPai;
     private String contatoTrabalhoPai;
     private String nomeMae;
+    private Long idMae;
     private String telefoneMae;
     private String profissaoMae;
     private String localTrabalhoMae;
@@ -106,6 +108,7 @@ public class AlunoDto {
             this.localTrabalhoPai = null;
             this.contatoTrabalhoPai = null;
         } else {
+            this.idPai = aluno.getPai().getId();
             this.nomePai = aluno.getPai().getNome();
             this.telefonePai = aluno.getPai().getTelefone();
             this.profissaoPai = aluno.getPai().getProfissao();
@@ -119,6 +122,7 @@ public class AlunoDto {
             this.localTrabalhoMae = null;
             this.contatoTrabalhoMae = null;
         } else {
+            this.idMae = aluno.getMae().getId();
             this.nomeMae = aluno.getMae().getNome();
             this.telefoneMae = aluno.getMae().getTelefone();
             this.profissaoMae = aluno.getMae().getProfissao();
@@ -605,5 +609,21 @@ public class AlunoDto {
 
     public void setNomeEmergencia2(String nomeEmergencia2) {
         this.nomeEmergencia2 = nomeEmergencia2;
+    }
+
+    public Long getIdPai() {
+        return idPai;
+    }
+
+    public void setIdPai(Long idPai) {
+        this.idPai = idPai;
+    }
+
+    public Long getIdMae() {
+        return idMae;
+    }
+
+    public void setIdMae(Long idMae) {
+        this.idMae = idMae;
     }
 }
