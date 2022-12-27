@@ -1,13 +1,21 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDInput from "../../../components/MDInput";
+import MDButton from "../../../components/MDButton";
+import MDSnackbar from "../../../components/MDSnackbar";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -16,21 +24,13 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/secretaria/cadastroResponsavel/data/authorsTableData";
-import MDInput from "../../../components/MDInput";
-import { useState } from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogActions from "@mui/material/DialogActions";
-import MDButton from "../../../components/MDButton";
-import MDSnackbar from "../../../components/MDSnackbar";
+import tableData from "layouts/secretaria/responsavel/data";
 import api from "../../../api";
-import {Navigate, useNavigate} from "react-router-dom";
 
 function Tables() {
     const navigate = useNavigate();
-  const { columns, rows, filtro, idResponsavel, openDialog, setOpenDialog, setLista, setListaFiltro } = authorsTableData();
-  const [searchText, setSearchText] = useState("");
+    const { columns, rows, filtro, idResponsavel, openDialog, setOpenDialog, setLista, setListaFiltro } = tableData();
+    const [searchText, setSearchText] = useState("");
 
     const [successSB, setSuccessSB] = useState(false);
     const [content, setContentSuccessSB] = useState("");

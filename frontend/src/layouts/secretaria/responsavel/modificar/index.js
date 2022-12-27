@@ -2,28 +2,27 @@
 /* eslint-disable react/function-component-definition */
 
 import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import {Autocomplete, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDSnackbar from "components/MDSnackbar";
+import MDButton from "components/MDButton";
+import MDInput from "components/MDInput";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
-import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
-
-import api from "api";
-import {Autocomplete, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
 import InputMask from "react-input-mask";
-import {useParams} from "react-router-dom";
+import api from "api";
 
 function Tables() {
 
@@ -43,33 +42,15 @@ function Tables() {
         estadoCivil: "",
         nacionalidade: "",
     });
-    const [listaResponsaveis, setListaResponsaveis] = useState([]);
+
     const [listaEstadoCivil, setListaEstadoCivil] = useState([]);
     const [listaNacionalidade, setListaNacionalidade] = useState([]);
-
-
     const [successSB, setSuccessSB] = useState(false);
     const [errorSB, setErrorSB] = useState(false);
     const openSuccessSB = () => setSuccessSB(true);
     const closeSuccessSB = () => setSuccessSB(false);
     const openErrorSB = () => setErrorSB(true);
     const closeErrorSB = () => setErrorSB(false);
-
-    useEffect(() => {
-        api.get(`/api/responsavel/${id}`)
-            .then((response) => {
-                responsavel.dataCriacao === undefined && setResponsavel(response.data);
-            })
-            .catch((error) => console.error(error));
-    });
-
-    useEffect(() => {
-        api.get("/api/responsavel?size=500")
-            .then((response) => {
-                setListaResponsaveis(response.data.content);
-            })
-            .catch((error) => console.error(error))
-    }, []);
 
     useEffect(() => {
         api.get("api/estadocivil")
@@ -86,6 +67,19 @@ function Tables() {
             })
             .catch((error) => console.error(error))
     },[]);
+
+    useEffect(() => {
+        let isSubscribed = true;
+        api.get(`/api/responsavel/${id}`)
+            .then((response) => {
+                if (isSubscribed) {
+                    setResponsavel(response.data);
+                }
+            })
+            .catch((error) => console.error(error));
+
+        return () => (isSubscribed = false);
+    }, []);
 
     const renderSuccessSB = (
         <MDSnackbar
@@ -116,34 +110,19 @@ function Tables() {
     );
 
     function handleSubmit() {
-        api.post("/api/responsavel", responsavel)
+        api.put(`/api/responsavel/${id}`, responsavel)
             .then((res) => {
                 console.table(res);
-                if (res.status == 201) {
+                if (res.status === 204) {
                     openSuccessSB();
-                    resetForm();
                 }
             }).catch((error) => {
-            openErrorSB();
-            console.error(error)
-        });
+                openErrorSB();
+                console.error(error)
+            });
     }
 
     function resetForm() {
-        setResponsavel({
-            dataCadastro: `${new Date().getFullYear()}-${(new Date().getMonth()+1) < 10 ? '0' : ''}${(new Date().getMonth()+1)}-${new Date().getDate()}`,
-            nome: "",
-            telefone: "",
-            sexo: "",
-            profissao: "",
-            email: "",
-            localTrabalho: "",
-            telefoneTrabalho: "",
-            cpf: "",
-            rg: "",
-            estadoCivil: "",
-            nacionalidade: "",
-        });
     }
 
     return (
@@ -171,7 +150,6 @@ function Tables() {
                             </MDBox>
                             <MDBox p={3} pb={3}>
                                 <Grid container justifyContent='inherit' spacing={1}>
-                                    {/*Identificação*/}
                                     <Grid item xs={12} md={12}>
                                         <MDTypography mb={1} variant="h6" color="dark">
                                             Identificação
@@ -271,7 +249,7 @@ function Tables() {
                                             <MDInput
                                                 fullWidth
                                                 InputLabelProps={{shrink:true}}
-                                                type="text"
+                                                type="email"
                                                 label="Email"
                                                 value={responsavel.email}
                                                 onChange={(e) => setResponsavel({
@@ -284,9 +262,13 @@ function Tables() {
                                     <Grid item xs={12} md={4}>
                                         <MDBox mb={1}>
                                             <Autocomplete
+                                                value={responsavel.estadoCivil}
                                                 options={listaEstadoCivil}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                getOptionLabel={(option) => {
+                                                    const estadoCivil = listaEstadoCivil.find(item => item.nome === option);
+                                                    return option ? (estadoCivil ? estadoCivil.nome : option.nome) : "";
+                                                }}
+                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
                                                         setResponsavel({...responsavel, estadoCivil: value.nome});
@@ -305,9 +287,13 @@ function Tables() {
                                     <Grid item xs={12} md={4}>
                                         <MDBox mb={4}>
                                             <Autocomplete
+                                                value={responsavel.nacionalidade}
                                                 options={listaNacionalidade}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
-                                                isOptionEqualToValue={(option, value) => option ? value : ""}
+                                                getOptionLabel={(option) => {
+                                                    const nacionalidade = listaNacionalidade.find(item => item.nome === option);
+                                                    return option ? (nacionalidade ? nacionalidade.nome : option.nome) : "";
+                                                }}
+                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
                                                     if (value) {
                                                         setResponsavel({...responsavel, nacionalidade: value.nome});
@@ -373,6 +359,26 @@ function Tables() {
                                             </InputMask>
                                         </MDBox>
                                     </Grid>
+                                    <Grid item xs={12} md={2}>
+                                        <MDBox mb={1}>
+                                            <InputMask
+                                                mask="(99) 99999-9999"
+                                                value={responsavel.telefone}
+                                                onChange={(e) => setResponsavel({
+                                                    ...responsavel,
+                                                    telefone: e.target.value
+                                                })}
+                                                >
+                                                { () =>
+                                                    <TextField
+                                                    fullWidth
+                                                    InputLabelProps={{shrink:true}}
+                                                    label="Telefone"
+                                                    />
+                                                }
+                                            </InputMask>
+                                        </MDBox>
+                                    </Grid>
 
                                 </Grid>
 
@@ -392,7 +398,7 @@ function Tables() {
                                             color="error"
                                             variant="outlined"
                                             onClick={resetForm}>
-                                            Limpar
+                                            Excluir
                                         </MDButton>
                                     </Grid>
                                 </Grid>

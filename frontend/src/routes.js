@@ -28,13 +28,12 @@ import DirecaoAtualizar from "layouts/direcao/atualizar";
 import DirecaoComparador from "layouts/direcao/comparador";
 
 import Secretaria from "layouts/secretaria";
-import SecretariaCadastroResponsavel from "layouts/secretaria/cadastroResponsavel";
-import SecretariaCadastroResponsavelNovo from "layouts/secretaria/cadastroResponsavel/novo";
-import SecretariaCadastroResponsavelModificar from "layouts/secretaria/cadastroResponsavel/modificar";
+import SecretariaCadastroResponsavel from "layouts/secretaria/responsavel";
+import SecretariaCadastroResponsavelNovo from "layouts/secretaria/responsavel/novo";
+import SecretariaCadastroResponsavelModificar from "layouts/secretaria/responsavel/modificar";
 import SecretariaCadastroAluno from "layouts/secretaria/cadastroAluno";
 import SecretariaCadastroAlunoNovo from "layouts/secretaria/cadastroAluno/novo";
 import SecretariaCadastroAlunoModificar from "layouts/secretaria/cadastroAluno/modificar";
-import SecretariaCadastroAlunoAtualizar from "layouts/secretaria/cadastroAluno/atualizar";
 import SecretariaRequerimentoMatricula from "layouts/secretaria/requerimentoMatricula";
 import SecretariaContrato from "layouts/secretaria/contrato";
 import SecretariaAtualizar from "layouts/secretaria/atualizar";
@@ -43,7 +42,8 @@ import Coordenacao from "layouts/coordenacao";
 import CoordenacaoNovo from "layouts/coordenacao/novo";
 import CoordenacaoAtualizar from "layouts/coordenacao/atualizar";
 
-import Professor from "layouts/professor";
+import Disciplinas from "layouts/professor";
+import LancarNotas from "layouts/professor/lancarnotas";
 import ProfessorNovo from "layouts/professor/novo";
 import ProfessorAtualizar from "layouts/professor/atualizar";
 
@@ -139,7 +139,7 @@ const routes = [
     // name: "Aluno(a)",
     key: "secretaria/cadastroresponsavel/modificar",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/cadastroresponsavel/modificar",
+    route: "/secretaria/cadastroresponsavel/modificar/:id",
     component: <SecretariaCadastroResponsavelModificar />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
@@ -171,14 +171,6 @@ const routes = [
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/cadastroaluno/modificar/:id",
     component: <SecretariaCadastroAlunoModificar />,
-    isPrivate: true,
-    perfis: ["DIRECAO","SECRETARIA"],
-  },
-  {
-    key: "secretaria/aluno/atualizar",
-    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/aluno/atualizar/:idAluno",
-    component: <SecretariaCadastroAlunoAtualizar />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
@@ -256,11 +248,20 @@ const routes = [
   },
   {
     type: "collapseProfessor",
-    name: "Exemplo1",
+    name: "Disciplinas",
     key: "professor/todos",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/professor/todos",
-    component: <Professor />,
+    component: <Disciplinas />,
+    isPrivate: true,
+    perfis: ["DIRECAO","PROFESSOR"],
+  },
+  {
+    name: "Disciplinas",
+    key: "professor/lancarnotas",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/disciplina/lancarnotas/:id",
+    component: <LancarNotas />,
     isPrivate: true,
     perfis: ["DIRECAO","PROFESSOR"],
   },
