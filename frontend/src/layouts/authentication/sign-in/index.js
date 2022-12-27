@@ -28,7 +28,7 @@ import MDButton from "components/MDButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
-import bgImage from "assets/images/fundoceg.jpg";
+import bgImage from "assets/images/fundoceg.webp";
 import bgImage2 from 'assets/images/ceg.png';
 
 import { Context } from '../../../context/auth';
