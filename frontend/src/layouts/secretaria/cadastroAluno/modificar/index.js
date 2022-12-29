@@ -320,12 +320,13 @@ function Tables() {
         />
     );
     function handleSubmit() {
-        api.post("/api/aluno", aluno)
+        api.put((`/api/aluno/${id}`), aluno)
             .then((res) => {
+                console.log(res.status);
                 console.table(res);
-                if (res.status == 201) {
+                if (res.status === 200) {
                     openSuccessSB();
-                    resetForm();
+                    // resetForm();
                 }
             }).catch((error) => {
             openErrorSB();

@@ -3,6 +3,7 @@ package br.com.alf5.escolagenesis.controller;
 import br.com.alf5.escolagenesis.controller.dto.AlunoDto;
 import br.com.alf5.escolagenesis.controller.dto.PacienteDto;
 import br.com.alf5.escolagenesis.controller.form.AlunoForm;
+import br.com.alf5.escolagenesis.controller.form.AtualizarAlunoForm;
 import br.com.alf5.escolagenesis.controller.form.AtualizarPacienteForm;
 import br.com.alf5.escolagenesis.controller.form.PacienteForm;
 import br.com.alf5.escolagenesis.model.Aluno;
@@ -61,17 +62,17 @@ public class AlunoController {
         return ResponseEntity.notFound().build();
     }
 
-//    //Atualizar paciente por id
-//    @PutMapping("/{id}")
-//    @Transactional
-//    public ResponseEntity<PacienteDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizarPacienteForm form) {
-//        if (pacienteRepository.existsById(id)) {
-//            Paciente paciente = form.atualizar(id, pacienteRepository, sexoRepository);
-//            return ResponseEntity.ok().body(new PacienteDto(paciente));
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
-//
+    //Atualizar aluno por id
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<AlunoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizarAlunoForm form) {
+        if (alunoRepository.existsById(id)) {
+            Aluno aluno = form.atualizar(id, alunoRepository, responsavelRepository, enderecoRepository);
+            return ResponseEntity.ok().body(new AlunoDto(aluno));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 //    //Remover paciente por id
 //    @DeleteMapping("/{id}")
 //    @Transactional
