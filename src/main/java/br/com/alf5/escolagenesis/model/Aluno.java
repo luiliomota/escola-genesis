@@ -22,7 +22,7 @@ public class Aluno {
     private Long anoLetivo;
     private String anoInicial;
     private String situacao;
-    private String status = "MATRICULADO";
+    private String statusMatricula = "MATRICULADO";
     private String turma;
     private String turno;
     @OneToOne
@@ -276,12 +276,12 @@ public class Aluno {
         this.dataContrato = dataContrato;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusMatricula() {
+        return statusMatricula;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusMatricula(String statusMatricula) {
+        this.statusMatricula = statusMatricula;
     }
 
     public String getNomeEmergencia1() {

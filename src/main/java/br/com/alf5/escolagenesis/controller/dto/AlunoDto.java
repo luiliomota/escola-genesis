@@ -27,7 +27,7 @@ public class AlunoDto {
     private Long anoLetivo;
     private String anoInicial;
     private String situacao;
-    private String status;
+    private String statusMatricula;
     private String turma;
     private String turno;
     private String nomePai;
@@ -42,11 +42,13 @@ public class AlunoDto {
     private String profissaoMae;
     private String localTrabalhoMae;
     private String contatoTrabalhoMae;
+    private Long idResponsavel;
     private String nomeResponsavel;
     private String telefoneResponsavel;
     private String profissaoResponsavel;
     private String localTrabalhoResponsavel;
     private String contatoTrabalhoResponsavel;
+    private Long idResponsavelContrato;
     private String nomeResponsavelContrato;
     private String cpfResponsavelContrato;
     private String rgResponsavelContrato;
@@ -98,10 +100,11 @@ public class AlunoDto {
         this.anoLetivo = aluno.getAnoLetivo();
         this.anoInicial = aluno.getAnoInicial();
         this.situacao = aluno.getSituacao();
-        this.status = aluno.getStatus();
+        this.statusMatricula = aluno.getStatusMatricula();
         this.turma = aluno.getTurma();
         this.turno = aluno.getTurno();
         if(aluno.getPai() == null){
+            this.idPai = 0l;
             this.nomePai = null;
             this.telefonePai = null;
             this.profissaoPai = null;
@@ -116,6 +119,7 @@ public class AlunoDto {
             this.contatoTrabalhoPai = aluno.getPai().getTelefoneTrabalho();
         }
         if(aluno.getMae() == null){
+            this.idMae = 0l;
             this.nomeMae = null;
             this.telefoneMae = null;
             this.profissaoMae = null;
@@ -130,12 +134,14 @@ public class AlunoDto {
             this.contatoTrabalhoMae = aluno.getMae().getTelefoneTrabalho();
         }
         if(aluno.getResponsavel() == null){
+            this.idResponsavel = 0l;
             this.nomeResponsavel = null;
             this.telefoneResponsavel = null;
             this.profissaoResponsavel = null;
             this.localTrabalhoResponsavel = null;
             this.contatoTrabalhoResponsavel = null;
         } else {
+            this.idResponsavel = aluno.getResponsavel().getId();
             this.nomeResponsavel = aluno.getResponsavel().getNome();
             this.telefoneResponsavel = aluno.getResponsavel().getTelefone();
             this.profissaoResponsavel = aluno.getResponsavel().getProfissao();
@@ -143,6 +149,7 @@ public class AlunoDto {
             this.contatoTrabalhoResponsavel = aluno.getResponsavel().getTelefoneTrabalho();
         }
         if(aluno.getResponsavelContrato() == null){
+            this.idResponsavelContrato = 0l;
             this.nomeResponsavelContrato = null;
             this.cpfResponsavelContrato = null;
             this.rgResponsavelContrato = null;
@@ -154,6 +161,7 @@ public class AlunoDto {
             this.localTrabalhoResponsavelContrato = null;
             this.contatoTrabalhoResponsavelContrato = null;
         } else {
+            this.idResponsavelContrato = aluno.getResponsavelContrato().getId();
             this.nomeResponsavelContrato = aluno.getResponsavelContrato().getNome();
             this.cpfResponsavelContrato = aluno.getResponsavelContrato().getCpf();
             this.rgResponsavelContrato = aluno.getResponsavelContrato().getRg();
@@ -459,6 +467,14 @@ public class AlunoDto {
         this.observacao = observacao;
     }
 
+    public Long getIdResponsavel() {
+        return idResponsavel;
+    }
+
+    public void setIdResponsavel(Long idResponsavel) {
+        this.idResponsavel = idResponsavel;
+    }
+
     public String getNomeResponsavel() {
         return nomeResponsavel;
     }
@@ -497,6 +513,14 @@ public class AlunoDto {
 
     public void setContatoTrabalhoResponsavel(String contatoTrabalhoResponsavel) {
         this.contatoTrabalhoResponsavel = contatoTrabalhoResponsavel;
+    }
+
+    public Long getIdResponsavelContrato() {
+        return idResponsavelContrato;
+    }
+
+    public void setIdResponsavelContrato(Long idResponsavelContrato) {
+        this.idResponsavelContrato = idResponsavelContrato;
     }
 
     public String getNomeResponsavelContrato() {
@@ -587,12 +611,12 @@ public class AlunoDto {
         this.emailResponsavelContrato = emailResponsavelContrato;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusMatricula() {
+        return statusMatricula;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusMatricula(String statusMatricula) {
+        this.statusMatricula = statusMatricula;
     }
 
     public String getNomeEmergencia1() {

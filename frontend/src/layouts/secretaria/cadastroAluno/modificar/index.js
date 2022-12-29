@@ -30,10 +30,10 @@ function Tables() {
     const { id } = useParams();
 
     const [aluno, setAluno] = useState({
+        id: 0,
         nome: "",
         dataNascimento: "",
         dataMatricula: "",
-        dataContrato: "",
         sexo: "",
         naturalidadeCidade: "",
         naturalidadeEstado: "",
@@ -42,27 +42,51 @@ function Tables() {
         especificacao: "",
         cep: "",
         logradouro: "",
+        bairro: "",
         cidade: "",
         estado: "",
-        pais: "",
         complemento: "",
         anoLetivo: "",
         anoInicial: "",
         situacao: "",
+        statusMatricula: "",
         turma: "",
         turno: "",
-        nomePai: "",
-        nomeMae: "",
-        nomeResponsavel: "",
         idPai: 0,
+        nomePai: "",
+        telefonePai: "",
+        profissaoPai: "",
+        localTrabalhoPai: "",
+        contatoTrabalhoPai: "",
         idMae: 0,
+        nomeMae: "",
+        telefoneMae: "",
+        profissaoMae: "",
+        localTrabalhoMae: "",
+        contatoTrabalhoMae: "",
         idResponsavel: 0,
+        nomeResponsavel: "",
+        telefoneResponsavel: "",
+        profissaoResponsavel: "",
+        localTrabalhoResponsavel: "",
+        contatoTrabalhoResponsavel: "",
         idResponsavelContrato: 0,
+        nomeResponsavelContrato: "",
+        cpfResponsavelContrato: "",
+        rgResponsavelContrato: "",
+        nacionalidadeResponsavelContrato: "",
+        estadoCivilResponsavelContrato: "",
+        telefoneResponsavelContrato: "",
+        profissaoResponsavelContrato: "",
+        emailResponsavelContrato: "",
+        localTrabalhoResponsavelContrato: "",
+        contatoTrabalhoResponsavelContrato: "",
+        dataContrato: "",
         contatoEmergencia1: "",
         contatoEmergencia2: "",
         nomeEmergencia1: "",
         nomeEmergencia2: "",
-        observacao: ""
+        observacao: "",
     });
 
     const [idade, setIdade] = useState();
@@ -79,34 +103,18 @@ function Tables() {
 
     const [pai, setPai] = useState({
         nome: "",
-        telefone: "",
-        profissao: "",
-        localTrabalho: "",
-        telefoneTrabalho: "",
     });
 
     const [mae, setMae] = useState({
         nome: "",
-        telefone: "",
-        profissao: "",
-        localTrabalho: "",
-        telefoneTrabalho: "",
     });
 
     const [responsavel, setResponsavel] = useState({
         nome: "",
-        telefone: "",
-        profissao: "",
-        localTrabalho: "",
-        telefoneTrabalho: "",
     });
 
     const [responsavelContrato, setResponsavelContrato] = useState({
         nome: "",
-        telefone: "",
-        profissao: "",
-        localTrabalho: "",
-        telefoneTrabalho: "",
     });
 
     const [listaAlunos, setListaAlunos] = useState([]);
@@ -118,9 +126,6 @@ function Tables() {
         }]);
     const [listaEndereco, setListaEndereco] = useState({
         cep: "",
-        logradouro: "",
-        localidade: "",
-        uf: "",
     });
     const [listaTurno, setListaTurno] = useState([]);
     const [listaTurma, setListaTurma] = useState([]);
@@ -197,13 +202,12 @@ function Tables() {
                 if(response.status == 200 && aluno.dataCadastro === undefined) {
                     api.get(`/api/municipiosIbge/porEstado/${response.data.naturalidadeEstado}/?size=1000`)
                         .then((resp) => {
-                            console.log(response.data);
                             apiPai(listaResponsaveis.find(item => item.nome === response.data.nomePai).id);
                             apiMae(listaResponsaveis.find(item => item.nome === response.data.nomeMae).id);
-                            apiResponsavel(listaResponsaveis.find(item => item.nome === response.data.nomeResponsavel).id);
-                            apiResponsavelContrato(listaResponsaveis.find(item => item.nome === response.data.nomeResponsavelContrato).id);
                             setListaMunicipio(resp.data.content);
                             setAluno(response.data);
+                            apiResponsavel(listaResponsaveis.find(item => item.nome === response.data.nomeResponsavel).id);
+                            apiResponsavelContrato(listaResponsaveis.find(item => item.nome === response.data.nomeResponsavelContrato).id);
                         })
                         .catch((error) => console.error(error));
                 }
@@ -254,7 +258,8 @@ function Tables() {
         api.get(`/api/responsavel/${id}`)
             .then((response) => {
                 setPai(response.data);
-                listaResponsaveisContrato.push(response.data);
+                listaResponsaveisContrato.find(item => item.nome === response.data.nome) ? "" :
+                    listaResponsaveisContrato.push(response.data);
             })
             .catch((error) => console.error(error))
     }
@@ -263,7 +268,8 @@ function Tables() {
         api.get(`/api/responsavel/${id}`)
             .then((response) => {
                 setMae(response.data);
-                listaResponsaveisContrato.push(response.data);
+                listaResponsaveisContrato.find(item => item.nome === response.data.nome) ? "" :
+                    listaResponsaveisContrato.push(response.data);
             })
             .catch((error) => console.error(error))
     }
@@ -272,7 +278,8 @@ function Tables() {
         api.get(`/api/responsavel/${id}`)
             .then((response) => {
                 setResponsavel(response.data);
-                listaResponsaveisContrato.push(response.data);
+                listaResponsaveisContrato.find(item => item.nome === response.data.nome) ? "" :
+                    listaResponsaveisContrato.push(response.data);
             })
             .catch((error) => console.error(error))
     }
@@ -326,6 +333,7 @@ function Tables() {
         });
     }
 
+    console.log(aluno);
     return (
         <DashboardLayout>
             <DashboardNavbar/>
@@ -735,7 +743,7 @@ function Tables() {
                                                 options={listaResponsaveis}
                                                 getOptionLabel={(option) => {
                                                     const respMae = listaResponsaveis.find(item => item.nome === option);
-                                                    return option ? (respMae ? respMae.nome : option.nome) : ""
+                                                    return option ? (respMae ? respMae.nome : option.nome) : "";
                                                 }}
                                                 isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
@@ -812,7 +820,7 @@ function Tables() {
                                                 options={listaResponsaveis}
                                                 getOptionLabel={(option) => {
                                                     const resp = listaResponsaveis.find(item => item.nome === option);
-                                                    return option ? (resp ? resp.nome : option.nome) : ""
+                                                    return option ? (resp ? resp.nome : option.nome) : "";
                                                 }}
                                                 isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
@@ -1004,7 +1012,7 @@ function Tables() {
                                     <Grid item xs={12} md={6}>
                                         <MDBox mb={4}>
                                             <Autocomplete
-                                                value={responsavelContrato.nome}
+                                                value={aluno.nomeResponsavelContrato}
                                                 options={listaResponsaveisContrato}
                                                 getOptionLabel={(option) => {
                                                     const respContrato = listaResponsaveisContrato.find(item => item.nome === option);
@@ -1085,7 +1093,7 @@ function Tables() {
                                                 options={listaContatoEmergencia}
                                                 getOptionLabel={(option) => {
                                                     const nomeEm = listaContatoEmergencia.find(item => item.nome === option);
-                                                    return option ? (nomeEm ? nomeEm.nome : option.nome) : ""
+                                                    return option ? (nomeEm ? nomeEm.nome : option.nome) : "";
                                                 }}
                                                 isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
@@ -1131,7 +1139,7 @@ function Tables() {
                                                 options={listaContatoEmergencia}
                                                 getOptionLabel={(option) => {
                                                     const nomeEm = listaContatoEmergencia.find(item => item.nome === option);
-                                                    return option ? (nomeEm ? nomeEm.nome : option.nome) : ""
+                                                    return option ? (nomeEm ? nomeEm.nome : option.nome) : "";
                                                 }}
                                                 isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
                                                 onChange={(e, value) => {
