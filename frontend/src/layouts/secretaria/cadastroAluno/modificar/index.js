@@ -333,7 +333,6 @@ function Tables() {
         });
     }
 
-    console.log(aluno);
     return (
         <DashboardLayout>
             <DashboardNavbar/>
