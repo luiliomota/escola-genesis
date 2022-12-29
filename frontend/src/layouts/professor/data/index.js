@@ -1,20 +1,19 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 import {useState, useEffect, useContext} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import {Link} from "@mui/material";
-import {Edit, Compare, Delete} from "@mui/icons-material";
-import IconButton from "@mui/material/IconButton";
+import {Edit, CalendarToday} from "@mui/icons-material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDBadge from "components/MDBadge";
+import MDButton from "components/MDButton";
 
-import {Context} from "../../../context/auth";
+import {Context} from "context/auth";
 import api from "api";
-import Typography from "@mui/material/Typography";
 
 export default function data() {
     const {roles} = useContext(Context);
@@ -22,15 +21,6 @@ export default function data() {
 
     const [lista, setLista] = useState([]);
     const [listaFiltro, setListaFiltro] = useState([]);
-
-
-    const Nome = ({name}) => (
-        <MDBox display="flex" alignItems="center" lineHeight={1}>
-            <MDBox ml={2} lineHeight={1}>
-
-            </MDBox>
-        </MDBox>
-    );
 
     function getItems(items) {
         if (items === undefined) return [];
@@ -56,10 +46,25 @@ export default function data() {
                         ),
                         acao: (
                             <>
-                                <IconButton component="a" onClick={() => navigate(`/disciplina/lancarnotas/${item.id}`)}
-                                            variant="caption" color="text" fontWeight="medium">
-                                    <Edit fontSize="medium"/>
-                                </IconButton>
+                                <MDButton
+                                    component="a"
+                                    onClick={() => navigate(`/disciplina/lancarnotas/${item.id}`)}
+                                    variant="outlined"
+                                    size="small"
+                                    color="info">
+                                    Notas&nbsp;
+                                    <Edit />
+                                </MDButton>
+                                &nbsp;
+                                <MDButton
+                                    component="a"
+                                    onClick={() => navigate(`/disciplina/frequencia/${item.id}`)}
+                                    variant="outlined"
+                                    size="small"
+                                    color="info">
+                                    Frequência&nbsp;
+                                    <CalendarToday fontSize="medium"/>
+                                </MDButton>
                             </>
                         ),
                     });

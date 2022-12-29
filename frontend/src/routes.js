@@ -44,8 +44,7 @@ import CoordenacaoAtualizar from "layouts/coordenacao/atualizar";
 
 import Disciplinas from "layouts/professor";
 import LancarNotas from "layouts/professor/lancarnotas";
-import ProfessorNovo from "layouts/professor/novo";
-import ProfessorAtualizar from "layouts/professor/atualizar";
+import Frequencia from "layouts/professor/frequencia";
 
 import SignIn from "layouts/authentication/sign-in";
 import Logout from "layouts/authentication/logout";
@@ -257,29 +256,20 @@ const routes = [
     perfis: ["DIRECAO","PROFESSOR"],
   },
   {
-    name: "Disciplinas",
-    key: "professor/lancarnotas",
+    name: "Lançar Notas",
+    key: "disciplina/lancarnotas",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/disciplina/lancarnotas/:id",
+    route: "/disciplina/lancarnotas/:idDisciplina",
     component: <LancarNotas />,
     isPrivate: true,
     perfis: ["DIRECAO","PROFESSOR"],
   },
   {
-    type: "collapseProfessor",
-    name: "Exemplo2",
-    key: "professor/novo",
+    name: "Frequência",
+    key: "disciplina/frequencia",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/professor/novo",
-    component: <ProfessorNovo />,
-    isPrivate: true,
-    perfis: ["DIRECAO","PROFESSOR"],
-  },
-  {
-    name: "Atualizar",
-    key: "professor/atualizar",
-    route: "/professor/atualizar/:id",
-    component: <ProfessorAtualizar />,
+    route: "/disciplina/frequencia/:idDisciplina",
+    component: <Frequencia />,
     isPrivate: true,
     perfis: ["DIRECAO","PROFESSOR"],
   },
