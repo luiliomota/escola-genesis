@@ -359,27 +359,6 @@ function Tables() {
                                             </InputMask>
                                         </MDBox>
                                     </Grid>
-                                    <Grid item xs={12} md={2}>
-                                        <MDBox mb={1}>
-                                            <InputMask
-                                                mask="(99) 99999-9999"
-                                                value={responsavel.telefone}
-                                                onChange={(e) => setResponsavel({
-                                                    ...responsavel,
-                                                    telefone: e.target.value
-                                                })}
-                                                >
-                                                { () =>
-                                                    <TextField
-                                                    fullWidth
-                                                    InputLabelProps={{shrink:true}}
-                                                    label="Telefone"
-                                                    />
-                                                }
-                                            </InputMask>
-                                        </MDBox>
-                                    </Grid>
-
                                 </Grid>
 
                                     <Grid mt={6} container justifyContent='inherit' spacing={2}>
@@ -392,15 +371,15 @@ function Tables() {
                                             Salvar
                                         </MDButton>
                                     </Grid>
-                                    <Grid item xs={12} md={3}>
-                                        <MDButton
-                                            fullWidth
-                                            color="error"
-                                            variant="outlined"
-                                            onClick={resetForm}>
-                                            Excluir
-                                        </MDButton>
-                                    </Grid>
+                                    {/*<Grid item xs={12} md={3}>*/}
+                                    {/*    <MDButton*/}
+                                    {/*        fullWidth*/}
+                                    {/*        color="error"*/}
+                                    {/*        variant="outlined"*/}
+                                    {/*        onClick={resetForm}>*/}
+                                    {/*        Excluir*/}
+                                    {/*    </MDButton>*/}
+                                    {/*</Grid>*/}
                                 </Grid>
                             </MDBox>
                         </Card>

@@ -2,7 +2,7 @@
 /* eslint-disable react/function-component-definition */
 
 import {useContext, useEffect, useState} from "react";
-import {Edit} from "@mui/icons-material";
+import {Delete, Edit} from "@mui/icons-material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -72,10 +72,10 @@ export default function data() {
                     <IconButton component="a" onClick={() => navigate(`/secretaria/cadastroaluno/modificar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
                         <Edit fontSize="medium" />
                     </IconButton>
-                    {/*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
-                    {/*<IconButton component="a" onClick={() => {setOpenDialog(true);setIdAluno(item.id)}} color="error" variant="gradient" fontWeight="medium">*/}
-                    {/*    <Delete fontSize="medium" />*/}
-                    {/*</IconButton>*/}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <IconButton component="a" onClick={() => {setOpenDialog(true);setIdAluno(item.id)}} color="error" variant="gradient" fontWeight="medium">
+                        <Delete fontSize="medium" />
+                    </IconButton>
                 </>
             ),
         });
@@ -86,11 +86,11 @@ export default function data() {
     if(roles[0] === 'DIRECAO'){
       return {
         columns: [
-          { Header: "Nome", accessor: "nome", width: "45%", align: "left" },
-            { Header: "Curso", accessor: "curso", align: "center" },
-            { Header: "Data Nascimento", accessor: "dataNascimento", align: "center" },
-          // { Header: "Status", accessor: "status", align: "center" },
             { Header: "Modificar", accessor: "acao", align: "center" },
+            { Header: "Nome", accessor: "nome", width: "45%", align: "left" },
+            { Header: "Curso", accessor: "curso", align: "center" },
+            // { Header: "Status", accessor: "status", align: "center" },
+            { Header: "Data Nascimento", accessor: "dataNascimento", align: "center" },
         ],
 
         rows: getItems(lista),

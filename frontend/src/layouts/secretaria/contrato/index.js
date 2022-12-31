@@ -219,7 +219,7 @@ function Tables() {
                                       </Grid>
                                       <Grid item xs={6} md={4}>
                                           <MDTypography fontSize="0.8rem" variant="body2" color="dark">
-                                              <b>MATRÍCULA: </b>{aluno.id} [{aluno.dataMatricula}]
+                                              <b>MATRÍCULA: </b>{aluno.id} ({aluno.dataMatriculaString})
                                           </MDTypography>
                                       </Grid>
                                       <Grid item xs={6} md={8}>

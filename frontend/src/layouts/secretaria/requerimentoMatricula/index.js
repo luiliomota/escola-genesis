@@ -51,16 +51,14 @@ function Tables() {
     if(aluno.dataNascimento === undefined){
       setIdade("");
     } else {
-      let dataArray = aluno.dataNascimento.toString().split('/')
-      let dataParseada = new Date(dataArray[1]+"/"+dataArray[0]+"/"+dataArray[2])
-
-      if (new Date().getMonth() + 1 < new Date(dataParseada).getMonth() ||
-          (new Date().getMonth() + 1 == new Date(dataParseada).getMonth() + 1 &&
-              new Date().getDate() < new Date(dataParseada).getDate())
+      let dataNascimento = aluno.dataNascimento
+      if (new Date().getMonth() + 1 < new Date(dataNascimento).getMonth() ||
+          (new Date().getMonth() + 1 == new Date(dataNascimento).getMonth() + 1 &&
+              new Date().getDate() < new Date(dataNascimento).getDate())
       ) {
-        setIdade(new Date().getFullYear() - new Date(dataParseada).getFullYear() - 1 + " Anos");
+        setIdade(new Date().getFullYear() - new Date(dataNascimento).getFullYear() - 1 + " Anos");
       } else {
-        setIdade(new Date().getFullYear() - new Date(dataParseada).getFullYear() + " Anos");
+        setIdade(new Date().getFullYear() - new Date(dataNascimento).getFullYear() + " Anos");
       }
     }
   });
@@ -187,7 +185,7 @@ function Tables() {
                   </Grid>
                   <Grid item ml={2} xs={6} md={3}>
                     <MDTypography fontSize="0.8rem" variant="body2" color="dark">
-                      <b>Data de Nascimento: </b>{aluno.dataNascimento}
+                      <b>Data de Nascimento: </b>{aluno.dataNascimentoString}
                     </MDTypography>
                   </Grid>
                   <Grid item ml={2} xs={6} md={3}>

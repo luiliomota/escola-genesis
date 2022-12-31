@@ -4,7 +4,7 @@
 import {useState, useEffect, useContext} from "react";
 import {useNavigate} from "react-router-dom";
 
-import { Edit } from "@mui/icons-material";
+import {Delete, Edit} from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 
 // Material Dashboard 2 React components
@@ -72,10 +72,10 @@ export default function data() {
                     <IconButton component="a" onClick={() => navigate(`/secretaria/cadastroresponsavel/modificar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
                         <Edit fontSize="medium" />
                     </IconButton>
-                    {/*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
-                    {/*<IconButton component="a" onClick={() => {setOpenDialog(true);setIdResponsavel(item.id)}} color="error" variant="gradient" fontWeight="medium">*/}
-                    {/*    <Delete fontSize="medium" />*/}
-                    {/*</IconButton>*/}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <IconButton component="a" onClick={() => {setOpenDialog(true);setIdResponsavel(item.id)}} color="error" variant="gradient" fontWeight="medium">
+                        <Delete fontSize="medium" />
+                    </IconButton>
                 </>
             ),
         });
@@ -86,11 +86,11 @@ export default function data() {
     if(roles[0] === 'DIRECAO'){
       return {
         columns: [
-          { Header: "Nome", accessor: "nome", width: "45%", align: "left" },
-            // { Header: "Curso", accessor: "curso", align: "center" },
-            { Header: "Data Cadastro", accessor: "dataCadastro", align: "center" },
-          { Header: "Status", accessor: "status", align: "center" },
             { Header: "Modificar", accessor: "acao", align: "center" },
+            // { Header: "Curso", accessor: "curso", align: "center" },
+            { Header: "Nome", accessor: "nome", width: "45%", align: "left" },
+            { Header: "Data Cadastro", accessor: "dataCadastro", align: "center" },
+            // { Header: "Status", accessor: "status", align: "center" },
         ],
 
         rows: getItems(lista),

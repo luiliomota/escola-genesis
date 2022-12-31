@@ -30,7 +30,7 @@ function Tables() {
     const { id } = useParams();
 
     const [aluno, setAluno] = useState({
-        id: 0,
+        id: "",
         nome: "",
         dataNascimento: "",
         dataMatricula: "",
@@ -46,41 +46,16 @@ function Tables() {
         cidade: "",
         estado: "",
         complemento: "",
-        anoLetivo: "",
+        anoLetivo: '',
         anoInicial: "",
         situacao: "",
         statusMatricula: "",
         turma: "",
         turno: "",
-        idPai: 0,
-        nomePai: "",
-        telefonePai: "",
-        profissaoPai: "",
-        localTrabalhoPai: "",
-        contatoTrabalhoPai: "",
-        idMae: 0,
-        nomeMae: "",
-        telefoneMae: "",
-        profissaoMae: "",
-        localTrabalhoMae: "",
-        contatoTrabalhoMae: "",
-        idResponsavel: 0,
-        nomeResponsavel: "",
-        telefoneResponsavel: "",
-        profissaoResponsavel: "",
-        localTrabalhoResponsavel: "",
-        contatoTrabalhoResponsavel: "",
-        idResponsavelContrato: 0,
-        nomeResponsavelContrato: "",
-        cpfResponsavelContrato: "",
-        rgResponsavelContrato: "",
-        nacionalidadeResponsavelContrato: "",
-        estadoCivilResponsavelContrato: "",
-        telefoneResponsavelContrato: "",
-        profissaoResponsavelContrato: "",
-        emailResponsavelContrato: "",
-        localTrabalhoResponsavelContrato: "",
-        contatoTrabalhoResponsavelContrato: "",
+        idPai: "",
+        idMae: "",
+        idResponsavel: "",
+        idResponsavelContrato: "",
         dataContrato: "",
         contatoEmergencia1: "",
         contatoEmergencia2: "",
@@ -202,14 +177,14 @@ function Tables() {
                 if(response.status == 200 && aluno.dataCadastro === undefined) {
                     api.get(`/api/municipiosIbge/porEstado/${response.data.naturalidadeEstado}/?size=1000`)
                         .then((resp) => {
-                            apiPai(listaResponsaveis.find(item => item.nome === response.data.nomePai).id);
-                            apiMae(listaResponsaveis.find(item => item.nome === response.data.nomeMae).id);
                             setListaMunicipio(resp.data.content);
-                            setAluno(response.data);
-                            apiResponsavel(listaResponsaveis.find(item => item.nome === response.data.nomeResponsavel).id);
-                            apiResponsavelContrato(listaResponsaveis.find(item => item.nome === response.data.nomeResponsavelContrato).id);
                         })
                         .catch((error) => console.error(error));
+                    setAluno(response.data);
+                    apiPai(listaResponsaveis.find(item => item.nome === response.data.nomePai).id);
+                    apiMae(listaResponsaveis.find(item => item.nome === response.data.nomeMae).id);
+                    apiResponsavelContrato(listaResponsaveis.find(item => item.nome === response.data.nomeResponsavelContrato).id);
+                    apiResponsavel(listaResponsaveis.find(item => item.nome === response.data.nomeResponsavel).id);
                 }
             })
             .catch((error) => console.error(error));
@@ -220,16 +195,14 @@ function Tables() {
         if(aluno.dataNascimento === undefined){
             setIdade("");
         } else {
-            let dataArray = aluno.dataNascimento.toString().split('/')
-            let dataParseada = new Date(dataArray[1]+"/"+dataArray[0]+"/"+dataArray[2])
-
-            if (new Date().getMonth() + 1 < new Date(dataParseada).getMonth() ||
-                (new Date().getMonth() + 1 == new Date(dataParseada).getMonth() + 1 &&
-                    new Date().getDate() < new Date(dataParseada).getDate())
+            let dataNascimento = aluno.dataNascimento
+            if (new Date().getMonth() + 1 < new Date(dataNascimento).getMonth() ||
+                (new Date().getMonth() + 1 == new Date(dataNascimento).getMonth() + 1 &&
+                    new Date().getDate() < new Date(dataNascimento).getDate())
             ) {
-                setIdade(new Date().getFullYear() - new Date(dataParseada).getFullYear() - 1 + " Anos");
+                setIdade(new Date().getFullYear() - new Date(dataNascimento).getFullYear() - 1 + " Anos");
             } else {
-                setIdade(new Date().getFullYear() - new Date(dataParseada).getFullYear() + " Anos");
+                setIdade(new Date().getFullYear() - new Date(dataNascimento).getFullYear() + " Anos");
             }
         }
     });
@@ -320,9 +293,9 @@ function Tables() {
         />
     );
     function handleSubmit() {
+        console.log(aluno)
         api.put((`/api/aluno/${id}`), aluno)
             .then((res) => {
-                console.log(res.status);
                 console.table(res);
                 if (res.status === 200) {
                     openSuccessSB();
@@ -330,8 +303,8 @@ function Tables() {
                 }
             }).catch((error) => {
             openErrorSB();
-            console.error(error)
-        });
+            console.error(error);
+            });
     }
 
     return (
@@ -384,7 +357,7 @@ function Tables() {
                                                 fullWidth
                                                 InputLabelProps={{shrink:true}}
                                                 label="Data de nascimento"
-                                                // type="date"
+                                                type="date"
                                                 value={aluno.dataNascimento}
                                                 onChange={(e) => setAluno({
                                                     ...aluno,
@@ -398,7 +371,7 @@ function Tables() {
                                                 fullWidth
                                                 InputLabelProps={{shrink:true}}
                                                 label="Data de matricula"
-                                                // type="date"
+                                                type="date"
                                                 value={aluno.dataMatricula}
                                                 onChange={(e) => {
                                                     setAluno({
@@ -1012,7 +985,7 @@ function Tables() {
                                     <Grid item xs={12} md={6}>
                                         <MDBox mb={4}>
                                             <Autocomplete
-                                                value={aluno.nomeResponsavelContrato}
+                                                value={responsavelContrato.nome}
                                                 options={listaResponsaveisContrato}
                                                 getOptionLabel={(option) => {
                                                     const respContrato = listaResponsaveisContrato.find(item => item.nome === option);
@@ -1041,7 +1014,7 @@ function Tables() {
                                                 fullWidth
                                                 InputLabelProps={{shrink:true}}
                                                 label="Data do contrato"
-                                                // type="date"
+                                                type="date"
                                                 value={aluno.dataContrato}
                                                 onChange={(e) => setAluno({
                                                     ...aluno,
@@ -1056,106 +1029,109 @@ function Tables() {
                                             Emergência
                                         </MDTypography>
                                     </Grid>
-                                    <Grid item xs={12} md={6.5}>
-                                        <MDTypography fontSize={15} color="dark">
-                                            Contato 1
-                                        </MDTypography>
-                                    </Grid>
-                                    <Grid item xs={12} md={5.5}>
-                                        <MDTypography fontSize={15} color="dark">
-                                            Contato 2
-                                        </MDTypography>
-                                    </Grid>
-                                    <Grid item xs={12} md={3}>
-                                        <MDBox mb={1}>
-                                            <InputMask
-                                                mask="(99) 99999-9999"
-                                                value={aluno.contatoEmergencia1}
-                                                onChange={(e) => setAluno({
-                                                    ...aluno,
-                                                    contatoEmergencia1: e.target.value
-                                                })}
-                                            >
-                                                {() =>
-                                                    <TextField
-                                                        fullWidth
-                                                        InputLabelProps={{shrink:true}}
-                                                        label="Telefone"
-                                                    />
-                                                }
-                                            </InputMask>
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={2.5}>
-                                        <MDBox mb={4}>
-                                            <Autocomplete
-                                                value={aluno.nomeEmergencia1}
-                                                options={listaContatoEmergencia}
-                                                getOptionLabel={(option) => {
-                                                    const nomeEm = listaContatoEmergencia.find(item => item.nome === option);
-                                                    return option ? (nomeEm ? nomeEm.nome : option.nome) : "";
-                                                }}
-                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
-                                                onChange={(e, value) => {
-                                                    if (value) {
-                                                        setAluno({...aluno, nomeEmergencia1: value.nome});
-                                                    } else {
-                                                        setAluno({...aluno, nomeEmergencia1: ""});
+                                    <Grid container justifyContent="inherit" spacing={1} item xs={6}>
+                                        <Grid item xs={12} md={12}>
+                                            <MDTypography fontSize={15} color="dark">
+                                                Contato 1
+                                            </MDTypography>
+                                        </Grid>
+                                        <Grid item xs={12} md={5}>
+                                            <MDBox mb={1}>
+                                                <InputMask
+                                                    mask="(99) 99999-9999"
+                                                    value={aluno.contatoEmergencia1}
+                                                    onChange={(e) => setAluno({
+                                                        ...aluno,
+                                                        contatoEmergencia1: e.target.value
+                                                    })}
+                                                >
+                                                    {() =>
+                                                        <TextField
+                                                            fullWidth
+                                                            InputLabelProps={{shrink:true}}
+                                                            label="Telefone"
+                                                        />
                                                     }
-                                                }}
-                                                renderInput={(params) =>
-                                                    <TextField
-                                                        {...params}
-                                                        InputLabelProps={{shrink:true}}
-                                                        label="Vínculo"/>}
-                                            />
-                                        </MDBox>
+                                                </InputMask>
+                                            </MDBox>
+                                        </Grid>
+                                        <Grid item xs={12} md={5}>
+                                            <MDBox mb={4}>
+                                                <Autocomplete
+                                                    value={aluno.nomeEmergencia1}
+                                                    options={listaContatoEmergencia}
+                                                    getOptionLabel={(option) => {
+                                                        const nomeEm = listaContatoEmergencia.find(item => item.nome === option);
+                                                        return option ? (nomeEm ? nomeEm.nome : option.nome) : "";
+                                                    }}
+                                                    isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
+                                                    onChange={(e, value) => {
+                                                        if (value) {
+                                                            setAluno({...aluno, nomeEmergencia1: value.nome});
+                                                        } else {
+                                                            setAluno({...aluno, nomeEmergencia1: ""});
+                                                        }
+                                                    }}
+                                                    renderInput={(params) =>
+                                                        <TextField
+                                                            {...params}
+                                                            InputLabelProps={{shrink:true}}
+                                                            label="Vínculo"/>}
+                                                />
+                                            </MDBox>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12} md={1}></Grid>
-                                    <Grid item xs={12} md={3}>
-                                        <MDBox mb={4}>
-                                            <InputMask
-                                                mask="(99) 99999-9999"
-                                                value={aluno.contatoEmergencia2}
-                                                onChange={(e) => setAluno({
-                                                    ...aluno,
-                                                    contatoEmergencia2: e.target.value
-                                                })}
-                                            >
-                                                {() =>
-                                                    <TextField
-                                                        fullWidth
-                                                        InputLabelProps={{shrink:true}}
-                                                        label="Telefone"
-                                                    />
-                                                }
-                                            </InputMask>
-                                        </MDBox>
-                                    </Grid>
-                                    <Grid item xs={12} md={2.5}>
-                                        <MDBox mb={4}>
-                                            <Autocomplete
-                                                value={aluno.nomeEmergencia2}
-                                                options={listaContatoEmergencia}
-                                                getOptionLabel={(option) => {
-                                                    const nomeEm = listaContatoEmergencia.find(item => item.nome === option);
-                                                    return option ? (nomeEm ? nomeEm.nome : option.nome) : "";
-                                                }}
-                                                isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
-                                                onChange={(e, value) => {
-                                                    if (value) {
-                                                        setAluno({...aluno, nomeEmergencia2: value.nome});
-                                                    } else {
-                                                        setAluno({...aluno, nomeEmergencia2: ""});
+                                    <Grid container justifyContent="inherit" spacing={1} item xs={6}>
+                                        <Grid item xs={12} md={12}>
+                                            <MDTypography fontSize={15} color="dark">
+                                                Contato 2
+                                            </MDTypography>
+                                        </Grid>
+                                        <Grid item xs={12} md={5}>
+                                            <MDBox mb={4}>
+                                                <InputMask
+                                                    mask="(99) 99999-9999"
+                                                    value={aluno.contatoEmergencia2}
+                                                    onChange={(e) => setAluno({
+                                                        ...aluno,
+                                                        contatoEmergencia2: e.target.value
+                                                    })}
+                                                >
+                                                    {() =>
+                                                        <TextField
+                                                            fullWidth
+                                                            InputLabelProps={{shrink:true}}
+                                                            label="Telefone"
+                                                        />
                                                     }
-                                                }}
-                                                renderInput={(params) =>
-                                                    <TextField
-                                                        {...params}
-                                                        InputLabelProps={{shrink:true}}
-                                                        label="Vínculo"/>}
-                                            />
-                                        </MDBox>
+                                                </InputMask>
+                                            </MDBox>
+                                        </Grid>
+                                        <Grid item xs={12} md={5}>
+                                            <MDBox mb={4}>
+                                                <Autocomplete
+                                                    value={aluno.nomeEmergencia2}
+                                                    options={listaContatoEmergencia}
+                                                    getOptionLabel={(option) => {
+                                                        const nomeEm = listaContatoEmergencia.find(item => item.nome === option);
+                                                        return option ? (nomeEm ? nomeEm.nome : option.nome) : "";
+                                                    }}
+                                                    isOptionEqualToValue={(option, value) => option ? option.nome === value : false}
+                                                    onChange={(e, value) => {
+                                                        if (value) {
+                                                            setAluno({...aluno, nomeEmergencia2: value.nome});
+                                                        } else {
+                                                            setAluno({...aluno, nomeEmergencia2: ""});
+                                                        }
+                                                    }}
+                                                    renderInput={(params) =>
+                                                        <TextField
+                                                            {...params}
+                                                            InputLabelProps={{shrink:true}}
+                                                            label="Vínculo"/>}
+                                                />
+                                            </MDBox>
+                                        </Grid>
                                     </Grid>
 
                                     {/*Observaçoes*/}

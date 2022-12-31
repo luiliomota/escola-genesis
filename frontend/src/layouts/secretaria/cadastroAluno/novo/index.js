@@ -112,19 +112,20 @@ function Tables() {
 
     //Cálculo de idade
     useEffect(() => {
-        if (new Date().getMonth()+1 < new Date(aluno.dataNascimento).getMonth() ||
-            (new Date().getMonth()+1 == new Date(aluno.dataNascimento).getMonth()+1 &&
-            new Date().getDate() < new Date(aluno.dataNascimento).getDate())
+        let dataNascimento = aluno.dataNascimento
+        if (new Date().getMonth()+1 < new Date(dataNascimento).getMonth() ||
+            (new Date().getMonth()+1 == new Date(dataNascimento).getMonth()+1 &&
+            new Date().getDate() < new Date(dataNascimento).getDate())
         ){
-            setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear() - 1);
+            setIdade(new Date().getFullYear() - new Date(dataNascimento).getFullYear() - 1);
         }
         else {
-            setIdade(new Date().getFullYear() - new Date(aluno.dataNascimento).getFullYear());
+            setIdade(new Date().getFullYear() - new Date(dataNascimento).getFullYear());
         }
     });
 
     useEffect(() => {
-        api.get("/api/aluno")
+        api.get("/api/aluno?size=2000")
             .then((response) => {
                 setListaAlunos(response.data.content);
             })
@@ -132,7 +133,7 @@ function Tables() {
     }, []);
 
     useEffect( () => {
-        api.get("/api/responsavel?size=500")
+        api.get("/api/responsavel?size=2000")
             .then((response) => {
                 setListaResponsaveis(response.data.content);
         })
@@ -181,17 +182,17 @@ function Tables() {
     },[]);
 
     useEffect( () => {
-        api.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados/")
+        api.get("/api/unidadeFederativaIbge?size=27")
             .then((response) => {
-                setListaEstado(response.data);
+                setListaEstado(response.data.content);
             })
             .catch((error) => console.error(error))
     },[]);
 
-    function localizaMunicipio (idEstado) {
-        api.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idEstado}/municipios`)
+    function localizaMunicipio (sigla) {
+        api.get(`/api/municipiosIbge/porEstado/${sigla}/?size=1000`)
             .then((response) => {
-                setListaMunicipio(response.data);
+                setListaMunicipio(response.data.content);
             })
             .catch((error) => console.error(error))
     }
@@ -458,7 +459,7 @@ function Tables() {
                                                 onChange={(e, value) => {
                                                     if (value) {
                                                         setUf(value.sigla);
-                                                        localizaMunicipio(value.id);
+                                                        localizaMunicipio(value.sigla);
                                                     }
                                                 }}
                                                 renderInput={(params) =>

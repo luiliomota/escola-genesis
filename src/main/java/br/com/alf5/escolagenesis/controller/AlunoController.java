@@ -73,14 +73,14 @@ public class AlunoController {
         return ResponseEntity.notFound().build();
     }
 
-//    //Remover paciente por id
-//    @DeleteMapping("/{id}")
-//    @Transactional
-//    public ResponseEntity<?> remover(@PathVariable Long id) {
-//        if (pacienteRepository.existsById(id)) {
-//            pacienteRepository.deleteById(id);
-//            return ResponseEntity.ok().build();
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
+    //Remover aluno por id
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        if (alunoRepository.existsById(id)) {
+            alunoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

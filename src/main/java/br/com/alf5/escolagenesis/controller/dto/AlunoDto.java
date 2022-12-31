@@ -3,15 +3,19 @@ package br.com.alf5.escolagenesis.controller.dto;
 import br.com.alf5.escolagenesis.model.Aluno;
 import org.springframework.data.domain.Page;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class AlunoDto {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Long id;
     private String nome;
-    private String dataCadastro;
-    private String dataNascimento;
-    private String dataMatricula;
+    private LocalDate dataCadastro;
+    private LocalDate dataNascimento;
+    private LocalDate dataMatricula;
+    private String dataCadastroString;
+    private String dataNascimentoString;
+    private String dataMatriculaString;
     private String sexo;
     private String naturalidadeCidade;
     private String naturalidadeEstado;
@@ -59,7 +63,8 @@ public class AlunoDto {
     private String emailResponsavelContrato;
     private String localTrabalhoResponsavelContrato;
     private String contatoTrabalhoResponsavelContrato;
-    private String dataContrato;
+    private LocalDate dataContrato;
+    private String dataContratoString;
     private String contatoEmergencia1;
     private String contatoEmergencia2;
     private String nomeEmergencia1;
@@ -69,13 +74,20 @@ public class AlunoDto {
     public AlunoDto(Aluno aluno) {
         this.id = aluno.getId();
         this.nome = aluno.getNome();
-        this.dataCadastro = aluno.getDataCadastro().format(formatter);
+        this.dataCadastro = aluno.getDataCadastro();
+        this.dataCadastroString = aluno.getDataCadastro().format(formatter);
         if(aluno.getDataNascimento() == null)
             this.dataNascimento = null;
-        else this.dataNascimento = aluno.getDataNascimento().format(formatter);
+        else {
+            this.dataNascimento = aluno.getDataNascimento();
+            this.dataNascimentoString = aluno.getDataNascimento().format(formatter);
+        }
         if(aluno.getDataMatricula() == null)
             this.dataMatricula = null;
-        else this.dataMatricula = aluno.getDataMatricula().format(formatter);
+        else {
+            this.dataMatricula = aluno.getDataMatricula();
+            this.dataMatriculaString = aluno.getDataMatricula().format(formatter);
+        }
         this.sexo = aluno.getSexo();
         this.naturalidadeCidade = aluno.getNaturalidadeCidade();
         this.naturalidadeEstado = aluno.getNaturalidadeEstado();
@@ -104,7 +116,7 @@ public class AlunoDto {
         this.turma = aluno.getTurma();
         this.turno = aluno.getTurno();
         if(aluno.getPai() == null){
-            this.idPai = 0l;
+            this.idPai = null;
             this.nomePai = null;
             this.telefonePai = null;
             this.profissaoPai = null;
@@ -119,7 +131,7 @@ public class AlunoDto {
             this.contatoTrabalhoPai = aluno.getPai().getTelefoneTrabalho();
         }
         if(aluno.getMae() == null){
-            this.idMae = 0l;
+            this.idMae = null;
             this.nomeMae = null;
             this.telefoneMae = null;
             this.profissaoMae = null;
@@ -134,7 +146,7 @@ public class AlunoDto {
             this.contatoTrabalhoMae = aluno.getMae().getTelefoneTrabalho();
         }
         if(aluno.getResponsavel() == null){
-            this.idResponsavel = 0l;
+            this.idResponsavel = null;
             this.nomeResponsavel = null;
             this.telefoneResponsavel = null;
             this.profissaoResponsavel = null;
@@ -149,7 +161,7 @@ public class AlunoDto {
             this.contatoTrabalhoResponsavel = aluno.getResponsavel().getTelefoneTrabalho();
         }
         if(aluno.getResponsavelContrato() == null){
-            this.idResponsavelContrato = 0l;
+            this.idResponsavelContrato = null;
             this.nomeResponsavelContrato = null;
             this.cpfResponsavelContrato = null;
             this.rgResponsavelContrato = null;
@@ -175,7 +187,10 @@ public class AlunoDto {
         }
         if(aluno.getDataContrato() == null)
             this.dataContrato = null;
-        else this.dataContrato = aluno.getDataContrato().format(formatter);
+        else {
+            this.dataContrato = aluno.getDataContrato();
+            this.dataContratoString = aluno.getDataContrato().format(formatter);
+        }
         this.contatoEmergencia1 = aluno.getContatoEmergencia1();
         this.contatoEmergencia2 = aluno.getContatoEmergencia2();
         this.nomeEmergencia1 = aluno.getNomeEmergencia1();
@@ -203,27 +218,27 @@ public class AlunoDto {
         this.nome = nome;
     }
 
-    public String getDataCadastro() {
+    public LocalDate getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(String dataCadastro) {
+    public void setDataCadastro(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 
-    public String getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getDataMatricula() {
+    public LocalDate getDataMatricula() {
         return dataMatricula;
     }
 
-    public void setDataMatricula(String dataMatricula) {
+    public void setDataMatricula(LocalDate dataMatricula) {
         this.dataMatricula = dataMatricula;
     }
 
@@ -563,11 +578,11 @@ public class AlunoDto {
         this.contatoTrabalhoResponsavelContrato = contatoTrabalhoResponsavelContrato;
     }
 
-    public String getDataContrato() {
+    public LocalDate getDataContrato() {
         return dataContrato;
     }
 
-    public void setDataContrato(String dataContrato) {
+    public void setDataContrato(LocalDate dataContrato) {
         this.dataContrato = dataContrato;
     }
 
@@ -649,5 +664,21 @@ public class AlunoDto {
 
     public void setIdMae(Long idMae) {
         this.idMae = idMae;
+    }
+
+    public String getDataCadastroString() {
+        return dataCadastroString;
+    }
+
+    public String getDataNascimentoString() {
+        return dataNascimentoString;
+    }
+
+    public String getDataMatriculaString() {
+        return dataMatriculaString;
+    }
+
+    public String getDataContratoString() {
+        return dataContratoString;
     }
 }

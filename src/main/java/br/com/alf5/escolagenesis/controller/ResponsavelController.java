@@ -73,4 +73,14 @@ public class ResponsavelController {
         return ResponseEntity.notFound().build();
     }
 
+    //Remover responsavel por id
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        if (responsavelRepository.existsById(id)) {
+            responsavelRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
