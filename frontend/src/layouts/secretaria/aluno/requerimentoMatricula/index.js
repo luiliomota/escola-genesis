@@ -22,7 +22,7 @@ import MDButton from "components/MDButton";
 
 import api from "api";
 import {useReactToPrint} from 'react-to-print';
-import logo from "../../../assets/images/ceg.png";
+import logo from "../../../../assets/images/ceg.png";
 import moment from "moment/moment";
 
 function Tables() {
@@ -200,7 +200,7 @@ function Tables() {
                   </Grid>
                   <Grid item ml={2} xs={12} md={6}>
                     <MDTypography fontSize="0.8rem" variant="body2" color="dark">
-                      <b>Naturalidade: </b>{aluno.naturalidade}
+                      <b>Naturalidade: </b>{aluno.naturalidadeCidade}-{aluno.naturalidadeEstado}
                     </MDTypography>
                   </Grid>
 

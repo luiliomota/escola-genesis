@@ -16,7 +16,7 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/secretaria/cadastroAluno/data/authorsTableData";
+import authorsTableData from "layouts/secretaria/aluno/data/authorsTableData";
 import MDInput from "../../../components/MDInput";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
@@ -145,7 +145,7 @@ function Tables() {
                                 fullWidth
                                 variant="gradient"
                                 color="dark"
-                                onClick={() => navigate(`/secretaria/cadastroAluno/novo`)}
+                                onClick={() => navigate(`/secretaria/aluno/novo`)}
                                 >
                                 Novo
                             </MDButton>

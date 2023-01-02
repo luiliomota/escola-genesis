@@ -28,15 +28,18 @@ import DirecaoAtualizar from "layouts/direcao/atualizar";
 import DirecaoComparador from "layouts/direcao/comparador";
 
 import Secretaria from "layouts/secretaria";
-import SecretariaCadastroResponsavel from "layouts/secretaria/responsavel";
-import SecretariaCadastroResponsavelNovo from "layouts/secretaria/responsavel/novo";
-import SecretariaCadastroResponsavelModificar from "layouts/secretaria/responsavel/modificar";
-import SecretariaCadastroAluno from "layouts/secretaria/cadastroAluno";
-import SecretariaCadastroAlunoNovo from "layouts/secretaria/cadastroAluno/novo";
-import SecretariaCadastroAlunoModificar from "layouts/secretaria/cadastroAluno/modificar";
-import SecretariaRequerimentoMatricula from "layouts/secretaria/requerimentoMatricula";
-import SecretariaContrato from "layouts/secretaria/contrato";
-import SecretariaAtualizar from "layouts/secretaria/atualizar";
+import SecretariaResponsavel from "layouts/secretaria/aluno/responsavel";
+import SecretariaResponsavelNovo from "layouts/secretaria/aluno/responsavel/novo";
+import SecretariaResponsavelModificar from "layouts/secretaria/aluno/responsavel/modificar";
+import SecretariaAluno from "layouts/secretaria/aluno";
+import SecretariaAlunoNovo from "layouts/secretaria/aluno/novo";
+import SecretariaAlunoModificar from "layouts/secretaria/aluno/modificar";
+import SecretariaProfessor from "layouts/secretaria/professor";
+import SecretariaProfessorNovo from "layouts/secretaria/professor/novo";
+import SecretariaProfessorModificar from "layouts/secretaria/professor/modificar";
+import SecretariaRequerimentoMatricula from "layouts/secretaria/aluno/requerimentoMatricula";
+import SecretariaContrato from "layouts/secretaria/aluno/contrato";
+// import SecretariaAtualizar from "layouts/secretaria/atualizar";
 
 import Coordenacao from "layouts/coordenacao";
 import CoordenacaoNovo from "layouts/coordenacao/novo";
@@ -116,60 +119,78 @@ const routes = [
   {
     type: "collapseCadastroSecretaria",
     name: "Pai/Mãe/Responsável",
-    key: "secretaria/cadastroresponsavel",
+    key: "secretaria/responsavel",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/cadastroresponsavel",
-    component: <SecretariaCadastroResponsavel />,
+    route: "/secretaria/responsavel",
+    component: <SecretariaResponsavel />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
-    // type: "collapseCadastroSecretaria",
-    // name: "Aluno(a)",
-    key: "secretaria/cadastroresponsavel/novo",
+    key: "secretaria/responsavel/novo",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/cadastroresponsavel/novo",
-    component: <SecretariaCadastroResponsavelNovo />,
+    route: "/secretaria/responsavel/novo",
+    component: <SecretariaResponsavelNovo />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
-    // type: "collapseCadastroSecretaria",
-    // name: "Aluno(a)",
-    key: "secretaria/cadastroresponsavel/modificar",
+    key: "secretaria/responsavel/modificar",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/cadastroresponsavel/modificar/:id",
-    component: <SecretariaCadastroResponsavelModificar />,
+    route: "/secretaria/responsavel/modificar/:id",
+    component: <SecretariaResponsavelModificar />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
     type: "collapseCadastroSecretaria",
     name: "Aluno(a)",
-    key: "secretaria/cadastroaluno",
+    key: "secretaria/aluno",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/cadastroaluno",
-    component: <SecretariaCadastroAluno />,
+    route: "/secretaria/aluno",
+    component: <SecretariaAluno />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
-    // type: "collapseCadastroSecretaria",
-    // name: "Aluno(a)",
-    key: "secretaria/cadastroaluno/novo",
+    key: "secretaria/aluno/novo",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/cadastroaluno/novo",
-    component: <SecretariaCadastroAlunoNovo />,
+    route: "/secretaria/aluno/novo",
+    component: <SecretariaAlunoNovo />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
   {
-    // type: "collapseCadastroSecretaria",
-    // name: "Aluno(a)",
-    key: "secretaria/cadastroaluno/modificar",
+    key: "secretaria/aluno/modificar",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
-    route: "/secretaria/cadastroaluno/modificar/:id",
-    component: <SecretariaCadastroAlunoModificar />,
+    route: "/secretaria/aluno/modificar/:id",
+    component: <SecretariaAlunoModificar />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    type: "collapseCadastroSecretaria",
+    name: "Professor(a)",
+    key: "secretaria/professor",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/professor",
+    component: <SecretariaProfessor />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    key: "secretaria/professor/novo",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/professor/novo",
+    component: <SecretariaProfessorNovo />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    key: "secretaria/professor/modificar",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/professor/modificar/:id",
+    component: <SecretariaProfessorModificar />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
@@ -198,13 +219,13 @@ const routes = [
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
-  {
-    key: "secretaria/atualizar",
-    route: "/secretaria/atualizar/:id",
-    component: <SecretariaAtualizar />,
-    isPrivate: true,
-    perfis: ["DIRECAO","SECRETARIA"],
-  },
+  // {
+  //   key: "secretaria/atualizar",
+  //   route: "/secretaria/atualizar/:id",
+  //   component: <SecretariaAtualizar />,
+  //   isPrivate: true,
+  //   perfis: ["DIRECAO","SECRETARIA"],
+  // },
 
   {
     type: "titleCoordenacao",

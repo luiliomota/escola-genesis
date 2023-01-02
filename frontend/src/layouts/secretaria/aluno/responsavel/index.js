@@ -13,9 +13,9 @@ import DialogActions from "@mui/material/DialogActions";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDInput from "../../../components/MDInput";
-import MDButton from "../../../components/MDButton";
-import MDSnackbar from "../../../components/MDSnackbar";
+import MDInput from "../../../../components/MDInput";
+import MDButton from "../../../../components/MDButton";
+import MDSnackbar from "../../../../components/MDSnackbar";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -24,8 +24,8 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import tableData from "layouts/secretaria/responsavel/data";
-import api from "../../../api";
+import tableData from "layouts/secretaria/aluno/responsavel/data";
+import api from "../../../../api";
 
 function Tables() {
     const navigate = useNavigate();
@@ -145,7 +145,7 @@ function Tables() {
                                 fullWidth
                                 variant="gradient"
                                 color="dark"
-                                onClick={() => navigate(`/secretaria/cadastroResponsavel/novo`)}                                // onClick={navigate("/secretaria/cadastroResponsavel/novo")}
+                                onClick={() => navigate(`/secretaria/responsavel/novo`)}
                                 >
                                 Novo
                             </MDButton>

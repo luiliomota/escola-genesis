@@ -22,7 +22,7 @@ import Footer from "examples/Footer";
 
 import {useReactToPrint} from 'react-to-print';
 import api from "api";
-import logo from "../../../assets/images/ceg.png";
+import logo from "../../../../assets/images/ceg.png";
 import Checkbox from "@mui/material/Checkbox";
 
 function Tables() {

@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
-import {Context} from "../../../../context/auth";
+import {Context} from "../../../../../context/auth";
 import api from "api";
 
 export default function data() {
@@ -69,7 +69,7 @@ export default function data() {
             // ),
             acao: (
                 <>
-                    <IconButton component="a" onClick={() => navigate(`/secretaria/cadastroresponsavel/modificar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
+                    <IconButton component="a" onClick={() => navigate(`/secretaria/responsavel/modificar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
                         <Edit fontSize="medium" />
                     </IconButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
