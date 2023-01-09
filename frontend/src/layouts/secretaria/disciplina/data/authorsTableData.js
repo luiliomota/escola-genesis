@@ -7,7 +7,6 @@ import {Delete, Edit} from "@mui/icons-material";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
 
 import api from "api";
 import IconButton from "@mui/material/IconButton";
@@ -15,7 +14,8 @@ import {useNavigate} from "react-router-dom";
 import {Context} from "../../../../context/auth";
 
 export default function data() {
-    const [idProfessor, setIdProfessor] = useState("");
+
+    const [idDisciplina, setIdDisciplina] = useState("");
     const [openDialog, setOpenDialog] = useState(false);
 
     const [lista, setLista] = useState([]);
@@ -24,7 +24,7 @@ export default function data() {
     const navigate = useNavigate();
 
   useEffect(() => {
-    api.get("/api/professor?size=1000")
+    api.get("/api/disciplina?size=1000")
       .then((response) => {
         setLista(response.data.content);
         setListaFiltro(response.data.content);
@@ -51,14 +51,13 @@ export default function data() {
       return (
         {
             nome: <Author name={item.nome}/>,
-            dataCadastro: <Author name={item.dataCadastro}/>,
             acao: (
-        <>
-                    <IconButton component="a" onClick={() => navigate(`/secretaria/professor/modificar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
-                          <Edit fontSize="medium" />
+                <>
+                    <IconButton component="a" onClick={() => navigate(`/secretaria/disciplina/modificar/${item.id}`)} variant="caption" color="text" fontWeight="medium">
+                        <Edit fontSize="medium" />
                     </IconButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <IconButton component="a" onClick={() => {setOpenDialog(true);setIdProfessor(item.id)}} color="error" variant="gradient" fontWeight="medium">
+                    <IconButton component="a" onClick={() => {setOpenDialog(true);setIdDisciplina(item.id)}} color="error" variant="gradient" fontWeight="medium">
                         <Delete fontSize="medium" />
                     </IconButton>
                 </>
@@ -73,7 +72,6 @@ export default function data() {
         columns: [
             { Header: "Modificar", accessor: "acao", align: "center" },
             { Header: "Nome", accessor: "nome", width: "45%", align: "left" },
-            { Header: "Data Cadastro", accessor: "dataCadastro", align: "center" },
         ],
 
         rows: getItems(lista),
@@ -83,7 +81,7 @@ export default function data() {
           );
           setLista(filter);
         },
-          idProfessor: idProfessor,
+          idDisciplina: idDisciplina,
           openDialog: openDialog,
           setOpenDialog: setOpenDialog,
           setLista: setLista,
@@ -93,10 +91,8 @@ export default function data() {
     return {
         columns: [
             { Header: "Nome", accessor: "nome", width: "45%", align: "left" },
-            { Header: "Data Cadastro", accessor: "dataCadastro", align: "center" },
             // { Header: "Ação", accessor: "acao", align: "center" },
         ],
-
         rows: getItems(lista),
         filtro: (searchText) => {
           let filter = listaFiltro.filter(item =>
@@ -104,7 +100,7 @@ export default function data() {
           );
           setLista(filter);
     },
-        idProfessor: idProfessor,
+        idDisciplina: idDisciplina,
         openDialog: openDialog,
         setOpenDialog: setOpenDialog,
         setLista: setLista,

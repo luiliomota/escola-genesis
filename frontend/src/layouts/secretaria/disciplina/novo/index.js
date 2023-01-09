@@ -23,19 +23,11 @@ import MDInput from "components/MDInput";
 import api from "api";
 import {Autocomplete, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
 import InputMask from "react-input-mask";
-import {useParams} from "react-router-dom";
 
 function Tables() {
 
-    const { id } = useParams();
-
-    const [professor, setProfessor] = useState({
-        id: "",
-        nome: "",
-        sexo: "",
-    });
-
-    const [listaProfessores, setListaProfessores] = useState([]);
+    const [disciplina, setDisciplina] = useState({});
+    const [listaDisciplinas, setListaDisciplinas] = useState([]);
 
     const [successSB, setSuccessSB] = useState(false);
     const [errorSB, setErrorSB] = useState(false);
@@ -45,21 +37,19 @@ function Tables() {
     const closeErrorSB = () => setErrorSB(false);
 
     useEffect(() => {
-        api.get(`/api/professor/${id}`)
+        api.get("/api/disciplina?size=100")
             .then((response) => {
-                if(response.status == 200 && professor.dataCadastro === undefined) {
-                    setProfessor(response.data);
-                }
+                setListaDisciplinas(response.data.content);
             })
-            .catch((error) => console.error(error));
-    });
+            .catch((error) => console.error(error))
+    }, []);
 
     const renderSuccessSB = (
         <MDSnackbar
             color="success"
             icon="check"
             title="Sucesso!"
-            content="Professor salvo com sucesso."
+            content="Disciplina salvo com sucesso."
             dateTime=""
             open={successSB}
             onClose={closeSuccessSB}
@@ -82,18 +72,23 @@ function Tables() {
         />
     );
     function handleSubmit() {
-        console.log(professor)
-        api.put((`/api/professor/${id}`), professor)
+        api.post("/api/disciplina", disciplina)
             .then((res) => {
                 console.table(res);
-                if (res.status === 200) {
+                if (res.status == 201) {
                     openSuccessSB();
-                    // resetForm();
+                    resetForm();
                 }
             }).catch((error) => {
             openErrorSB();
-            console.error(error);
-            });
+            console.error(error)
+        });
+    }
+
+    function resetForm() {
+        setDisciplina({
+            nome: "",
+        });
     }
 
     return (
@@ -116,7 +111,7 @@ function Tables() {
                                 coloredShadow="secondary"
                             >
                                 <MDTypography textTransform="uppercase" variant="h6" color="white">
-                                    Modificar Professor(a)
+                                    Cadastro Disciplina
                                 </MDTypography>
                             </MDBox>
                             <MDBox p={3} pb={3}>
@@ -124,7 +119,7 @@ function Tables() {
                                     {/*Identificação*/}
                                     <Grid item xs={12} md={12}>
                                         <MDTypography variant="h6" color="dark">
-                                            Nome professor
+                                            Nome da disciplina
                                         </MDTypography>
                                     </Grid>
                                     <Grid item xs={12} md={4}>
@@ -134,32 +129,16 @@ function Tables() {
                                                 InputLabelProps={{shrink:true}}
                                                 label="Nome"
                                                 type="text"
-                                                value={professor.nome}
-                                                onChange={(e) => setProfessor({...professor, nome: e.target.value
+                                                // multiline rows={5}
+                                                value={disciplina.nome}
+                                                onChange={(e) => setDisciplina({
+                                                    ...disciplina,
+                                                    nome: e.target.value
                                                 })}
-                                        />
+                                            />
                                         </MDBox>
                                     </Grid>
-                                    {/*Sexo*/}
-                                    <Grid item xs={12} md={12}>
-                                        <MDBox mb={1}>
-                                            <FormControl fullWidth>
-                                                <FormLabel style={{fontSize:"1rem"}} id="select-sexo-label">Sexo</FormLabel>
-                                                <RadioGroup
-                                                    row
-                                                    aria-labelledby="select-sexo-label"
-                                                    name="select-sexo-radio-group"
-                                                    value={professor.sexo}
-                                                    onChange={(e) => setProfessor({...professor, sexo: e.target.value})}
-                                                >
-                                                    <FormControlLabel value="Masculino" control={<Radio />} label="Masculino" />
-                                                    <FormControlLabel value="Feminino" control={<Radio />} label="Feminino" />
-                                                </RadioGroup>
-                                            </FormControl>
-                                       </MDBox>
-                                    </Grid>
                                 </Grid>
-
 
                                 <Grid mt={6} container justifyContent='inherit' spacing={2}>
                                     <Grid item xs={12} md={3}>
@@ -169,6 +148,15 @@ function Tables() {
                                             color="dark"
                                             onClick={handleSubmit}>
                                             Salvar
+                                        </MDButton>
+                                    </Grid>
+                                    <Grid item xs={12} md={3}>
+                                        <MDButton
+                                            fullWidth
+                                            color="error"
+                                            variant="outlined"
+                                            onClick={resetForm}>
+                                            Limpar
                                         </MDButton>
                                     </Grid>
                                 </Grid>
@@ -183,5 +171,3 @@ function Tables() {
 }
 
 export default Tables;
-
-

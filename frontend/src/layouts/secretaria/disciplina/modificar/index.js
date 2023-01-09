@@ -29,13 +29,12 @@ function Tables() {
 
     const { id } = useParams();
 
-    const [professor, setProfessor] = useState({
+    const [disciplina, setDisciplina] = useState({
         id: "",
         nome: "",
-        sexo: "",
     });
 
-    const [listaProfessores, setListaProfessores] = useState([]);
+    const [listaDisciplinas, setListaDisciplinas] = useState([]);
 
     const [successSB, setSuccessSB] = useState(false);
     const [errorSB, setErrorSB] = useState(false);
@@ -45,10 +44,10 @@ function Tables() {
     const closeErrorSB = () => setErrorSB(false);
 
     useEffect(() => {
-        api.get(`/api/professor/${id}`)
+        api.get(`/api/disciplina/${id}`)
             .then((response) => {
-                if(response.status == 200 && professor.dataCadastro === undefined) {
-                    setProfessor(response.data);
+                if(response.status == 200 && disciplina.id === undefined) {
+                    setDisciplina(response.data);
                 }
             })
             .catch((error) => console.error(error));
@@ -59,7 +58,7 @@ function Tables() {
             color="success"
             icon="check"
             title="Sucesso!"
-            content="Professor salvo com sucesso."
+            content="Disciplina salva com sucesso."
             dateTime=""
             open={successSB}
             onClose={closeSuccessSB}
@@ -82,8 +81,7 @@ function Tables() {
         />
     );
     function handleSubmit() {
-        console.log(professor)
-        api.put((`/api/professor/${id}`), professor)
+        api.put((`/api/disciplina/${id}`), disciplina)
             .then((res) => {
                 console.table(res);
                 if (res.status === 200) {
@@ -116,15 +114,14 @@ function Tables() {
                                 coloredShadow="secondary"
                             >
                                 <MDTypography textTransform="uppercase" variant="h6" color="white">
-                                    Modificar Professor(a)
+                                    Modificar Disciplina
                                 </MDTypography>
                             </MDBox>
                             <MDBox p={3} pb={3}>
                                 <Grid container justifyContent='inherit' spacing={1}>
-                                    {/*Identificação*/}
                                     <Grid item xs={12} md={12}>
                                         <MDTypography variant="h6" color="dark">
-                                            Nome professor
+                                            Nome da disciplina
                                         </MDTypography>
                                     </Grid>
                                     <Grid item xs={12} md={4}>
@@ -134,32 +131,13 @@ function Tables() {
                                                 InputLabelProps={{shrink:true}}
                                                 label="Nome"
                                                 type="text"
-                                                value={professor.nome}
-                                                onChange={(e) => setProfessor({...professor, nome: e.target.value
+                                                value={disciplina.nome}
+                                                onChange={(e) => setDisciplina({...disciplina, nome: e.target.value
                                                 })}
                                         />
                                         </MDBox>
                                     </Grid>
-                                    {/*Sexo*/}
-                                    <Grid item xs={12} md={12}>
-                                        <MDBox mb={1}>
-                                            <FormControl fullWidth>
-                                                <FormLabel style={{fontSize:"1rem"}} id="select-sexo-label">Sexo</FormLabel>
-                                                <RadioGroup
-                                                    row
-                                                    aria-labelledby="select-sexo-label"
-                                                    name="select-sexo-radio-group"
-                                                    value={professor.sexo}
-                                                    onChange={(e) => setProfessor({...professor, sexo: e.target.value})}
-                                                >
-                                                    <FormControlLabel value="Masculino" control={<Radio />} label="Masculino" />
-                                                    <FormControlLabel value="Feminino" control={<Radio />} label="Feminino" />
-                                                </RadioGroup>
-                                            </FormControl>
-                                       </MDBox>
-                                    </Grid>
                                 </Grid>
-
 
                                 <Grid mt={6} container justifyContent='inherit' spacing={2}>
                                     <Grid item xs={12} md={3}>

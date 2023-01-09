@@ -16,7 +16,7 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/secretaria/professor/data/authorsTableData";
+import authorsTableData from "layouts/secretaria/disciplina/data/authorsTableData";
 import MDInput from "../../../components/MDInput";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
@@ -28,8 +28,8 @@ import api from "../../../api";
 import {Navigate, useNavigate} from "react-router-dom";
 
 function Tables() {
-    const navigate = useNavigate();
-  const { columns, rows, filtro, idProfessor, openDialog, setOpenDialog, setLista, setListaFiltro } = authorsTableData();
+  const navigate = useNavigate();
+  const {columns, rows, filtro, idDisciplina, openDialog, setOpenDialog, setLista, setListaFiltro } = authorsTableData();
   const [searchText, setSearchText] = useState("");
 
     const [successSB, setSuccessSB] = useState(false);
@@ -92,10 +92,10 @@ function Tables() {
     );
 
     function handleDeleteSubmit() {
-        api.delete((`/api/professor/${idProfessor}`))
+        api.delete((`/api/disciplina/${idDisciplina}`))
             .then((res) => {
                 if(res.status === 200){
-                    openSuccessSB("Professor excluido com sucesso");
+                    openSuccessSB("Disciplina excluida com sucesso");
                     setOpenDialog(false);
                     atualizarLista();
                 }
@@ -106,7 +106,7 @@ function Tables() {
     }
 
     function atualizarLista(){
-        api.get("/api/professor?size=1000")
+        api.get("/api/disciplina?size=1000")
             .then((response) => {
                 setLista(response.data.content);
                 setListaFiltro(response.data.content);
@@ -135,7 +135,7 @@ function Tables() {
                 coloredShadow="secondary"
               >
                 <MDTypography variant="h6" color="white">
-                  Professor(a):
+                  Disciplina:
                 </MDTypography>
               </MDBox>
                 <MDBox p={3} pb={3}>
@@ -145,7 +145,7 @@ function Tables() {
                                 fullWidth
                                 variant="gradient"
                                 color="dark"
-                                onClick={() => navigate(`/secretaria/professor/novo`)}
+                                onClick={() => navigate(`/secretaria/disciplina/novo`)}
                                 >
                                 Novo
                             </MDButton>

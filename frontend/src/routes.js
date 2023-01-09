@@ -37,6 +37,9 @@ import SecretariaAlunoModificar from "layouts/secretaria/aluno/modificar";
 import SecretariaProfessor from "layouts/secretaria/professor";
 import SecretariaProfessorNovo from "layouts/secretaria/professor/novo";
 import SecretariaProfessorModificar from "layouts/secretaria/professor/modificar";
+import SecretariaDisciplina from "layouts/secretaria/disciplina";
+import SecretariaDisciplinaNovo from "layouts/secretaria/disciplina/novo";
+import SecretariaDisciplinaModificar from "layouts/secretaria/disciplina/modificar";
 import SecretariaRequerimentoMatricula from "layouts/secretaria/aluno/requerimentoMatricula";
 import SecretariaContrato from "layouts/secretaria/aluno/contrato";
 // import SecretariaAtualizar from "layouts/secretaria/atualizar";
@@ -171,7 +174,7 @@ const routes = [
   {
     type: "collapseCadastroSecretaria",
     name: "Professor(a)",
-    key: "secretaria/professor",
+    key: "secretarial/professor",
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/professor",
     component: <SecretariaProfessor />,
@@ -191,6 +194,32 @@ const routes = [
     icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
     route: "/secretaria/professor/modificar/:id",
     component: <SecretariaProfessorModificar />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    type: "collapseCadastroSecretaria",
+    name: "Disciplina",
+    key: "secretarial/disciplina",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/disciplina",
+    component: <SecretariaDisciplina />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    key: "secretaria/disciplina/novo",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/disciplina/novo",
+    component: <SecretariaDisciplinaNovo />,
+    isPrivate: true,
+    perfis: ["DIRECAO","SECRETARIA"],
+  },
+  {
+    key: "secretaria/disciplina/modificar",
+    icon: <HowToRegIcon fontSize="small">howtoreg</HowToRegIcon>,
+    route: "/secretaria/disciplina/modificar/:id",
+    component: <SecretariaDisciplinaModificar />,
     isPrivate: true,
     perfis: ["DIRECAO","SECRETARIA"],
   },
