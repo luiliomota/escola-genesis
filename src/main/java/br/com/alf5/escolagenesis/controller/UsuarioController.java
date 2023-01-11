@@ -6,7 +6,6 @@ import br.com.alf5.escolagenesis.controller.dto.UsuarioDto;
 import br.com.alf5.escolagenesis.controller.form.AtualizarUsuarioForm;
 import br.com.alf5.escolagenesis.controller.form.UsuarioForm;
 import br.com.alf5.escolagenesis.model.Usuario;
-import br.com.alf5.escolagenesis.repository.PacienteRepository;
 import br.com.alf5.escolagenesis.repository.PerfilRepository;
 import br.com.alf5.escolagenesis.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +28,12 @@ public class UsuarioController {
     @Autowired
     private PerfilRepository perfilRepository;
     @Autowired
-    private PacienteRepository pacienteRepository;
-    @Autowired
     private TokenService tokenService;
     //Cadastro de novo usuario
     @PostMapping
     @Transactional
     public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid UsuarioForm form, UriComponentsBuilder uriBuilder){
-        Usuario usuario = form.cadastro(perfilRepository, pacienteRepository);
+        Usuario usuario = form.cadastro(perfilRepository);
         if(usuario == null)
             ResponseEntity.badRequest().build();
         usuarioRepository.save(usuario);
@@ -75,7 +72,7 @@ public class UsuarioController {
     @Transactional
     public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id,@RequestBody @Valid AtualizarUsuarioForm form){
         if(usuarioRepository.existsById(id)){
-            Usuario usuario = form.atualizar(id, usuarioRepository, perfilRepository, pacienteRepository);
+            Usuario usuario = form.atualizar(id, usuarioRepository, perfilRepository);
             if(usuario == null) {
                 return ResponseEntity.badRequest().build();
             }

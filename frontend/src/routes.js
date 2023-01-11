@@ -21,39 +21,39 @@
  */
 
 // Material Dashboard 2 React layouts
-import Dashboard from "layouts/dashboard";
-import Direcao from "layouts/direcao";
-import DirecaoNovo from "layouts/direcao/novo";
-import DirecaoAtualizar from "layouts/direcao/atualizar";
-import DirecaoComparador from "layouts/direcao/comparador";
+import Dashboard from "pages/dashboard";
+import Direcao from "pages/direcao";
+import DirecaoNovo from "pages/direcao/novo";
+import DirecaoAtualizar from "pages/direcao/atualizar";
+import DirecaoComparador from "pages/direcao/comparador";
 
-import Secretaria from "layouts/secretaria";
-import SecretariaResponsavel from "layouts/secretaria/aluno/responsavel";
-import SecretariaResponsavelNovo from "layouts/secretaria/aluno/responsavel/novo";
-import SecretariaResponsavelModificar from "layouts/secretaria/aluno/responsavel/modificar";
-import SecretariaAluno from "layouts/secretaria/aluno";
-import SecretariaAlunoNovo from "layouts/secretaria/aluno/novo";
-import SecretariaAlunoModificar from "layouts/secretaria/aluno/modificar";
-import SecretariaProfessor from "layouts/secretaria/professor";
-import SecretariaProfessorNovo from "layouts/secretaria/professor/novo";
-import SecretariaProfessorModificar from "layouts/secretaria/professor/modificar";
-import SecretariaDisciplina from "layouts/secretaria/disciplina";
-import SecretariaDisciplinaNovo from "layouts/secretaria/disciplina/novo";
-import SecretariaDisciplinaModificar from "layouts/secretaria/disciplina/modificar";
-import SecretariaRequerimentoMatricula from "layouts/secretaria/aluno/requerimentoMatricula";
-import SecretariaContrato from "layouts/secretaria/aluno/contrato";
+import Secretaria from "pages/secretaria";
+import SecretariaResponsavel from "pages/secretaria/aluno/responsavel";
+import SecretariaResponsavelNovo from "pages/secretaria/aluno/responsavel/novo";
+import SecretariaResponsavelModificar from "pages/secretaria/aluno/responsavel/modificar";
+import SecretariaAluno from "pages/secretaria/aluno";
+import SecretariaAlunoNovo from "pages/secretaria/aluno/novo";
+import SecretariaAlunoModificar from "pages/secretaria/aluno/modificar";
+import SecretariaProfessor from "pages/secretaria/professor";
+import SecretariaProfessorNovo from "pages/secretaria/professor/novo";
+import SecretariaProfessorModificar from "pages/secretaria/professor/modificar";
+import SecretariaDisciplina from "pages/secretaria/disciplina";
+import SecretariaDisciplinaNovo from "pages/secretaria/disciplina/novo";
+import SecretariaDisciplinaModificar from "pages/secretaria/disciplina/modificar";
+import SecretariaRequerimentoMatricula from "pages/secretaria/aluno/requerimentoMatricula";
+import SecretariaContrato from "pages/secretaria/aluno/contrato";
 // import SecretariaAtualizar from "layouts/secretaria/atualizar";
 
-import Coordenacao from "layouts/coordenacao";
-import CoordenacaoNovo from "layouts/coordenacao/novo";
-import CoordenacaoAtualizar from "layouts/coordenacao/atualizar";
+import Coordenacao from "pages/coordenacao";
+import CoordenacaoNovo from "pages/coordenacao/novo";
+import CoordenacaoAtualizar from "pages/coordenacao/atualizar";
 
-import Disciplinas from "layouts/professor";
-import LancarNotas from "layouts/professor/lancarnotas";
-import Frequencia from "layouts/professor/frequencia";
+import Disciplinas from "pages/professor";
+import LancarNotas from "pages/professor/lancarnotas";
+import Frequencia from "pages/professor/frequencia";
 
-import SignIn from "layouts/authentication/sign-in";
-import Logout from "layouts/authentication/logout";
+import SignIn from "pages/authentication/sign-in";
+import Logout from "pages/authentication/logout";
 
 // @mui icons
 import Icon from "@mui/material/Icon";

@@ -16,8 +16,6 @@ public class Usuario implements UserDetails {
     private String nome;
     private String email;
     private String senha;
-    @OneToOne
-    private Paciente paciente;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Perfil> perfis = new ArrayList<>();
 
@@ -28,14 +26,6 @@ public class Usuario implements UserDetails {
     }
 
     public Usuario() {
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
     }
 
     public List<Perfil> getPerfis() {

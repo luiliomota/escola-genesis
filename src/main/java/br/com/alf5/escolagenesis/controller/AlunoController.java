@@ -1,13 +1,9 @@
 package br.com.alf5.escolagenesis.controller;
 
 import br.com.alf5.escolagenesis.controller.dto.AlunoDto;
-import br.com.alf5.escolagenesis.controller.dto.PacienteDto;
 import br.com.alf5.escolagenesis.controller.form.AlunoForm;
 import br.com.alf5.escolagenesis.controller.form.AtualizarAlunoForm;
-import br.com.alf5.escolagenesis.controller.form.AtualizarPacienteForm;
-import br.com.alf5.escolagenesis.controller.form.PacienteForm;
 import br.com.alf5.escolagenesis.model.Aluno;
-import br.com.alf5.escolagenesis.model.Paciente;
 import br.com.alf5.escolagenesis.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

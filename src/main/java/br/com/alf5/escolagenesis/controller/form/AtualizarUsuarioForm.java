@@ -1,9 +1,7 @@
 package br.com.alf5.escolagenesis.controller.form;
 
-import br.com.alf5.escolagenesis.model.Paciente;
 import br.com.alf5.escolagenesis.model.Perfil;
 import br.com.alf5.escolagenesis.model.Usuario;
-import br.com.alf5.escolagenesis.repository.PacienteRepository;
 import br.com.alf5.escolagenesis.repository.PerfilRepository;
 import br.com.alf5.escolagenesis.repository.UsuarioRepository;
 import org.hibernate.validator.constraints.Length;
@@ -40,7 +38,7 @@ public class AtualizarUsuarioForm {
         return perfil;
     }
 
-    public Usuario atualizar(Long id, UsuarioRepository usuarioRepository, PerfilRepository perfilRepository, PacienteRepository pacienteRepository) {
+    public Usuario atualizar(Long id, UsuarioRepository usuarioRepository, PerfilRepository perfilRepository) {
         Usuario usuario = usuarioRepository.findById(id).get();
         if(this.nome != null) usuario.setNome(nome);
         if(this.email != null) usuario.setEmail(email);
@@ -53,10 +51,6 @@ public class AtualizarUsuarioForm {
             List<Perfil> perfis = new ArrayList<>();
             perfis.add(perfil0);
             usuario.setPerfis(perfis);
-        }
-        if(pacienteRepository.existsById(this.idPaciente)){
-            Paciente paciente = pacienteRepository.findById(idPaciente).get();
-            usuario.setPaciente(paciente);
         }
         return usuario;
     }

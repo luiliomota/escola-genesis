@@ -1,9 +1,7 @@
 package br.com.alf5.escolagenesis.controller.form;
 
-import br.com.alf5.escolagenesis.model.Paciente;
 import br.com.alf5.escolagenesis.model.Perfil;
 import br.com.alf5.escolagenesis.model.Usuario;
-import br.com.alf5.escolagenesis.repository.PacienteRepository;
 import br.com.alf5.escolagenesis.repository.PerfilRepository;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,12 +26,6 @@ public class UsuarioForm {
     @NotEmpty
     private String perfil;
 
-    private Long idPaciente;
-
-    public Long getIdPaciente() {
-        return idPaciente;
-    }
-
     public String getPerfil() {
         return perfil;
     }
@@ -50,17 +42,13 @@ public class UsuarioForm {
         return senha;
     }
 
-    public Usuario cadastro(PerfilRepository perfilRepository, PacienteRepository pacienteRepository) {
+    public Usuario cadastro(PerfilRepository perfilRepository) {
         if (perfilRepository.existsByNome(perfil)) {
             String encodeSenha = new BCryptPasswordEncoder().encode(this.senha);
             Usuario usuario = new Usuario(this.nome, this.email, encodeSenha);
             Perfil perfil = perfilRepository.findByNome(this.perfil);
             List<Perfil> perfis = new ArrayList<>();
             perfis.add(perfil);
-            if(pacienteRepository.existsById(idPaciente)){
-                Paciente paciente = pacienteRepository.getReferenceById(this.idPaciente);
-                usuario.setPaciente(paciente);
-            }
             usuario.setPerfis(perfis);
             return usuario;
         }
