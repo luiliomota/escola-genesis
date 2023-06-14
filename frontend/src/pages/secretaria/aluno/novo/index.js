@@ -663,7 +663,7 @@ function Tables() {
                                         <MDBox mb={1}>
                                             <Autocomplete
                                                 options={listaResponsaveis}
-                                                getOptionLabel={(option) => option ? option.nome : ""}
+                                                getOptionLabel={(option) => option ? option.nome : option.nome}
                                                 isOptionEqualToValue={(option, value) => option ? value : ""}
                                                 onChange={(e, value) => {
                                                     if (value) {
