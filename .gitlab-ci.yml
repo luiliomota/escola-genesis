@@ -1,0 +1,43 @@
+image: docker:20.10.16-dind
+
+services:
+  - docker:dind
+
+stages:
+  - dependency-build
+  - package-deploy
+
+install_dependency-build:
+  image: amazoncorretto:17-alpine-jdk
+  stage: dependency-build
+  script:
+    - apk update
+    - apk add npm 
+    - apk add maven
+    - cd frontend/
+    - echo "Atualização de pacotes npm..."
+    - npm install
+    - echo "Iniciando Build do FrontEnd..."
+    - npm run build
+    - cd ../
+    - echo "Iniciando o build do BackEnd..."
+    - mvn clean package -DskipTests
+
+  artifacts:
+    paths:
+      - target/*.jar
+  only:
+    - develop
+
+package_deploy_image:
+  stage: package-deploy
+  script:
+    - echo "Criando a imagem Docker..."
+    - docker build . -t "$DOCKERHUB_IMAGE_DEV"
+    - echo "Mostrando lista de images..."
+    - docker images
+    - echo "Fazendo o deploy para o Docker Hub..."
+    - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+    - docker push "$DOCKERHUB_IMAGE_DEV"
+  only:
+    - develop
