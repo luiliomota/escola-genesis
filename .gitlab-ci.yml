@@ -27,17 +27,17 @@ install_dependency-build:
     paths:
       - target/*.jar
   only:
-    - develop
+    - master
 
 package_deploy_image:
   stage: package-deploy
   script:
     - echo "Criando a imagem Docker..."
-    - docker build . -t "$DOCKERHUB_IMAGE_DEV"
+    - docker build . --platform linux/arm64 -t "$DOCKERHUB_IMAGE_PROD"
     - echo "Mostrando lista de images..."
     - docker images
     - echo "Fazendo o deploy para o Docker Hub..."
     - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-    - docker push "$DOCKERHUB_IMAGE_DEV"
+    - docker push "$DOCKERHUB_IMAGE_PROD"
   only:
-    - develop
+    - master
